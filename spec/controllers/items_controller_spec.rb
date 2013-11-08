@@ -1,7 +1,8 @@
 require 'spec_helper'
 
 describe ItemsController do
-  let!(:item) { Item.create(name: "Milk", category: "Dairy", fridge_id: 1) }
+  let!(:fridge) { Fridge.create(name: "Food Titanic") }
+  let!(:item) { Item.create(name: "Milk", category: "Dairy", fridge_id: fridge.id) }
 
   it "#index" do
     get :index, fridge_id: item.fridge_id
@@ -11,7 +12,7 @@ describe ItemsController do
   context "#create" do
     it "creates a new item with valid params" do
       expect {
-        post :create, fridge_id: item.fridge_id, item: { name: "Milk", category: "Dairy", fridge_id: 1 }
+        post :create, fridge_id: item.fridge_id, item: { name: item.name, category: item.category, fridge_id: item.fridge_id }
       }.to change{ Item.count }.by(1)
     end
 

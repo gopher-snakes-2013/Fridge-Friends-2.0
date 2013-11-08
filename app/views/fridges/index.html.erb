@@ -2,6 +2,7 @@
 
 <% @fridges.each  do |fridge| %>
   <h3><%= link_to fridge.name, fridge_path(fridge.id) %></h3>
+  <%= button_to('Delete Fridge', fridge_path(fridge.id), method: 'delete') %>
 <% end %>
 
 <%= form_for @fridge do |f| %>

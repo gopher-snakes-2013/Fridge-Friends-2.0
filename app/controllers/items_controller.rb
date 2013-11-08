@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
     if new_item.save
       redirect_to fridge_path(new_item.fridge.id)
     else
-      redirect_to :fridges
+      redirect_to fridge_path(new_item.fridge.id)
     end
   end
 
@@ -20,7 +20,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    Item.find(params[:id]).destroy
-    redirect_to :fridges
+    item = Item.find(params[:id]).destroy
+    redirect_to fridge_path(item.fridge_id)
   end
 end

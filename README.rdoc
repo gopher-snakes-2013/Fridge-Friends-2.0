@@ -13,31 +13,31 @@ MVP
 - [ ] User can see what's in fridge
 
 
-== README
+MESSAGE CLEARANCE SENT AFTER BUNDLING
+Next steps:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+1. Configure the mailer to create full URLs in emails:
 
-Things you may want to cover:
+    # config/environments/{development,test}.rb
+    config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 
-* Ruby version
+    In production it should be your app's domain name.
 
-* System dependencies
+2. Display user session and flashes. For example, in your application layout:
 
-* Configuration
+    <% if signed_in? %>
+      Signed in as: <%= current_user.email %>
+      <%= link_to 'Sign out', sign_out_path, :method => :delete %>
+    <% else %>
+      <%= link_to 'Sign in', sign_in_path %>
+    <% end %>
 
-* Database creation
+    <div id="flash">
+      <% flash.each do |key, value| %>
+        <div class="flash <%= key %>"><%= value %></div>
+      <% end %>
+    </div>
 
-* Database initialization
+3. Migrate:
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+    rake db:migrate

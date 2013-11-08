@@ -11,7 +11,7 @@
 
 <%= form_for [@fridge, @item] do |f| %>
   <%= f.text_field :name, placeholder: 'Item Name' %>
-  <%= f.text_field :category, placeholder: 'Category' %>
+  <%= f.select :category, ['Beverage', 'Dairy', 'Meat', 'Produce', 'Snack', 'Other'], :prompt => 'Category' %>
   <%= f.submit 'Add Item to Fridge' %>
 <% end %>
 

@@ -4,7 +4,6 @@ FridgeFriends20::Application.routes.draw do
     root to: 'clearance/sessions#new'
   end
 
-
   constraints Clearance::Constraints::SignedIn.new do
     root to: 'fridges#index'
   end

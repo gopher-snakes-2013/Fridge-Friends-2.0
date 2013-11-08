@@ -11,27 +11,27 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131108073115) do
+ActiveRecord::Schema.define(:version => 20131108220311) do
 
   create_table "fridges", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "fridges_users", :force => true do |t|
     t.integer  "fridge_id"
     t.integer  "user_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "items", :force => true do |t|
     t.string   "name"
     t.string   "category"
     t.integer  "fridge_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "users", :force => true do |t|
@@ -41,8 +41,8 @@ ActiveRecord::Schema.define(:version => 20131108073115) do
     t.string   "encrypted_password", :limit => 128, :null => false
     t.string   "confirmation_token", :limit => 128
     t.string   "remember_token",     :limit => 128, :null => false
-    t.string   "phone_number"
     t.string   "name"
+    t.string   "phone_number"
     t.string   "customer_id"
   end
 

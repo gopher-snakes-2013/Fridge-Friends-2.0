@@ -6,10 +6,10 @@ FridgeFriends20::Application.routes.draw do
 
   constraints Clearance::Constraints::SignedIn.new do
     root to: 'fridges#index'
+    resources :fridges, only: [:index, :create, :show, :destroy] do
+      resources :items, only: [:index, :create, :show, :destroy]
+    end
   end
 
-  resources :fridges, only: [:index, :create, :show, :destroy] do
-    resources :items, only: [:index, :create, :show, :destroy]
-  end
 
 end

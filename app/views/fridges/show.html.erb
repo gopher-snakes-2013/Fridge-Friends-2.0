@@ -3,6 +3,9 @@
     <% @fridge.items.each do |item| %>
       <li>Name: <%= item.name %></li>
       <li>Category: <%= item.category %></li>
+      <li>Purchased: <%= time_ago_in_words(item.created_at) %> ago</li>
+      <%= button_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete') %>
+      <br>
     <% end %>
   </ul>
 

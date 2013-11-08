@@ -22,17 +22,21 @@ end
 
 gem 'jquery-rails'
 
+group :testing do
+  gem 'shoulda-matchers'
+  gem 'simplecov', require: false
+end
+
+group :test do
+  gem 'shoulda-matchers'
+end
+
+group :testing, :development do
+  gem 'rspec-rails'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'quiet_assets'
+end
+
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-# Deploy with Capistrano
-# gem 'capistrano'
-
-# To use debugger
-# gem 'debugger'

@@ -1,0 +1,10 @@
+<h1>Fridges</h1>
+
+<% @fridges.each  do |fridge| %>
+  <h3><%= link_to fridge.name, fridge_path(fridge.id) %></h3>
+<% end %>
+
+<%= form_for @fridge do |f| %>
+  <%= f.text_field :name, placeholder: 'Fridge Name' %>
+  <%= f.submit 'Add Fridge' %>
+<% end %>

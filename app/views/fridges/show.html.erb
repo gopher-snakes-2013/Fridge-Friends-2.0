@@ -1,0 +1,13 @@
+<h2><%= @fridge.name %></h2>
+  <ul>
+    <% @fridge.items.each do |item| %>
+      <li>Name: <%= item.name %></li>
+      <li>Category: <%= item.category %></li>
+    <% end %>
+  </ul>
+
+<%= form_for [@fridge, @item] do |f| %>
+  <%= f.text_field :name, placeholder: 'Item Name' %>
+  <%= f.text_field :category, placeholder: 'Category' %>
+  <%= f.submit 'Add Item to Fridge' %>
+<% end %>

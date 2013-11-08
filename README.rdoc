@@ -17,7 +17,7 @@ MVP
 - [x] User can see what's in fridge
 - [ ] guest can get login feedback on errors
 - [ ] guest can get sign-up feedback on errors
-- [ ] make associations work between users and fridge, fridge and items in website version
+- [x] make associations work between users and fridge
 MESSAGE CLEARANCE SENT AFTER BUNDLING
 Next steps:
 

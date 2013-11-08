@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131108205020) do
+ActiveRecord::Schema.define(:version => 20131108220311) do
 
   create_table "fridges", :force => true do |t|
     t.string   "name"
@@ -41,6 +41,9 @@ ActiveRecord::Schema.define(:version => 20131108205020) do
     t.string   "encrypted_password", :limit => 128, :null => false
     t.string   "confirmation_token", :limit => 128
     t.string   "remember_token",     :limit => 128, :null => false
+    t.string   "name"
+    t.string   "phone_number"
+    t.string   "customer_id"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

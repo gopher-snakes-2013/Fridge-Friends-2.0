@@ -1,0 +1,24 @@
+<div class='name-field'>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+</div>
+
+<div class='text-field'>
+  <%= form.label :email %>
+  <%= form.text_field :email, :type => 'email', placeholder: 'gary@example.com' %>
+</div>
+
+<div class='password-field'>
+  <%= form.label :password %>
+  <%= form.password_field :password %>
+</div>
+
+<div class='phone_number-field'>
+  <%= form.label :phone_number %>
+  <%= form.password_field :phone_number, placeholder: '350-203-4320' %>
+</div>
+
+<div class='customer_id-field'>
+  <%= form.label "Grocery Store Customer ID" %>
+  <%= form.password_field :customer_id %>
+</div>

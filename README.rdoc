@@ -2,17 +2,22 @@ Fridge Friends
 
 MVP
 
-- [ ] User can remove items from fridge
-- [ ] User can see date item was purchased
+- [x] User can remove items from fridge
+- [x] User can see date item was purchased
 - [ ] User can add housemate to a fridge
 - [ ] User can join a specific fridge
 - [ ] Multiple users can see same fridge
-- [ ] User can add item to fridge
-- [ ] Guest can signup for an account
-- [ ] User can create a new fridge
-- [ ] User can see what's in fridge
-
-
+- [x] User can add item to fridge
+- [x] Guest can signup for an account
+- [x] User can create a new fridge
+- [x] if not logged in, should see login page.
+- [x] if not logged in, shouldn't be able to see fridges http://localhost:3000/fridges/1
+- [x] after log in/sign-up, should get redirected to see page with list of all fridges
+- [x] when click on fridge, should see all items that belong to the fridge.
+- [x] User can see what's in fridge
+- [ ] guest can get login feedback on errors
+- [ ] guest can get sign-up feedback on errors
+- [x] make associations work between users and fridge
 MESSAGE CLEARANCE SENT AFTER BUNDLING
 Next steps:
 
@@ -41,3 +46,6 @@ Next steps:
 3. Migrate:
 
     rake db:migrate
+
+
+

@@ -2,11 +2,12 @@ class FridgesController < ApplicationController
 
   def index
     @fridge = Fridge.new
-    @fridges = Fridge.all
+    @fridges = current_user.fridges
   end
 
   def create
     fridge = Fridge.new(params[:fridge])
+    fridge.users << current_user
     if fridge.save
       redirect_to :fridges
     else

@@ -21,16 +21,14 @@ RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 
   config.before(:suite) do
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.strategy = :truncation
   end
 
   config.before(:each) do
-    DatabaseCleaner.start
+    DatabaseCleaner.clean
   end
 
   config.after(:each) do
-    DatabaseCleaner.clean
   end
 
   config.use_transactional_fixtures = false

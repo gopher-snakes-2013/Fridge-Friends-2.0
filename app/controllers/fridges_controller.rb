@@ -11,7 +11,7 @@ class FridgesController < ApplicationController
     if fridge.save
       redirect_to :fridges
     else
-      flash[:notice] = fridge.errors.full_messages.join(", ")
+      flash[:add_fridge_notice] = fridge.errors.full_messages.join(", ")
       redirect_to :fridges
     end
   end

@@ -5,9 +5,7 @@
   <%= button_to('Delete Fridge', fridge_path(fridge.id), method: 'delete') %>
 <% end %>
 
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, class: name %>
-<% end %>
+<%= flash[:add_fridge_notice] %>
 
 <%= form_for @fridge do |f| %>
   <%= f.text_field :name, placeholder: 'Fridge Name' %>

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "User can create fridge item" do
+feature "User can delete fridge item" do
   before(:each) do
     visit root_path
   end
@@ -19,15 +19,20 @@ feature "User can create fridge item" do
     select('Other', :from => 'item_category')
     click_on 'Add Item to Fridge'
     expect(page).to have_content "fridge item"
+    click_on 'Delete Item'
+    expect(page).to_not have_content "fridge item"
   end
 
-  scenario "when they are not the original fridge creator", js: true do
+  scenario "and when they are not the original fridge creator", js: true do
     signup_user(user)
     click_link "logout"
     signup_user(user_2)
     fill_in "fridge_name", with: "test fridge"
     click_on "Add Fridge"
     click_link "test fridge"
+    fill_in 'item_name', with: 'item'
+    select('Other', :from => 'item_category')
+    click_on 'Add Item to Fridge'
     fill_in 'user_email', with: user.email
     click_on 'Sign up'
     expect(page).to have_content "User successfully added as a friend."
@@ -37,41 +42,7 @@ feature "User can create fridge item" do
     click_on 'Sign in'
     expect(page).to have_content "test fridge"
     click_link "test fridge"
-    fill_in "item_name", with: "fridge item"
-    select('Other', :from => 'item_category')
-    click_on 'Add Item to Fridge'
-    expect(page).to have_content "fridge item"
-  end
-
-  scenario "with valid item name and category" do
-    signup_user(user)
-    fill_in "fridge_name", with: "Bob's Home Fridge"
-    click_on "Add Fridge"
-    expect(page).to have_content "Bob's Home Fridge"
-    click_link "Bob's Home Fridge"
-    fill_in 'item_name', with: 'fridge item'
-    select('Other', :from => 'item_category')
-    click_on 'Add Item to Fridge'
-    expect(page).to have_content "fridge item"
-  end
-end
-
-
-feature "User cannot create fridge item" do
-  before(:each) do
-    visit root_path
-  end
-
-  let!(:user) { User.new(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '407-774-9393', customer_id: '123456788') }
-
-  scenario "with invalid item name and category" do
-    signup_user(user)
-    fill_in "fridge_name", with: "Bob's Home Fridge"
-    click_on "Add Fridge"
-    expect(page).to have_content "Bob's Home Fridge"
-    click_link "Bob's Home Fridge"
-    select('Other', :from => 'item_category')
-    click_on 'Add Item to Fridge'
-    expect(page).to have_content "Name can't be blank"
+    click_on 'Delete Item'
+    expect(page).to_not have_content "item"
   end
 end

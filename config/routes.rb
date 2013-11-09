@@ -1,4 +1,6 @@
 FridgeFriends20::Application.routes.draw do
+  
+  match '/users' => 'users#create'
 
   constraints Clearance::Constraints::SignedOut.new do
     root to: 'clearance/sessions#new'
@@ -13,6 +15,4 @@ FridgeFriends20::Application.routes.draw do
       resources :items, only: [:index, :create, :show, :destroy]
     end
   end
-
-
 end

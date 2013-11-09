@@ -3,33 +3,37 @@ require 'spec_helper'
 describe FridgesController do
   let!(:user) { User.create(email: "steven@steven.com", password: "password", name: "Steven", phone_number: "555-555-5555") }
   let!(:user2) { User.create(email: "annie@annie.com", password: "password", name: "Annie") }
-  let!(:fridge) { Fridge.create(name: "Food Titanic") }
+  let!(:fridge) { Fridge.create(name: "Home Fridge", creator_id: user.id) }
 
-  xit "#index" do
+  it "#index" do
+  sign_in_as(user)
     get :index
     response.status.should eq(200)
   end
 
   context "#create" do
-    xit "creates a new fridge with valid params" do
+    it "creates a new fridge with valid params" do
+      sign_in_as(user)
       expect {
         post :create, fridge: { name: "Food Titanic" }
       }.to change{ Fridge.count }.by(1)
     end
 
-    xit "should not create a new fridge without valid params" do
+    it "should not create a new fridge without valid params" do
+      sign_in_as(user)
       expect {
         post :create, fridge: { name: "" }
       }.not_to change{ Fridge.count }
     end
   end
 
-  xit "#show" do
+  it "#show" do
     get :show, id: fridge.id
-    response.status.should eq(200)
+    response.status.should eq(302)
   end
 
-  xit "#destroy" do
+  it "#destroy" do
+    sign_in_as(user)
     expect {
       post :destroy, id: fridge.id
     }.to change{ Fridge.count }.by(-1)

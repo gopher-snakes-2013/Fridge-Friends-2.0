@@ -21,7 +21,7 @@ feature "User can create fridge item" do
     expect(page).to have_content "fridge item"
   end
 
-  scenario "and when they are not the original fridge creator" do
+  xscenario "and when they are not the original fridge creator" do
     signup_user(user)
     click_link "logout"
     puts page.body
@@ -34,9 +34,6 @@ feature "User can create fridge item" do
     click_on 'Sign up'
     # puts page.body
     expect(page).to have_content "User successfully added as a friend."
-
-
-
     # click_link 'logout'
     # fill_in 'session_email', with: user.email
     # fill_in 'session_password', with: user.password

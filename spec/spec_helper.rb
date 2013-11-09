@@ -7,6 +7,8 @@ require 'shoulda-matchers'
 require 'simplecov'
 require 'database_cleaner'
 require 'clearance/testing'
+require 'capybara/rspec'
+
 SimpleCov.start
 
 # Requires supporting ruby files with custom matchers and macros, etc,
@@ -36,4 +38,6 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
 
   config.order = "random"
+
+  config.include FactoryGirl::Syntax::Methods
 end

@@ -31,6 +31,7 @@ group :test do
   gem 'shoulda-matchers'
   gem 'database_cleaner'
   gem 'capybara'
+  gem 'factory_girl_rails'
 end
 
 group :testing, :development do
@@ -38,6 +39,8 @@ group :testing, :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'quiet_assets'
+  gem 'factory_girl_rails'
+  gem 'selenium-webdriver'
 end
 
 # To use ActiveModel has_secure_password

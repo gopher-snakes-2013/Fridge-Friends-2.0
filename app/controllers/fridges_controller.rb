@@ -26,17 +26,21 @@ class FridgesController < ApplicationController
     Fridge.find(params[:id]).destroy
     redirect_to :fridges
   end
-  
+
   def add_user
     searched_user = User.find_by_email(params[:user][:email])
     fridge = Fridge.find(params[:id])
     if searched_user
-      fridge.users << searched_user
-      redirect_to fridge
+      unless fridge.users.include?(searched_user)
+        fridge.users << searched_user
+        flash[:add_user_notice] = "User successfully added as a friend."
+      else
+        flash[:add_user_notice] = "User is already a friend of this fridge."
+      end
     else
-      flash[:notice] = "User not found. Please try again"
-      redirect_to fridge
+      flash[:add_user_notice] = "User not found. Please try again."
     end
+    redirect_to fridge
   end
 
   private

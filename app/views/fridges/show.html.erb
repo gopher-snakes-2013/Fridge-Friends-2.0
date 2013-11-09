@@ -9,9 +9,7 @@
     <% end %>
   </ul>
 
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, class: name %>
-<% end %>
+<%= flash[:add_item_notice] %>
 
 <%= form_for [@fridge, @item] do |f| %>
   <%= f.text_field :name, placeholder: 'Item Name' %>
@@ -20,9 +18,8 @@
 <% end %>
 
 <h3>Add User to <%= @fridge.name %>:</h3>
-<% flash.each do |name, msg| %>
-  <%= content_tag :div, msg, class: name %>
-<% end %>
+
+<%= flash[:add_user_notice] %>
 
 <%= form_for @find_user_email, url: add_user_fridge_path, method: 'post' do |f| %>
   <%= f.text_field :email, placeholder: "Enter Email Address" %>

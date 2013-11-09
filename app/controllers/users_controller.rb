@@ -1,5 +1,18 @@
 class UsersController < Clearance::UsersController
 
+  def create
+    @user = user_from_params
+    if @user.save
+      sign_in @user
+      redirect_back_or url_after_create
+    else
+      flash[:notice] = @user.errors.full_messages.join(", ")
+      redirect_to sign_up_path
+    end
+  end
+  
+  private
+  
   def user_from_params
     user_params = params[:user] || Hash.new
     email = user_params.delete(:email)
@@ -16,5 +29,5 @@ class UsersController < Clearance::UsersController
       user.customer_id = customer_id
     end
   end
-
 end
+

@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe FridgesController do
-  let!(:user) { User.create(email: "steven@steven.com", password: "password", name: "Steven") }
-  let!(:user2) { User.create(email: "annie@steven.com", password: "password", name: "Annie") }
+  let!(:user) { User.create(email: "steven@steven.com", password: "password", name: "Steven", phone_number: "555-555-5555") }
+  let!(:user2) { User.create(email: "annie@annie.com", password: "password", name: "Annie") }
   let!(:fridge) { Fridge.create(name: "Food Titanic") }
 
   xit "#index" do
@@ -35,12 +35,9 @@ describe FridgesController do
     }.to change{ Fridge.count }.by(-1)
   end
 
-  context "#add_user" do
-    xit "adds an existing user to the fridge with a valid email address" do
-      expect {
-        post :add_user, params = { id: fridge.id, user: { email: user2.email } }
-        p fridge.users.count
-      }.to change { fridge.users.count }.by(1)
-    end
+  it "#add_user" do
+    expect {
+      post :add_user, id: fridge.id, user: { email: user.email }
+    }.to change { fridge.users.count }.by(1)
   end
 end

@@ -3,6 +3,7 @@ class FridgesController < ApplicationController
   def index
     @fridge = Fridge.new
     @fridges = current_user.fridges
+    @current_user = current_user
   end
 
   def create
@@ -25,7 +26,12 @@ class FridgesController < ApplicationController
   end
 
   def destroy
-    Fridge.find(params[:id]).destroy
+    fridge = Fridge.find(params[:id])
+    if current_user.id == fridge.creator_id
+      fridge.destroy
+    else
+      flash[:delete_fridge_notice] = "You are not authorized to remove this fridge"
+    end
     redirect_to :fridges
   end
 

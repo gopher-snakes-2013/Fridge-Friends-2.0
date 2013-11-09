@@ -34,6 +34,7 @@ class FridgesController < ApplicationController
       fridge.users << searched_user
       redirect_to fridge
     else
+      flash[:notice] = "User not found. Please try again"
       redirect_to fridge
     end
   end

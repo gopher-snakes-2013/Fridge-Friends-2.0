@@ -9,6 +9,10 @@
     <% end %>
   </ul>
 
+<% flash.each do |name, msg| %>
+  <%= content_tag :div, msg, class: name %>
+<% end %>
+
 <%= form_for [@fridge, @item] do |f| %>
   <%= f.text_field :name, placeholder: 'Item Name' %>
   <%= f.select :category, ['Beverage', 'Dairy', 'Meat', 'Produce', 'Snack', 'Other'], :prompt => 'Category' %>

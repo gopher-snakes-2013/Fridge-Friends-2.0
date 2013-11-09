@@ -21,29 +21,25 @@ feature "User can create fridge item" do
     expect(page).to have_content "fridge item"
   end
 
-  xscenario "and when they are not the original fridge creator" do
+  scenario "and when they are not the original fridge creator", js: true do
     signup_user(user)
     click_link "logout"
-    puts page.body
-    visit root_path
     signup_user(user_2)
-    fill_in "fridge_name", with: "Bob Home Fridge"
+    fill_in "fridge_name", with: "test fridge"
     click_on "Add Fridge"
-    click_link "Bob Home Fridge"
-    fill_in 'user_email', with: 'user.email'
+    click_link "test fridge"
+    fill_in 'user_email', with: user.email
     click_on 'Sign up'
-    # puts page.body
     expect(page).to have_content "User successfully added as a friend."
-    # click_link 'logout'
-    # fill_in 'session_email', with: user.email
-    # fill_in 'session_password', with: user.password
-    # click_on 'Sign in'
-    # # puts page.body
-    # expect(page).to have_content "Bob Home Fridge"
-    # click_link "Bob Home Fridge"
-    # fill_in "item_name", with: "fridge item"
-    # select('Other', :from => 'item_category')
-    # click_on 'Add Item to Fridge'
-    # expect(page).to have_content "fridge item"
+    click_link 'logout'
+    fill_in 'session_email', with: user.email
+    fill_in 'session_password', with: user.password
+    click_on 'Sign in'
+    expect(page).to have_content "test fridge"
+    click_link "test fridge"
+    fill_in "item_name", with: "fridge item"
+    select('Other', :from => 'item_category')
+    click_on 'Add Item to Fridge'
+    expect(page).to have_content "fridge item"
   end
 end

@@ -26,7 +26,7 @@ feature "User can delete a fridge" do
     click_on "Add Fridge"
     expect(page).to have_content "Bob's Home Fridge"
     click_link "Bob's Home Fridge"
-    fill_in 'user_email', with: 'user.email'
+    fill_in 'user_email', with: user.email
     click_on 'Sign up'
     click_link "logout"
     fill_in 'session_email', with: user.email

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131108231629) do
+ActiveRecord::Schema.define(:version => 20131109064819) do
 
   create_table "fridges", :force => true do |t|
     t.string   "name"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20131108231629) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "fridges_users", ["user_id", "fridge_id"], :name => "index_fridges_users_on_user_id_and_fridge_id", :unique => true
 
   create_table "items", :force => true do |t|
     t.string   "name"

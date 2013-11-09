@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
     if new_item.save
       redirect_to fridge_path(new_item.fridge.id)
     else
-      flash[:notice] = new_item.errors.full_messages.join(", ")
+      flash[:add_item_notice] = new_item.errors.full_messages.join(", ")
       redirect_to fridge_path(new_item.fridge.id)
     end
   end

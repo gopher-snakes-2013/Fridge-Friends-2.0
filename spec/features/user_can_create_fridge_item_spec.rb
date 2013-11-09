@@ -21,7 +21,7 @@ feature "User can create fridge item" do
     expect(page).to have_content "fridge item"
   end
 
-  scenario "and when they are not the original fridge creator", js: true do
+  scenario "when they are not the original fridge creator", js: true do
     signup_user(user)
     click_link "logout"
     signup_user(user_2)

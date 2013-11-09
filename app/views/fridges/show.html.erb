@@ -15,7 +15,12 @@
   <%= f.submit 'Add Item to Fridge' %>
 <% end %>
 
+<h3>Add User to <%= @fridge.name %>:</h3>
+<%= form_for @find_user_email, url: add_user_fridge_path, method: 'post' do |f| %>
+  <%= f.text_field :email, placeholder: "Enter Email Address" %>
+  <%= f.submit %>
+<% end %>
+
 <div class 'extra-links'>
   <%= link_to 'Back', fridges_path %>
 </div>
-

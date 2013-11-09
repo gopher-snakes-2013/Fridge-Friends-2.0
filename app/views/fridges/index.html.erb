@@ -1,17 +1,73 @@
-<h1>Fridges</h1>
+  <div data-role="page">
+    <div data-role="header" class="toolbar" style="overflow:hidden;">
+      <h1>Fridges</h1>
+      <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
+    </div><!-- /header -->
 
-<%= flash[:delete_fridge_notice] %>
+    <div data-role="content">
 
-<% @fridges.each  do |fridge| %>
-  <h3><%= link_to fridge.name, fridge_path(fridge.id) %></h3>
-  <% if fridge.creator_id == @current_user.id %>
-    <%= button_to('Delete Fridge', fridge_path(fridge.id), method: 'delete') %>
-  <% end %>
-<% end %>
+      <%= flash[:delete_fridge_notice] %>
+      <%= flash[:add_fridge_notice] %>
 
-<%= flash[:add_fridge_notice] %>
 
-<%= form_for @fridge do |f| %>
-  <%= f.text_field :name, placeholder: 'Fridge Name' %>
-  <%= f.submit 'Add Fridge' %>
-<% end %>
+      <div>
+        <%= form_for @fridge do |f| %>
+          <%= f.text_field :name, placeholder: 'Fridge Name' %>
+          <%= f.submit 'Add Fridge' %>
+        <% end %>
+      </div>
+
+      <div id="fridge-contents">
+        <ul data-role="listview" data-inset="true" data-split-icon="delete">
+
+        <% @fridges.each  do |fridge| %>
+          <li data-icon="false">
+            <%= link_to fridge.name, fridge_path(fridge.id) %>
+            <% if fridge.creator_id == @current_user.id %>
+              <%= link_to('Delete Fridge', fridge_path(fridge.id), method: 'delete', data: { icon: "delete"}) %>
+            <% end %>
+          </li>
+        <% end %>
+          <li data-icon="info">
+            <a href="#">Kitchen Fridge</a>
+          </li>
+          <li data-icon="info">
+            <a href="#">Man-cave Fridge</a>
+          </li>
+          <li data-icon="info">
+            <a href="#">Champagne Room Fridge</a>
+          </li>
+          <li data-icon="info">
+            <a href="#">DBC Phase 3 Whiskey Cabinet</a>
+          </li>
+          <li data-icon="info">
+            <a href="#">Parent's House</a>
+          </li>
+
+        </ul>
+      </div>
+
+  </div><!-- /content -->
+
+    <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
+      <div id="username-display">
+        <% if signed_in? %>
+         <span><%= current_user.email %></span>
+         <span><%= link_to 'Sign out', sign_out_path, method: :delete %></span>
+        <% else %>
+          <span><%= link_to 'Sign in', sign_in_path %></span>
+        <% end %>
+
+      </div>
+      <div>
+        <ul>
+          <% @fridges.each  do |fridge| %>
+          <li><%= link_to fridge.name, fridge_path(fridge.id) %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+
+
+  </div><!-- /page -->
+

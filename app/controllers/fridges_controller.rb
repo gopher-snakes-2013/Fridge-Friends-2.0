@@ -1,5 +1,5 @@
 class FridgesController < ApplicationController
-
+  before_filter :authorize_and_load_fridge, only: [:show]
   def index
     @fridge = Fridge.new
     @fridges = current_user.fridges
@@ -36,5 +36,11 @@ class FridgesController < ApplicationController
     else
       redirect_to fridge
     end
+  end
+
+  private
+  def authorize_and_load_fridge
+    @fridge = Fridge.find(params[:id])
+    redirect_to root_path unless @fridge.owner?(current_user)
   end
 end

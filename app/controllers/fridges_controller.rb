@@ -8,6 +8,7 @@ class FridgesController < ApplicationController
   def create
     fridge = Fridge.new(params[:fridge])
     fridge.users << current_user
+    fridge.creator_id = current_user.id
     if fridge.save
       redirect_to :fridges
     else

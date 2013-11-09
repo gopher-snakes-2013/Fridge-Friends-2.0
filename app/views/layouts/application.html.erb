@@ -7,7 +7,16 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= link_to 'logout', sign_out_path, method: 'delete' %>
+
+  <% if current_user %>
+    <%= link_to 'logout', sign_out_path, method: 'delete' %>
+  <% end %>
+
+  <div id="flash">
+    <% flash.each do |key, value| %>
+    <div class="flash <%= key %>"><%= value %></div>
+    <% end %>
+  </div>
   <%= yield %>
 
 </body>

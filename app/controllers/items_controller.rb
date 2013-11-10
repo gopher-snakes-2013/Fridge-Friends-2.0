@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
     new_item.fridge_id = params[:fridge_id]
     if new_item.save
       message = @client.account.sms.messages.create(body: "you just created a new item called #{new_item.name}",
-                                              to: '+13605844437',
+                                              to: ENV['ANNIES_NUMBER'],
                                               from: '!14153602257')
       puts message.sid
       redirect_to fridge_path(new_item.fridge.id)

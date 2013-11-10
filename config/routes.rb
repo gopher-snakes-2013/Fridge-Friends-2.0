@@ -1,7 +1,7 @@
 FridgeFriends20::Application.routes.draw do
-  
-  match '/users' => 'users#create'
 
+  match '/users' => 'users#create'
+  put '/users/:id/update' => 'users#update'
   constraints Clearance::Constraints::SignedOut.new do
     root to: 'clearance/sessions#new'
   end

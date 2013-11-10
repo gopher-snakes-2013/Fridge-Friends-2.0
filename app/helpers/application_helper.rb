@@ -19,15 +19,23 @@ module ApplicationHelper
   end
 
   def text_current_user(twilio_client, current_user, fridge, item)
-    twilio_client.account.sms.messages.create(body: "you just created a new item in #{fridge.name} called #{item.name}", to: convert(current_user.phone_number), from: '14153602257')
-    puts "Message sent to item creator: #{current_user.name}"
+    if current_user.opted_in && current_user.phone_number
+      twilio_client.account.sms.messages.create(body: "you just added #{item.name} to your #{fridge.name} fridge", to: convert(current_user.phone_number), from: '14153602257')
+      puts "Message sent to item creator: #{current_user.name}"
+    else
+      puts "#{current_user.name} not opted in for text alerts"
+    end
   end
 
   def text_fridge_friends(twilio_client, friends, original_user, fridge, item)
     friends.each do |friend|
-      phone_number = convert(friend.phone_number)
-      twilio_client.account.sms.messages.create(body: "#{original_user.name} just created a new item in #{fridge.name} called #{item.name}", to: convert(friend.phone_number), from: '14153602257')
-      puts "Message sent to fridge friend: #{friend.name}"
+      if friend.opted_in && friend.phone_number
+        phone_number = convert(friend.phone_number)
+        twilio_client.account.sms.messages.create(body: "#{original_user.name} just added #{item.name} to #{fridge.name} fridge", to: convert(friend.phone_number), from: '14153602257')
+        puts "Message sent to fridge friend: #{friend.name}"
+      else
+        puts "#{friend.name} not opted in for text alerts"
+      end
     end
   end
 end

@@ -1,13 +1,8 @@
 .ff-bgd-overlay {
   font-family: "Helvetica";
-  background: #c6a6dd;
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#c6a6dd), color-stop(100%,#788923));
-  background: -moz-linear-gradient(-45deg,  #c6a6dd 0%, #788923 100%);
-  background: -o-linear-gradient(-45deg,  #c6a6dd 0%,#788923 100%);
-  background: -ms-linear-gradient(-45deg,  #c6a6dd 0%,#788923 100%);
-  /*background-image: url('./img/fridge0.jpg');*/
+  /*background-image: url('./img/fridge0.jpg');
   background-repeat: no-repeat;
-  background-position: 50% -49px;
+  background-position: 50% -49px;*/
 }
 
 form.login {

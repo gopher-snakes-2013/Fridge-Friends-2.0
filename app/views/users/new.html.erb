@@ -4,7 +4,7 @@
      <div id='clearance' class='sign-up'>
       <h2>Sign up</h2>
 
-      <%= form_for @user, html: { class: "login" } do |form| %>
+      <%= form_for @user, html: { class: "login", data: { ajax: "false"} } do |form| %>
       <%= render :partial => '/users/form', :object => form %>
 
       <div class='submit-field'>

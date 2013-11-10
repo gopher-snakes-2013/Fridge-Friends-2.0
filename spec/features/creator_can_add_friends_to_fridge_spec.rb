@@ -7,7 +7,7 @@ feature "Fridge creator can add" do
 
   let!(:user) { User.new(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '360-584-4437', customer_id: '123456788') }
 
-  let!(:user_2) { User.new(name: 'Bob', email: 'bob@example.com', password: 'bobpassword', phone_number: '206-313-0520', customer_id: '123456788') }
+  let!(:user_2) { User.new(name: 'Bob', email: 'bob@example.com', password: 'bobpassword', phone_number: '757-535-4412', customer_id: '123456788') }
 
   scenario "exisiting user as friend to fridge", js: true do
     signup_user(user)
@@ -29,7 +29,7 @@ feature "Fridge creator cannot add" do
 
   let!(:user) { User.new(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '360-584-4437', customer_id: '123456788') }
 
-  let!(:user_2) { User.new(name: 'Bob', email: 'bob@example.com', password: 'bobpassword', phone_number: '206-313-0520', customer_id: '123456788') }
+  let!(:user_2) { User.new(name: 'Bob', email: 'bob@example.com', password: 'bobpassword', phone_number: '757-535-4412', customer_id: '123456788') }
 
   scenario "user to fridge when already a friend of fridge", js: true do
     signup_user(user)

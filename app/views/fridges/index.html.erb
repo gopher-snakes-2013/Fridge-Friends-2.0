@@ -1,17 +1,58 @@
-<h1>Fridges</h1>
+  <div data-role="page">
+    <div id="username-display">
+        <% if signed_in? %>
+         <span><%= current_user.email %></span>
+         <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
+        <% else %>
+          <span><%= link_to 'Sign in', sign_in_path %></span>
+        <% end %>
 
-<%= flash[:delete_fridge_notice] %>
+      </div>
 
-<% @fridges.each  do |fridge| %>
-  <h3><%= link_to fridge.name, fridge_path(fridge.id) %></h3>
-  <% if fridge.creator_id == @current_user.id %>
-    <%= button_to('Delete Fridge', fridge_path(fridge.id), method: 'delete') %>
-  <% end %>
-<% end %>
+    <div data-role="header" class="toolbar" style="overflow:hidden;">
+      <h1>Fridges</h1>
+      <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
+    </div><!-- /header -->
 
-<%= flash[:add_fridge_notice] %>
+    <div data-role="content">
 
-<%= form_for @fridge do |f| %>
-  <%= f.text_field :name, placeholder: 'Fridge Name' %>
-  <%= f.submit 'Add Fridge' %>
-<% end %>
+      <%= flash[:delete_fridge_notice] %>
+      <%= flash[:add_fridge_notice] %>
+
+
+      <div>
+        <%= form_for @fridge do |f| %>
+          <%= f.text_field :name, placeholder: 'Fridge Name' %>
+          <%= f.submit 'Add Fridge' %>
+        <% end %>
+      </div>
+
+      <div id="fridge-contents">
+        <ul data-role="listview" data-inset="true" data-split-icon="delete">
+
+        <% @fridges.each  do |fridge| %>
+          <li data-icon="false">
+            <%= link_to fridge.name, fridge_path(fridge.id) %>
+            <% if fridge.creator_id == @current_user.id %>
+              <%= link_to('Delete Fridge', fridge_path(fridge.id), method: 'delete', data: { icon: "delete"}) %>
+            <% end %>
+          </li>
+        <% end %>
+        </ul>
+      </div>
+
+  </div><!-- /content -->
+
+    <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
+      <div>
+        <ul>
+          <% @fridges.each  do |fridge| %>
+          <li><span>stuff</span></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+
+
+  </div><!-- /page -->
+

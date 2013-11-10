@@ -1,0 +1,18 @@
+<div id="sign_up" data-role="page" class="sign-up">
+  <% if flash %>
+  <div id="flash-box">
+    <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+    <% end %>
+  </div>
+  <% end %>
+  <div data-role="content">
+
+    <div id='clearance' class='sign-in'>
+      <h2><%= t '.title' %></h2>
+
+      <%= render :partial => '/sessions/form' %>
+
+    </div>
+  </div>
+</div>

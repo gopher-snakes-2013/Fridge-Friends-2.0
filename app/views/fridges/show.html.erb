@@ -1,31 +1,83 @@
-<h2><%= @fridge.name %></h2>
-  <ul>
-    <% @fridge.items.each do |item| %>
-      <li>Name: <%= item.name %></li>
-      <li>Category: <%= item.category %></li>
-      <li>Purchased: <%= time_ago_in_words(item.created_at) %> ago</li>
-      <%= button_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete') %>
-      <br>
-    <% end %>
-  </ul>
 
-<%= flash[:add_item_notice] %>
+  <div data-role="page" id="fridge-show">
+    <div id="username-display">
+        <% if signed_in? %>
+         <span><%= current_user.email %></span>
+         <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
+        <% else %>
+          <span><%= link_to 'Sign in', sign_in_path %></span>
+        <% end %>
 
-<%= form_for [@fridge, @item] do |f| %>
-  <%= f.text_field :name, placeholder: 'Item Name' %>
-  <%= f.select :category, ['Beverage', 'Dairy', 'Meat', 'Produce', 'Snack', 'Other'], :prompt => 'Category' %>
-  <%= f.submit 'Add Item to Fridge' %>
-<% end %>
+      </div>
 
-<h3>Add User to <%= @fridge.name %>:</h3>
+    <div data-role="header" class="toolbar" style="overflow:hidden;">
+      <h2><%= @fridge.name %></h2>
+      <%= link_to 'Back', fridges_path, data: {icon: 'gear'}, class: 'ui-btn-left' %>
+      <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
+    </div><!-- /header -->
 
-<%= flash[:add_user_notice] %>
+    <div data-role="content">
 
-<%= form_for @find_user_email, url: add_user_fridge_path, method: 'post' do |f| %>
-  <%= f.text_field :email, placeholder: "Enter Email Address" %>
-  <%= f.submit %>
-<% end %>
+      <%= flash[:add_item_notice] %>
+      <%= flash[:add_user_notice] %>
 
-<div class 'extra-links'>
-  <%= link_to 'Back', fridges_path %>
-</div>
+      <div>
+        <%= form_for [@fridge, @item] do |f| %>
+          <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
+            <legend>Add Item to <%= @fridge.name %></legend>
+            <%= f.text_field :name, placeholder: 'Item Name' %>
+            <%= f.select :category, ['Beverage', 'Dairy', 'Meat', 'Produce', 'Snack', 'Other'], :prompt => 'Category' %>
+            <%= f.submit 'Add Item to Fridge' %>
+          </fieldset>
+        <% end %>
+      </div>
+
+      <div>
+        <%= form_for @find_user_email, url: add_user_fridge_path, method: 'post' do |f| %>
+          <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
+            <legend>Add User to <%= @fridge.name %></legend>
+            <%= f.text_field :email, placeholder: "Enter Email Address" %>
+            <%= f.submit %>
+          </fieldset>
+        <% end %>
+      </div>
+
+      <div id="fridge-contents">
+        <ul data-role="listview" data-filter="true" data-filter-placeholder="Search this fridge..." data-split-icon="delete">
+          <li data-role="list-divider">
+            <span>Fruits & Vegetables</span>
+          </li>
+          <% @fridge.items.each do |item| %>
+            <li>
+              <a>
+              <span><%= item.name %></span>
+              <span><%= item.category %></span>
+              <span>Purchased: <%= time_ago_in_words(item.created_at) %> ago</span>
+              <%= link_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete', data: { icon: "delete"}) %>
+            </li>
+          <% end %>
+
+        </ul>
+      </div>
+
+  </div><!-- /content -->
+
+    <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
+      <div>
+        <p>Eventually, I'd like to show a list of people that this fridge is shared with here.</p>
+        <p>I'm also open to suggestion</p>
+      </div>
+      <div>
+        <ul>
+          <% @fridge.items.each do |item| %>
+            <li>
+              <span>stuff</span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+
+
+  </div><!-- /page -->
+

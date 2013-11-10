@@ -18,6 +18,11 @@
   <%= form.text_field :phone_number, placeholder: '350-203-4320' %>
 </div>
 
+<div class='opted_in-field'>
+    <%= form.label "Text Alerts" %>
+    <%= form.check_box :opted_in %>
+</div>
+
 <div class='customer_id-field'>
   <%= form.label "Grocery Store Customer ID" %>
   <%= form.text_field :customer_id, placeholder: 'Grocery Store Customer ID' %>

@@ -3,7 +3,7 @@ FactoryGirl.define do
     user_name 'Carter1'
     user_email 'carter11@example.com'
     user_password 'password'
-    user_phone_number '407-774-9393'
+    user_phone_number '360-584-4437'
     user_customer_id '123456788'
   end
 

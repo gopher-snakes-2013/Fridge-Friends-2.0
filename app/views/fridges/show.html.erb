@@ -67,8 +67,19 @@
         <p>Eventually, I'd like to show a list of people that this fridge is shared with here.</p>
         <p>I'm also open to suggestion</p>
       </div>
+      <div id='list_fridge_friends'>
+        <h3>Friends of this Fridge</h3>
+         <ul>
+          <% @friends.each do |friend| %>
+            <li>
+              <span><%= friend.name %></span>
+            </li>
+          <% end %>
+        </ul>
+      </div>
       <div>
         <ul>
+          <h3>Cricket's Stuff</h3>
           <% @fridge.items.each do |item| %>
             <li>
               <span>stuff</span>

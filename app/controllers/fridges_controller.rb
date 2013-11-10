@@ -23,6 +23,7 @@ class FridgesController < ApplicationController
     @item = Item.new
     @items = @fridge.items.all
     @find_user_email = User.new
+    @friends = find_only_friends_of_fridge(current_user, @fridge)
   end
 
   def destroy

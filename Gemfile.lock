@@ -69,6 +69,9 @@ GEM
       factory_girl (~> 4.3.0)
       railties (>= 3.0.0)
     ffi (1.9.3)
+    figaro (0.7.0)
+      bundler (~> 1.0)
+      rails (>= 3, < 5)
     hike (1.2.3)
     i18n (0.6.5)
     journey (1.0.4)
@@ -177,6 +180,7 @@ DEPENDENCIES
   coffee-rails (~> 3.2.1)
   database_cleaner
   factory_girl_rails
+  figaro
   jquery-rails
   pg
   quiet_assets

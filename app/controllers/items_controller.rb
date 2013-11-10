@@ -10,8 +10,8 @@ class ItemsController < ApplicationController
   end
 
   def create
-  account_sid = 'ACf895d88962485e9831abd44f013c09f0'
-  auth_token = '6be73c40c5926faadd2eb899e8b41653'
+  account_sid = ENV['ACCOUNT_SID']
+  auth_token = ENV['AUTH_TOKEN']
   @client = Twilio::REST::Client.new account_sid, auth_token
     new_item = Item.new(params[:item])
     new_item.fridge_id = params[:fridge_id]

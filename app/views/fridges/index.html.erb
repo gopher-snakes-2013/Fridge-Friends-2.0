@@ -1,4 +1,13 @@
   <div data-role="page">
+    <div id="username-display">
+    <% if signed_in? %>
+     <span><%= current_user.email %></span>
+     <span><%= link_to 'Sign out', sign_out_path, method: :delete %></span>
+    <% else %>
+      <span><%= link_to 'Sign in', sign_in_path %></span>
+    <% end %>
+
+  </div>
     <div data-role="header" class="toolbar" style="overflow:hidden;">
       <h1>Fridges</h1>
       <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>

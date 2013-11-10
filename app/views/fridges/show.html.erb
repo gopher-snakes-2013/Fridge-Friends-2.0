@@ -1,5 +1,14 @@
 
   <div data-role="page" id="fridge-show">
+    <div id="username-display">
+    <% if signed_in? %>
+     <span><%= current_user.email %></span>
+     <span><%= link_to 'Sign out', sign_out_path, method: :delete %></span>
+    <% else %>
+      <span><%= link_to 'Sign in', sign_in_path %></span>
+    <% end %>
+
+  </div>
     <div data-role="header" class="toolbar" style="overflow:hidden;">
       <h2><%= @fridge.name %></h2>
       <%= link_to 'Back', fridges_path, data: {icon: 'gear'}, class: 'ui-btn-left' %>
@@ -99,6 +108,10 @@
           <span><%= link_to 'Sign in', sign_in_path %></span>
         <% end %>
 
+      </div>
+      <div>
+        <p>Eventually, I'd like to show a list of people that this fridge is shared with here.</p>
+        <p>I'm also open to suggestion</p>
       </div>
       <div>
         <ul>

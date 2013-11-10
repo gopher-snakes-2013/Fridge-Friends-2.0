@@ -21,10 +21,10 @@ form.login {
 }
 
 
-.home, .sign-up {
+.home, .sign-up, .password-new, .password-reset {
   text-align: center;
 }
-.home h1, .sign-up h1 {
+.home h1, .sign-up h1, .password-new h1,  {
   margin-top: 2em;
 }
 

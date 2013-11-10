@@ -1,0 +1,31 @@
+<div id="password-edit" data-role="page" class="password-edit">
+  <div data-role="content">
+    <% if flash %>
+    <div id="flash-box">
+      <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+      <% end %>
+    </div>
+    <% end %>
+    <h1>Fridge Friends</h1>
+
+    <div id='clearance' class='password-edit'>
+      <h2><%= t '.title' %></h2>
+
+      <p><%= t '.description' %></p>
+
+      <%= form_for :password_reset,
+      :url => user_password_path(@user, :token => @user.confirmation_token),
+      :html => { :method => :put } do |form| %>
+      <div class='password-field'>
+        <%= form.label :password %>
+        <%= form.password_field :password, placeholder: 'HungryMonster@example.com' %>
+      </div>
+
+      <div class='submit-field'>
+        <%= form.submit %>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>

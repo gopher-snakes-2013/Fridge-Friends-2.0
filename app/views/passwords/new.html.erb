@@ -1,0 +1,28 @@
+<div id="password-new" data-role="page" class="password-new">
+  <% if flash %>
+  <div id="flash-box">
+    <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+    <% end %>
+  </div>
+  <% end %>
+  <div data-role="content">
+<h1>Fridge Friends</h1>
+   <div id='clearance' class='password-new'>
+    <h2><%= t '.title' %></h2>
+
+    <p><%= t '.description' %></p>
+
+    <%= form_for :password, :url => passwords_path, html: { class: "login" } do |form| %>
+    <div class='text-field'>
+      <%= form.label :email %>
+      <%= form.text_field :email, :type => 'email', placeholder: 'HungryMonster@example.com' %>
+    </div>
+
+    <div class='submit-field'>
+      <%= form.submit %>
+    </div>
+    <% end %>
+  </div>
+</div>
+</div>

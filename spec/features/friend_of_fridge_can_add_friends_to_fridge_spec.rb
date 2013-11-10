@@ -5,11 +5,9 @@ feature "friend of fridge (that is not creator of fridge) can add" do
     visit root_path
   end
 
-  let!(:user) { User.new(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '360-584-4437'
-  , customer_id: '123456788') }
+  let!(:user) { User.new(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '360-584-4437', customer_id: '123456788') }
 
-  let!(:user_2) { User.new(name: 'Bob', email: 'bob@example.com', password: 'bobpassword', phone_number: '206-313-0520'
-  , customer_id: '123456788') }
+  let!(:user_2) { User.new(name: 'Bob', email: 'bob@example.com', password: 'bobpassword', phone_number: '206-313-0520', customer_id: '123456788') }
 
   let!(:user_3) { User.new(name: 'Boring', email: 'boring@test.com', password: 'boring', phone_number: '510-409-1895', customer_id: '000000000') }
 

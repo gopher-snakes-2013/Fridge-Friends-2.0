@@ -1,11 +1,13 @@
 require 'spec_helper'
 
 describe ItemsController do
-  let!(:fridge) { Fridge.create(name: "Food Titanic") }
+  let!(:user) { User.create(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '360-584-4437', customer_id: '123456788') }
+  let!(:fridge) { Fridge.create(name: "Food Titanic", creator_id: user.id) }
   let!(:item) { Item.create(name: "Milk", category: "Dairy", fridge_id: fridge.id) }
 
   context "#create" do
     it "creates a new item with valid params" do
+      sign_in_as(user)
       expect {
         post :create, fridge_id: item.fridge_id, item: { name: item.name, category: item.category, fridge_id: item.fridge_id }
       }.to change{ Item.count }.by(1)

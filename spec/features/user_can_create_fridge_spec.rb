@@ -5,8 +5,7 @@ feature "User can create a new fridge" do
     visit root_path
   end
 
-  let!(:user) { User.new(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '360-584-4437'
-  , customer_id: '123456788') }
+  let!(:user) { User.new(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '360-584-4437', customer_id: '123456788') }
 
   scenario "with valid fridge name" do
     signup_user(user)
@@ -21,8 +20,7 @@ feature "User cannot create a new fridge" do
     visit root_path
   end
 
-  let!(:user) { User.new(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '360-584-4437'
-  , customer_id: '123456788') }
+  let!(:user) { User.new(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '360-584-4437', customer_id: '123456788') }
 
   scenario "with duplicate fridge name" do
     signup_user(user)

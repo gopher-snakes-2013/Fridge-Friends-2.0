@@ -18,8 +18,11 @@ class ItemsController < ApplicationController
     if new_item.save
       message = @client.account.sms.messages.create(body: "you just created a new item called #{new_item.name}",
                                               to: ENV['ANNIES_NUMBER'],
-                                              from: '!14153602257')
+                                              from: '14153602257')
       puts message.sid
+
+
+
       redirect_to fridge_path(new_item.fridge.id)
     else
       flash[:add_item_notice] = new_item.errors.full_messages.join(", ")

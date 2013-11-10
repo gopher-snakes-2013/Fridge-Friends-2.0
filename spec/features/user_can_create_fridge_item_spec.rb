@@ -5,9 +5,11 @@ feature "User can create fridge item" do
     visit root_path
   end
 
-  let!(:user) { User.new(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '407-774-9393', customer_id: '123456788') }
+  let!(:user) { User.new(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '360-584-4437'
+  , customer_id: '123456788') }
 
-  let!(:user_2) { User.new(name: 'Bob', email: 'bob@example.com', password: 'bobpassword', phone_number: '234-533-4354', customer_id: '123456788') }
+  let!(:user_2) { User.new(name: 'Bob', email: 'bob@example.com', password: 'bobpassword', phone_number: '206-313-0520'
+  , customer_id: '123456788') }
 
   scenario "when they are the original fridge creator" do
     signup_user(user)
@@ -62,7 +64,8 @@ feature "User cannot create fridge item" do
     visit root_path
   end
 
-  let!(:user) { User.new(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '407-774-9393', customer_id: '123456788') }
+  let!(:user) { User.new(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '360-584-4437'
+  , customer_id: '123456788') }
 
   scenario "with invalid item name and category" do
     signup_user(user)

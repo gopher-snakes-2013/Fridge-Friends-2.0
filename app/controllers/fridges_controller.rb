@@ -23,6 +23,9 @@ class FridgesController < ApplicationController
     @item = Item.new
     @items = @fridge.items.all
     @find_user_email = User.new
+    categories = []
+    @items.each { |i| categories << i.category }
+    @items_categories = categories.uniq.sort
   end
 
   def destroy

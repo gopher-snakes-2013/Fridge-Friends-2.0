@@ -44,19 +44,19 @@
 
       <div id="fridge-contents">
         <ul data-role="listview" data-filter="true" data-filter-placeholder="Search this fridge..." data-split-icon="delete">
-          <li data-role="list-divider">
-            <span>Fruits & Vegetables</span>
-          </li>
-          <% @fridge.items.each do |item| %>
+          <% @items_categories.each do |cat| %>
+            <li data-role="list-divider">
+              <span class="category"><%= cat %></span>
+            </li>
+            <% @fridge.items.where(category:cat).each do |item| %>
             <li>
               <a>
-              <span><%= item.name %></span>
-              <span><%= item.category %></span>
-              <span>Purchased: <%= time_ago_in_words(item.created_at) %> ago</span>
+              <span class="item"><%= item.name %></span>
+              <span class="purchase-date">Purchased: <%= time_ago_in_words(item.created_at) %> ago</span>
               <%= link_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete', data: { icon: "delete"}) %>
             </li>
           <% end %>
-
+          <% end %>
         </ul>
       </div>
 
@@ -66,15 +66,6 @@
       <div>
         <p>Eventually, I'd like to show a list of people that this fridge is shared with here.</p>
         <p>I'm also open to suggestion</p>
-      </div>
-      <div>
-        <ul>
-          <% @fridge.items.each do |item| %>
-            <li>
-              <span>stuff</span>
-            </li>
-          <% end %>
-        </ul>
       </div>
     </div>
 

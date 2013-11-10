@@ -1,14 +1,15 @@
 
   <div data-role="page" id="fridge-show">
     <div id="username-display">
-    <% if signed_in? %>
-     <span><%= current_user.email %></span>
-     <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
-    <% else %>
-      <span><%= link_to 'Sign in', sign_in_path %></span>
-    <% end %>
+        <% if signed_in? %>
+         <span><%= current_user.email %></span>
+         <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
+        <% else %>
+          <span><%= link_to 'Sign in', sign_in_path %></span>
+        <% end %>
 
-  </div>
+      </div>
+
     <div data-role="header" class="toolbar" style="overflow:hidden;">
       <h2><%= @fridge.name %></h2>
       <%= link_to 'Back', fridges_path, data: {icon: 'gear'}, class: 'ui-btn-left' %>
@@ -22,7 +23,7 @@
 
       <div>
         <%= form_for [@fridge, @item] do |f| %>
-          <fieldset data-role="collapsible" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
+          <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
             <legend>Add Item to <%= @fridge.name %></legend>
             <%= f.text_field :name, placeholder: 'Item Name' %>
             <%= f.select :category, ['Beverage', 'Dairy', 'Meat', 'Produce', 'Snack', 'Other'], :prompt => 'Category' %>
@@ -33,7 +34,7 @@
 
       <div>
         <%= form_for @find_user_email, url: add_user_fridge_path, method: 'post' do |f| %>
-          <fieldset data-role="collapsible" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
+          <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
             <legend>Add User to <%= @fridge.name %></legend>
             <%= f.text_field :email, placeholder: "Enter Email Address" %>
             <%= f.submit %>
@@ -55,44 +56,6 @@
               <%= link_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete', data: { icon: "delete"}) %>
             </li>
           <% end %>
-          <li data-role="list-divider">
-            <span>Meat & Poultry</span>
-          </li>
-          <% @fridge.items.each do |item| %>
-            <li>
-              <a>
-              <span><%= item.name %></span>
-              <span><%= item.category %></span>
-              <span>Purchased: <%= time_ago_in_words(item.created_at) %> ago</span>
-              <%= link_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete', data: { icon: "delete"}) %>
-            </li>
-          <% end %>
-          <li data-role="list-divider">
-            <span>Cheese, Eggs, & Dairy</span>
-          </li>
-          <% @fridge.items.each do |item| %>
-            <li>
-              <a>
-              <span><%= item.name %></span>
-              <span><%= item.category %></span>
-              <span>Purchased: <%= time_ago_in_words(item.created_at) %> ago</span>
-              <%= link_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete', data: { icon: "delete"}) %>
-            </li>
-          <% end %>
-          <li data-role="list-divider">
-            <span>Breads, Rice, & Pasta</span>
-          </li>
-          <% @fridge.items.each do |item| %>
-            <li>
-              <a>
-              <span><%= item.name %></span>
-              <span><%= item.category %></span>
-              <span>Purchased: <%= time_ago_in_words(item.created_at) %> ago</span>
-              <%= link_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete', data: { icon: "delete"}) %>
-            </li>
-          <% end %>
-
-
 
         </ul>
       </div>
@@ -100,15 +63,6 @@
   </div><!-- /content -->
 
     <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
-      <div id="username-display">
-        <% if signed_in? %>
-         <span><%= current_user.email %></span>
-         <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
-        <% else %>
-          <span><%= link_to 'Sign in', sign_in_path %></span>
-        <% end %>
-
-      </div>
       <div>
         <p>Eventually, I'd like to show a list of people that this fridge is shared with here.</p>
         <p>I'm also open to suggestion</p>
@@ -117,7 +71,7 @@
         <ul>
           <% @fridge.items.each do |item| %>
             <li>
-              <span><%= item.category %></span>
+              <span>stuff</span>
             </li>
           <% end %>
         </ul>

@@ -1,13 +1,14 @@
   <div data-role="page">
     <div id="username-display">
-    <% if signed_in? %>
-     <span><%= current_user.email %></span>
-     <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
-    <% else %>
-      <span><%= link_to 'Sign in', sign_in_path %></span>
-    <% end %>
+        <% if signed_in? %>
+         <span><%= current_user.email %></span>
+         <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
+        <% else %>
+          <span><%= link_to 'Sign in', sign_in_path %></span>
+        <% end %>
 
-  </div>
+      </div>
+
     <div data-role="header" class="toolbar" style="overflow:hidden;">
       <h1>Fridges</h1>
       <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
@@ -37,41 +38,16 @@
             <% end %>
           </li>
         <% end %>
-          <li data-icon="info">
-            <a href="#">Kitchen Fridge</a>
-          </li>
-          <li data-icon="info">
-            <a href="#">Man-cave Fridge</a>
-          </li>
-          <li data-icon="info">
-            <a href="#">Champagne Room Fridge</a>
-          </li>
-          <li data-icon="info">
-            <a href="#">DBC Phase 3 Whiskey Cabinet</a>
-          </li>
-          <li data-icon="info">
-            <a href="#">Parent's House</a>
-          </li>
-
         </ul>
       </div>
 
   </div><!-- /content -->
 
     <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
-      <div id="username-display">
-        <% if signed_in? %>
-         <span><%= current_user.email %></span>
-         <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
-        <% else %>
-          <span><%= link_to 'Sign in', sign_in_path %></span>
-        <% end %>
-
-      </div>
       <div>
         <ul>
           <% @fridges.each  do |fridge| %>
-          <li><%= link_to fridge.name, fridge_path(fridge.id) %></li>
+          <li><span>stuff</span></li>
         <% end %>
         </ul>
       </div>

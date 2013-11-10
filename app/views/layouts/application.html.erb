@@ -17,24 +17,6 @@
 </head>
 <body>
 <div id="global-container" class="ff-bgd-overlay">
-  <div id="username-display">
-    <% if signed_in? %>
-     <span><%= current_user.email %></span>
-     <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
-    <% else %>
-      <span><%= link_to 'Sign in', sign_in_path %></span>
-    <% end %>
-
-  </div>
-
-  <% if flash %>
-    <div id="flash-box">
-      <% flash.each do |key, value| %>
-        <%= content_tag(:div, value, class: "alert alert-#{key}") %>
-      <% end %>
-    </div>
-  <% end %>
-
   <%= yield %>
 </div>
 </body>

@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe FridgesController do
-  let!(:user) { User.create(email: "steven@steven.com", password: "password", name: "Steven", phone_number: "555-555-5555") }
+  let!(:user) { User.create(email: "steven@steven.com", password: "password", name: "Steven", phone_number: "360-584-4437") }
   let!(:user2) { User.create(email: "annie@annie.com", password: "password", name: "Annie") }
   let!(:fridge) { Fridge.create(name: "Home Fridge", creator_id: user.id) }
 

@@ -1,3 +1,7 @@
+require 'rubygems'
+require 'twilio-ruby'
+include ApplicationHelper
+
 class FridgesController < ApplicationController
   before_filter :authorize_and_load_fridge, only: [:show]
   def index
@@ -26,6 +30,8 @@ class FridgesController < ApplicationController
     categories = []
     @items.each { |i| categories << i.category }
     @items_categories = categories.uniq.sort
+    @user = current_user
+    @friends = find_only_friends_of_fridge(current_user, @fridge)
   end
 
   def destroy

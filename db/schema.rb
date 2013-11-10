@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131109072646) do
+ActiveRecord::Schema.define(:version => 20131110212818) do
 
   create_table "fridges", :force => true do |t|
     t.string   "name"
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(:version => 20131109072646) do
     t.string   "name"
     t.string   "phone_number"
     t.string   "customer_id"
+    t.boolean  "opted_in"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email"

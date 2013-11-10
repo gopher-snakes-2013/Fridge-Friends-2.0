@@ -1,0 +1,71 @@
+.ff-bgd-overlay {
+  font-family: "Helvetica";
+  /*background-image: url('./img/fridge0.jpg');
+  background-repeat: no-repeat;
+  background-position: 50% -49px;*/
+}
+
+form.login {
+  max-width: 350px;
+  margin: 50px auto;
+  padding:20px;
+  background-color: #FFF;
+  border-radius: 7px;
+  border: 1px solid #eee;
+  text-align:left;
+}
+
+
+.home, .sign-up, .password-new, .password-reset {
+  text-align: center;
+}
+.home h1, .sign-up h1, .password-new h1,  {
+  margin-top: 2em;
+}
+
+form label {
+  display: inline-block;
+  margin-right: 10px;
+  min-width: 100px;
+}
+
+form input {
+  margin: 3px 0px;
+  font-size: 1.3em;
+  border-radius: 7px;
+  padding:5px;
+  min-width: 222px;
+
+}
+form.login {
+  max-width:350px;
+}
+
+
+form.login #btn {
+  width: 100%;
+  margin: 10px 0px 0px 0px;
+}
+
+
+#settings-panel {
+  background-color: #DDD;
+}
+
+#settings-panel li {
+  border-bottom: 2px solid #fff;
+  border-top: 1px solid #efefef;
+  padding: 10px 0px;
+}
+
+#fridge-contents {
+  margin-top: 16px;
+}
+
+#fridge-show .ui-content {
+  padding-top:0px;
+}
+
+#username-display span {
+  display: block;
+}

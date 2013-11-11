@@ -1,0 +1,29 @@
+<div data-role="page" id="query-show">
+  <div id="username-display">
+
+    <% if signed_in? %>
+    <span><%= current_user.email %></span>
+    <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
+    <% else %>
+    <span><%= link_to 'Sign in', sign_in_path %></span>
+    <% end %>
+
+  </div>
+
+  <div data-role="header" class="toolbar" style="overflow:hidden;">
+    <h2>Recipes</h2>
+    <%= link_to 'Back', recipe_queries_path, data: {icon: 'gear'}, class: 'ui-btn-left' %>
+    <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
+  </div><!-- /header -->
+
+  <div data-role="content">
+
+    <div class="recipe_query_results">
+        <h3> Search terms: <%= @recipe_query.terms %></h3>
+        <ul>
+          <% @recipes.each do |recipe| %>
+            <li><%= link_to recipe.name, recipe_query_recipe_path(recipe.recipe_query_id, recipe.id) %></li>
+          <% end %>
+        </ul>
+    </div>
+  </div>

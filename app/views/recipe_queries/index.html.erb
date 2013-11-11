@@ -1,3 +1,23 @@
+<div data-role="page" id="query-index">
+      <div id="username-display">
+
+        <% if signed_in? %>
+         <span><%= current_user.email %></span>
+         <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
+        <% else %>
+          <span><%= link_to 'Sign in', sign_in_path %></span>
+        <% end %>
+
+      </div>
+
+    <div data-role="header" class="toolbar" style="overflow:hidden;">
+      <h2>Recipe Search</h2>
+      <%= link_to 'Back', fridges_path, data: {icon: 'gear'}, class: 'ui-btn-left' %>
+      <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
+    </div><!-- /header -->
+
+    <div data-role="content">
+
 <div class="recipe_query">
 
   <%= form_for @recipe_query do |f| %>
@@ -6,9 +26,13 @@
   <% end %>
 </div>
 
-<div class="recipe_query_reseults">
-  <h3>Results</h3>
-  <% @recipe_array.each do |recipe| %>
-    <%= recipe.name %>
-  <% end %>
+<div class="users_recipe_queries">
+  <h3>Past Queries</h3>
+  <ul>
+    <% @recipe_queries.each do |query| %>
+      <li><%= link_to query.terms, recipe_query_path(query.id) %></li>
+    <% end %>
+  </ul>
+</div>
+</div>
 </div>

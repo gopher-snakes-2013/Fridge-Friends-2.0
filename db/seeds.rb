@@ -6,19 +6,19 @@ user1 = User.create(email: "stevennugent@gmail.com",
 
 user2 = User.create(email: "annie@gmail.com",
                     password: "anniepassword",
-                    phone_number: "555-555-5555",
+                    phone_number: "360-584-4437",
                     name: "Annie",
                     customer_id: "673198357")
 
 user3 = User.create(email: "cricket@gmail.com",
                     password: "cricketpassword",
-                    phone_number: "555-555-5555",
+                    phone_number: "757-535-4412",
                     name: "Cricket",
                     customer_id: "752856769")
 
 user4 = User.create(email: "carter@gmail.com",
                     password: "carterpassword",
-                    phone_number: "555-555-5555",
+                    phone_number: "510-409-1895",
                     name: "Carter",
                     customer_id: "958265963")
 

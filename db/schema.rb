@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131110212818) do
+ActiveRecord::Schema.define(:version => 20131111044347) do
 
   create_table "fridges", :force => true do |t|
     t.string   "name"
@@ -35,6 +35,16 @@ ActiveRecord::Schema.define(:version => 20131110212818) do
     t.integer  "fridge_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "upc_codes", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
+    t.string   "upc_img_file_name"
+    t.string   "upc_img_content_type"
+    t.integer  "upc_img_file_size"
+    t.datetime "upc_img_updated_at"
   end
 
   create_table "users", :force => true do |t|

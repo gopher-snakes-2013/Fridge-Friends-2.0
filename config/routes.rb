@@ -13,6 +13,7 @@ FridgeFriends20::Application.routes.draw do
         post :add_user
       end
       resources :items, only: [:index, :create, :show, :destroy]
+      resources :upc_codes, only: [:create, :show]
     end
   end
 end

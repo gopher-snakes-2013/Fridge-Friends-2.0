@@ -30,7 +30,15 @@
             <%= f.submit 'Add Item to Fridge' %>
           </fieldset>
         <% end %>
+        
+        <%= form_for [@fridge, @upc_code], :url => fridge_upc_codes_path(@fridge.id), :html => { :multipart => true } do |f| %>
+          <%= f.file_field :upc_img %>
+          <%= f.submit "Upload UPC Code Image" %>
+        <% end %>
       </div>
+
+
+
 
       <div>
         <%= form_for @find_user_email, url: add_user_fridge_path, method: 'post' do |f| %>

@@ -1,2 +1,0 @@
-class ImgUploadsController < ApplicationController
-end

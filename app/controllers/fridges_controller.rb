@@ -32,6 +32,7 @@ class FridgesController < ApplicationController
     @items_categories = categories.uniq.sort
     @user = current_user
     @friends = find_only_friends_of_fridge(current_user, @fridge)
+    @upc_code = UpcCode.new
   end
 
   def destroy

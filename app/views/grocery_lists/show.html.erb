@@ -12,7 +12,7 @@
         <a>
         <span class="item"><%= item.name %></span>
         <span class="add-date">Added: <%= time_ago_in_words(item.created_at) %> ago</span>
-        <%= link_to('Delete Item', [@fridge, @list], method: 'delete', data: { icon: "delete"}) %>
+        <%= link_to('Delete Item', [@fridge, @list, item], method: 'delete', data: { icon: "delete"}) %>
       </li>
       <% end %>
     <% end %>

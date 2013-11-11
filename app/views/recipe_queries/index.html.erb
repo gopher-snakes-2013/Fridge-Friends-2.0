@@ -29,7 +29,7 @@
 <div class="users_recipe_queries">
   <h3>Past Queries</h3>
   <ul>
-    <% @recipe_queries.each do |query| %>
+    <% @recipe_queries.reverse.each do |query| %>
       <li><%= link_to query.terms, recipe_query_path(query.id) %></li>
     <% end %>
   </ul>

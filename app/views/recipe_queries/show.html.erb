@@ -22,7 +22,8 @@
         <h3> Search terms: <%= @recipe_query.terms %></h3>
         <ul>
           <% @recipes.each do |recipe| %>
-            <li><%= link_to recipe.name, recipe_query_recipe_path(recipe.recipe_query_id, recipe.id) %></li>
+            <li><img src="<%= recipe.img_url %>" alt="" height="60" width="90">
+            <%= link_to recipe.name, recipe_query_recipe_path(recipe.recipe_query_id, recipe.id) %></li>
           <% end %>
         </ul>
     </div>

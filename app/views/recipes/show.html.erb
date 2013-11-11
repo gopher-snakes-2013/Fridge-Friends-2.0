@@ -18,6 +18,7 @@
 
   <div data-role="content">
     <h3><%= @recipe.name %></h3>
+    <img src="<%= @recipe.img_url %>" alt="" height="60" width="90">
     <p>Ingredients List: </p>
     <ul>
       <% ingredients_array = @recipe.ingredients.split(',') %>

@@ -14,13 +14,14 @@ class RecipeQueriesController < ApplicationController
     result.collect.each do |recipe|
       new_recipe = Recipe.new
       new_recipe.name = recipe.name
+      new_recipe.img_url = recipe.images.first.small_url
       new_recipe.ingredients = recipe.ingredients.join(", ")
       new_recipe.recipe_query_id = recipe_query.id
       new_recipe.save
       p "RECIPE:" + new_recipe.name
       p "INGREDIENTS:" + new_recipe.ingredients
     end
-    redirect_to :recipe_queries
+    redirect_to recipe_query_path(recipe_query.id)
   end
 
   def show

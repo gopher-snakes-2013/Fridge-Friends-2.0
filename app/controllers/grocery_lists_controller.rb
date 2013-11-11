@@ -5,7 +5,6 @@ class GroceryListsController < ApplicationController
   end
 
   def show
-    @params = params
     @fridge = Fridge.find(params[:fridge_id])
     @list = GroceryList.find(params[:id])
     @item = Item.new
@@ -28,7 +27,6 @@ class GroceryListsController < ApplicationController
   end
 
   def destroy
-    p params
     @list = GroceryList.find(params[:id])
     @list.destroy
     redirect_to fridge_path(params[:fridge_id])

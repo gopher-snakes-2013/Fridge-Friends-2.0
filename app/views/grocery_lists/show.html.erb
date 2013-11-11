@@ -1,1 +1,12 @@
 <%= @params %>
+<%= @fridge.id %>
+<h1><%= @list.title %></h1>
+<div class='error-message'><%= flash[:add_item_notice] %></div>
+<div>
+  <h3>Add Item to Grocery List</h3>
+  <%= form_for @item, url: fridge_grocery_list_path(@fridge, @list), method: 'post' do |f| %>
+    <%= f.text_field :name, placeholder: 'Item Name' %>
+    <%= f.select :category, ['Beverage', 'Dairy', 'Meat', 'Produce', 'Snack', 'Other'], :prompt => 'Category' %>
+    <%= f.submit 'Add Item to Grocery List' %>
+  <% end %>
+</div>

@@ -17,11 +17,24 @@ class ItemsController < ApplicationController
     if @new_item.save
       text_current_user(twilio_client, current_user, current_fridge, @new_item)
       text_fridge_friends(twilio_client, fridge_friends, current_user, current_fridge, @new_item)
-      redirect_to fridge_path(@new_item.fridge.id)
     else
       flash[:add_item_notice] = @new_item.errors.full_messages.join(", ")
-      redirect_to fridge_path(@new_item.fridge.id)
     end
+    redirect_to fridge_path(@new_item.fridge.id)
+  end
+
+  def create_grocery_list_item
+    @new_item = Item.new(params[:item])
+    @new_item.grocery_list_id = params[:grocery_list_id]
+    @new_item.fridge_id = params[:fridge_id]
+    current_fridge = find_fridge(params[:fridge_id])
+    current_list = find_list(params[:grocery_list_id])
+    if @new_item.save
+      puts "item successfully saved!!" *80
+    else
+      flash[:add_item_notice] = @new_item.errors.full_messages.join(", ")
+    end
+    redirect_to fridge_grocery_list_path(current_fridge.id, current_list.id)
   end
 
   def show

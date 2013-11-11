@@ -14,7 +14,8 @@ FridgeFriends20::Application.routes.draw do
       end
       resources :items, only: [:index, :create, :show, :destroy]
       resources :grocery_lists, only: [:index, :create, :show] do
-        resources :items, only: [:index, :create, :destroy]
+        resources :items, only: [:index, :destroy]
+        post '/', to: 'items#create_grocery_list_item'
       end
     end
   end

@@ -6,7 +6,9 @@ class GroceryListsController < ApplicationController
 
   def show
     @params = params
-    # @list = GroceryList.find(fridge_id: params[:fridge_id])
+    @fridge = Fridge.find(params[:fridge_id])
+    @list = GroceryList.find(params[:id])
+    @item = Item.new
   end
 
   def create

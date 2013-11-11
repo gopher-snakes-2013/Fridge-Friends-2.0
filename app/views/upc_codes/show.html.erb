@@ -1,3 +1,6 @@
-<h1>YAY</h1>
-
-<%= image_tag @upc.upc_img.url %>
+<h1>Confirm Item for <%= @fridge.name %></h2>
+<%= form_for [@fridge, @item] do |f| %>
+  <%= f.text_field :name, value: "#{@upc.item_name}" %>
+  <%= f.select :category, ['Beverage', 'Dairy', 'Meat', 'Produce', 'Snack', 'Other'], :prompt => 'Category' %>
+  <%= f.submit 'Add Item to Fridge' %>
+<% end %>

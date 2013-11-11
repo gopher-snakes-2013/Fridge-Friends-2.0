@@ -42,6 +42,10 @@ module ApplicationHelper
   def item_added_by(user_id)
     User.find(user_id).name
   end
+
+  def is_shared?
+    true if Fridge.find(self.id).users.length >= 2
+  end
 end
 
 

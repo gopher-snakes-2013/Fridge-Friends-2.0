@@ -5,5 +5,5 @@ describe Item do
   it { should validate_presence_of(:category) }
   it { should validate_presence_of(:fridge_id) }
   it { should belong_to(:fridge) }
-
+  it { should validate_presence_of(:creator_id) }
 end

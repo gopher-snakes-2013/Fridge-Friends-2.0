@@ -23,7 +23,6 @@ class FridgesController < ApplicationController
   end
 
   def show
-    # @fridge = Fridge.find(params[:id])
     @item = Item.new
     items_related_to_fridge = @fridge.items.all
     @items = []

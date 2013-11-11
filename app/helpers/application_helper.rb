@@ -13,6 +13,10 @@ module ApplicationHelper
     Fridge.find(id)
   end
 
+  def find_list(id)
+    GroceryList.find(id)
+  end
+
   def find_only_friends_of_fridge(current_user, current_fridge)
     current_user_array = [current_user]
     current_fridge.users - current_user_array
@@ -42,6 +46,7 @@ module ApplicationHelper
   def item_added_by(user_id)
     User.find(user_id).name
   end
+
 end
 
 

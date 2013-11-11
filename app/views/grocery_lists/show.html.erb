@@ -1,0 +1,35 @@
+<div data-role="header" class="toolbar" style="overflow:hidden;">
+  <h2><%= @fridge.name %></h2>
+  <%= link_to 'Back', fridge_path(@fridge), data: {icon: 'gear'}, class: 'ui-btn-left' %>
+</div>
+
+<h1><%= @list.title %></h1>
+<div class='error-message'><%= flash[:add_item_notice] %></div>
+
+<div id="fridge-contents">
+  <ul data-role="listview" data-filter="true" data-filter-placeholder="Search this grocery list..." data-split-icon="delete">
+    <% @items_categories.each do |cat| %>
+      <li data-role="list-divider">
+        <span class="category"><%= cat %></span>
+      </li>
+      <% @list.items.where(category:cat).each do |item| %>
+      <li>
+        <a>
+        <span class="item"><%= item.name %></span>
+        <span class="add-date">Added: <%= time_ago_in_words(item.created_at) %> ago</span>
+        <%= link_to('Delete Item', [@fridge, @list, item], method: 'delete', data: { icon: "delete"}) %>
+      </li>
+      <% end %>
+    <% end %>
+  </ul>
+</div>
+
+
+<div>
+  <h3>Add Item to Grocery List</h3>
+  <%= form_for @item, url: fridge_grocery_list_items_path(@fridge, @list), method: :post do |f| %>
+    <%= f.text_field :name, placeholder: 'Item Name' %>
+    <%= f.select :category, ['Beverage', 'Dairy', 'Meat', 'Produce', 'Snack', 'Other'], :prompt => 'Category' %>
+    <%= f.submit 'Add Item to Grocery List' %>
+  <% end %>
+</div>

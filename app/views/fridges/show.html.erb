@@ -20,6 +20,7 @@
 
       <%= flash[:add_item_notice] %>
       <%= flash[:add_user_notice] %>
+      <%= flash[:add_grocery_list_notice] %>
 
       <div>
         <%= form_for [@fridge, @item] do |f| %>
@@ -28,6 +29,16 @@
             <%= f.text_field :name, placeholder: 'Item Name' %>
             <%= f.select :category, ['Beverage', 'Dairy', 'Meat', 'Produce', 'Snack', 'Other'], :prompt => 'Category' %>
             <%= f.submit 'Add Item to Fridge' %>
+          </fieldset>
+        <% end %>
+      </div>
+
+      <div>
+        <%= form_for [@fridge, @list] do |f| %>
+          <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
+            <legend>Add Grocery List for <%= @fridge.name %></legend>
+            <%= f.text_field :title, placeholder: 'Grocery List Title' %>
+            <%= f.submit 'Create Grocery List for Fridge' %>
           </fieldset>
         <% end %>
       </div>
@@ -55,7 +66,7 @@
               <span class="purchase-date">Purchased By: <%= item_added_by(item.creator_id) %> <%= time_ago_in_words(item.created_at) %> ago</span>
               <%= link_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete', data: { icon: "delete"}) %>
             </li>
-          <% end %>
+            <% end %>
           <% end %>
         </ul>
       </div>
@@ -63,10 +74,7 @@
   </div><!-- /content -->
 
     <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
-      <div>
-        <p>Eventually, I'd like to show a list of people that this fridge is shared with here.</p>
-        <p>I'm also open to suggestion</p>
-      </div>
+
       <div id='notification_settings'>
         <h3>Notification Settings</h3>
         <ul>
@@ -80,6 +88,18 @@
         </ul>
       </div>
 
+      <div id='all_grocery_lists'>
+        <h3>Grocery Lists</h3>
+        <ul>
+          <% @lists.each do |list| %>
+          <li>
+            <%= link_to list.title, fridge_grocery_list_path(@fridge.id, list.id) %>
+            <%= link_to "Delete Grocery List", [list.fridge, list], method: :delete %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+
       <div id='list_fridge_friends'>
         <h3>Friends of this Fridge</h3>
          <ul>
@@ -90,18 +110,7 @@
           <% end %>
         </ul>
       </div>
-      <div>
-        <ul>
-          <h3>Cricket's Stuff</h3>
-          <% @fridge.items.each do |item| %>
-            <li>
-              <span>stuff</span>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
+
 
 
   </div><!-- /page -->
-

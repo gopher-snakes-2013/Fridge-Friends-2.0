@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131110212818) do
+ActiveRecord::Schema.define(:version => 20131111011531) do
 
   create_table "fridges", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(:version => 20131110212818) do
   end
 
   add_index "fridges_users", ["user_id", "fridge_id"], :name => "index_fridges_users_on_user_id_and_fridge_id", :unique => true
+
+  create_table "grocery_lists", :force => true do |t|
+    t.integer  "fridge_id"
+    t.string   "store"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "items", :force => true do |t|
     t.string   "name"

@@ -12,6 +12,7 @@ class ItemsController < ApplicationController
   def create
     @new_item = Item.new(params[:item])
     @new_item.fridge_id = params[:fridge_id]
+    @new_item.creator_id = current_user.id
     current_fridge = find_fridge(params[:fridge_id])
     fridge_friends = find_only_friends_of_fridge(current_user, current_fridge)
     if @new_item.save
@@ -27,6 +28,7 @@ class ItemsController < ApplicationController
     @new_item = Item.new(params[:item])
     @new_item.grocery_list_id = params[:grocery_list_id]
     @new_item.fridge_id = params[:fridge_id]
+    @new_item.creator_id = current_user.id
     current_fridge = find_fridge(params[:fridge_id])
     current_list = find_list(params[:grocery_list_id])
     if @new_item.save

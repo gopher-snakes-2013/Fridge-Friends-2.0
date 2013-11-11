@@ -4,33 +4,11 @@ user1 = User.create(email: "stevennugent@gmail.com",
                     name: "Steven",
                     customer_id: "489478274")
 
-home_fridge = user1.fridges.create(name:"Home")
-
-home_fridge.items.create([{ name: "Milk", category: "Dairy"}, 
-                          { name: "Orange Juice", category: "Beverage" }, 
-                          { name: "Lettuce", category: "Produce" },
-                          { name: "Paprika", category: "Other" },
-                          { name: "Turkey", category: "Meat"}])
-
-thanksgiving_fridge = user1.fridges.create(name: "Thanksgiving Dinner")
-thanksgiving_fridge.items.create([{ name: "Turkey", category: "Meat" },
-                                  { name: "Butter", category: "Dairy" },
-                                  { name: "Corn", category: "Produce"}])
-
-dbc_fridge = user1.fridges.create(name:"DBC")
-dbc_fridge.items.create([{ name: "Soy Milk", category: "Dairy" },
-                         { name: "Salad", category: "Produce" },
-                         { name: "Salsa", category: "Snack"},
-                         { name: "Mochi", category: "Other"}])
-
 user2 = User.create(email: "annie@gmail.com",
                     password: "anniepassword",
                     phone_number: "555-555-5555",
                     name: "Annie",
                     customer_id: "673198357")
-
-thanksgiving_fridge.users << user2
-dbc_fridge.users << user2
 
 user3 = User.create(email: "cricket@gmail.com",
                     password: "cricketpassword",
@@ -38,18 +16,37 @@ user3 = User.create(email: "cricket@gmail.com",
                     name: "Cricket",
                     customer_id: "752856769")
 
-dbc_fridge.users << user3
-
-party_fridge = user3.fridges.create(name: "Party Fridge")
-party_fridge.items.create([{ name: "Cristal", category: "Beverage" },
-                           { name: "Bagel Bites", category: "Snack" }])
-
-
 user4 = User.create(email: "carter@gmail.com",
                     password: "carterpassword",
                     phone_number: "555-555-5555",
                     name: "Carter",
                     customer_id: "958265963")
 
+home_fridge = user1.fridges.create(name:"Home")
+
+home_fridge.items.create([{ name: "Milk", category: "Dairy", creator_id: user1.id},
+                          { name: "Orange Juice", category: "Beverage", creator_id: user1.id },
+                          { name: "Lettuce", category: "Produce", creator_id: user1.id },
+                          { name: "Paprika", category: "Other", creator_id: user1.id },
+                          { name: "Turkey", category: "Meat", creator_id: user1.id}])
+
+dbc_fridge = user1.fridges.create(name:"DBC")
+dbc_fridge.items.create([{ name: "Soy Milk", category: "Dairy", creator_id: user1.id },
+                         { name: "Salad", category: "Produce", creator_id: user2.id },
+                         { name: "Salsa", category: "Snack", creator_id: user3.id},
+                         { name: "Mochi", category: "Other", creator_id: user4.id}])
+
+thanksgiving_fridge = user1.fridges.create(name: "Thanksgiving Dinner", creator_id: user1.id)
+thanksgiving_fridge.items.create([{ name: "Turkey", category: "Meat", creator_id: user1.id },
+                                  { name: "Butter", category: "Dairy", creator_id: user2.id },
+                                  { name: "Corn", category: "Produce", creator_id: user2.id}])
+
+party_fridge = user3.fridges.create(name: "Party Fridge", creator_id: user3.id)
+party_fridge.items.create([{ name: "Cristal", category: "Beverage", creator_id: user3.id },
+                           { name: "Bagel Bites", category: "Snack", creator_id: user4.id }])
+
+dbc_fridge.users << user2
+dbc_fridge.users << user3
 dbc_fridge.users << user4
+thanksgiving_fridge.users << user2
 party_fridge.users << user4

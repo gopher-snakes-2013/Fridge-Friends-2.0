@@ -14,7 +14,7 @@ feature "User can delete recipe query" do
     click_on "Find Recipes"
     expect(page).to have_content "Search terms: salmon"
     visit recipe_queries_path
-    click_on "Delete Search Results"
+    click_on "Delete Search"
     expect(page).not_to have_content "salmon"
   end
 end

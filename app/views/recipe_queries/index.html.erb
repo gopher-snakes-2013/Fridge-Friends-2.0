@@ -31,7 +31,7 @@
   <ul>
     <% @recipe_queries.reverse.each do |query| %>
       <li><%= link_to query.terms, recipe_query_path(query.id) %> |
-      <%= link_to('Delete Search Results', recipe_query_path(query.id), method: 'delete', data: { icon: "delete"}) %></li>
+      <%= link_to('Delete Search', recipe_query_path(query.id), method: 'delete', data: { icon: "delete"}) %></li>
     <% end %>
   </ul>
 </div>

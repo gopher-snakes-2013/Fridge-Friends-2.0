@@ -9,5 +9,4 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @ingredients = @recipe.ingredients.split(',')
   end
-
 end

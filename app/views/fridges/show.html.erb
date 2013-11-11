@@ -92,7 +92,12 @@
         <h3>Grocery Lists</h3>
         <ul>
           <% @lists.each do |list| %>
-          <li><%= link_to "#{list.title}", fridge_grocery_list_path(@fridge.id, list.id) %></li>
+          <li>
+            <%= link_to "#{list.title}", fridge_grocery_list_path(@fridge.id, list.id) %>
+            <%= link_to "Delete Grocery List", fridge_grocery_lists_path(list.fridge_id, list.id), controller: 'grocery_list', action: 'destroy', method: 'delete' %>
+
+            <%#= link_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete', data: { icon: "delete"}) %>
+          </li>
           <% end %>
         </ul>
       </div>

@@ -1,8 +1,8 @@
-.ff-bgd-overlay {
+.ff-bgd-overlay, body {
   font-family: "Helvetica";
-  /*background-image: url('./img/fridge0.jpg');
+  background-image: url('fridge0.jpg');
   background-repeat: no-repeat;
-  background-position: 50% -49px;*/
+  background-position: 50% -49px;
 }
 
 form.login {
@@ -66,6 +66,14 @@ form.login #btn {
   padding-top:0px;
 }
 
+#username-display {
+  box-shadow: -2px 2px 5px #555;
+  background-color: #0E6655;
+  color: white;
+  padding: 6px 10px;
+  text-align: right;
+}
 #username-display span {
-  display: block;
+  margin-right: 10px;
+
 }

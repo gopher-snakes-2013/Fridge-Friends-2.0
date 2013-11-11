@@ -10,17 +10,33 @@
 
       </div>
 
-    <div data-role="header" class="toolbar" style="overflow:hidden;">
+    <div data-role="header" class="toolbar" style="overflow:hidden;" data-theme="b">
       <h2><%= @fridge.name %></h2>
       <%= link_to 'Back', fridges_path, data: {icon: 'gear'}, class: 'ui-btn-left' %>
-      <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
+      <a href="#settings-panel" data-icon="gear" data-theme="b" class="ui-btn-right">Options</a>
+      <div data-role="navbar">
+        <ul>
+            <li><a href="#" data-icon="grid" data-theme="b">A</a></li>
+            <li><a href="#" data-icon="star" data-theme="b">B</a></li>
+            <li><a href="#" data-icon="gear" data-theme="b">C</a></li>
+            <li><a href="#" data-icon="arrow-l" data-theme="b">D</a></li>
+            <li><a href="#" data-icon="arrow-r" data-theme="b">E</a></li>
+        </ul>
+      </div><!-- /navbar -->
+
     </div><!-- /header -->
 
     <div data-role="content">
 
       <%= flash[:add_item_notice] %>
       <%= flash[:add_user_notice] %>
-
+      <div>
+        <div data-role="controlgroup" data-type="horizontal" data-mini="true">
+            <a href="#" data-role="button" data-icon="plus" data-theme="b">Add</a>
+            <a href="#" data-role="button" data-icon="delete" data-theme="b">Delete</a>
+            <a href="#" data-role="button" data-icon="grid" data-theme="b">More</a>
+        </div>
+      </div>
       <div>
         <%= form_for [@fridge, @item] do |f| %>
           <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
@@ -62,22 +78,24 @@
 
   </div><!-- /content -->
 
+  <!-- slider panel -->
     <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
-      <div>
-        <p>Eventually, I'd like to show a list of people that this fridge is shared with here.</p>
-        <p>I'm also open to suggestion</p>
-      </div>
       <div id='notification_settings'>
         <h3>Notification Settings</h3>
-        <ul>
-          <li>
+
             <%= form_for @user, url: url_for(controller: 'users', action: 'update'), method: 'put'  do |f| %>
-              <%= f.label "Text Alerts" %>
-              <%= f.check_box :opted_in %>
-              <%= f.submit %>
+            <fieldset data-role="controlgroup">
+                <%= f.label :opted_in, "Text Alerts" %>
+                <%= f.check_box :opted_in %>
+                <%= f.submit %>
+            </fieldset>
             <% end %>
-          </li>
-        </ul>
+
+            <label for="slider2">Flip switch:</label>
+            <select name="slider2" id="slider2" data-role="slider">
+                <option value="off">Off</option>
+                <option value="on">On</option>
+            </select>
       </div>
 
       <div id='list_fridge_friends'>
@@ -90,18 +108,6 @@
           <% end %>
         </ul>
       </div>
-      <div>
-        <ul>
-          <h3>Cricket's Stuff</h3>
-          <% @fridge.items.each do |item| %>
-            <li>
-              <span>stuff</span>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </div>
-
-
+    </div><!-- /slider panel -->
   </div><!-- /page -->
 

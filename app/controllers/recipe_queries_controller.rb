@@ -8,19 +8,9 @@ class RecipeQueriesController < ApplicationController
   def create
     recipe_query = RecipeQuery.new(params[:recipe_query])
     recipe_query.user_id = current_user.id
-    result = Yummly.search(recipe_query.terms)
     recipe_query.save
-
-    result.collect.each do |recipe|
-      new_recipe = Recipe.new
-      new_recipe.name = recipe.name
-      new_recipe.img_url = recipe.images.first.small_url
-      new_recipe.ingredients = recipe.ingredients.join(", ")
-      new_recipe.recipe_query_id = recipe_query.id
-      new_recipe.save
-      p "RECIPE:" + new_recipe.name
-      p "INGREDIENTS:" + new_recipe.ingredients
-    end
+    result = Yummly.search(recipe_query.terms)
+    extract_recipes_from_search(recipe_query, result)
     redirect_to recipe_query_path(recipe_query.id)
   end
 

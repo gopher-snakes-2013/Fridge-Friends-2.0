@@ -5,15 +5,8 @@ class RecipesController < ApplicationController
     @recipe_query = RecipeQuery.find(params[:recipe_query_id])
   end
 
-  def create
-
-  end
-
   def show
     @recipe = Recipe.find(params[:id])
-  end
-
-  def destroy
   end
 
 end

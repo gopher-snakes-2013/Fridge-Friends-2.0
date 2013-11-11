@@ -20,6 +20,7 @@
 
       <%= flash[:add_item_notice] %>
       <%= flash[:add_user_notice] %>
+      <%= flash[:add_grocery_list_notice] %>
 
       <div>
         <%= form_for [@fridge, @item] do |f| %>
@@ -37,7 +38,7 @@
           <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
             <legend>Add Grocery List for <%= @fridge.name %></legend>
             <%= f.text_field :title, placeholder: 'Grocery List Title' %>
-            <%= f.submit 'Add Item to Fridge' %>
+            <%= f.submit 'Create Grocery List for Fridge' %>
           </fieldset>
         <% end %>
       </div>

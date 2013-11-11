@@ -19,7 +19,11 @@ class GroceryListsController < ApplicationController
     @list = GroceryList.new
     @list.title = params[:grocery_list][:title]
     @list.fridge_id = params[:fridge_id].to_i
-    @list.save
+    if @list.save
+      flash[:add_grocery_list_notice] = "#{@list.title} successfully created!"
+    else
+      flash[:add_grocery_list_notice] = @list.errors.full_messages.join(', ')
+    end
     redirect_to fridge_path(params[:fridge_id])
   end
 end

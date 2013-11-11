@@ -1,8 +1,8 @@
-class CreateLists < ActiveRecord::Migration
+class CreateGroceryLists < ActiveRecord::Migration
   def up
     create_table :grocery_lists do |t|
       t.integer :fridge_id
-      t.string :store
+      t.string :title
       t.timestamps
     end
   end

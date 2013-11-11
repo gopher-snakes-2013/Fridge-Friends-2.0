@@ -33,6 +33,16 @@
       </div>
 
       <div>
+        <%= form_for [@fridge, @list] do |f| %>
+          <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
+            <legend>Add Grocery List for <%= @fridge.name %></legend>
+            <%= f.text_field :title, placeholder: 'Grocery List Title' %>
+            <%= f.submit 'Add Item to Fridge' %>
+          </fieldset>
+        <% end %>
+      </div>
+
+      <div>
         <%= form_for @find_user_email, url: add_user_fridge_path, method: 'post' do |f| %>
           <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
             <legend>Add User to <%= @fridge.name %></legend>

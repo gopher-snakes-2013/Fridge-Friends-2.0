@@ -32,11 +32,18 @@ describe ItemsController do
   end
 
   context '#create_grocery_list_item' do
-    it 'creates an item in a grocery list' do
+    it 'creates an item in a grocery list with valid params' do
       sign_in_as(user)
       expect{
         post :create_grocery_list_item, fridge_id: fridge.id, grocery_list_id: pre_created_list.id, item: {name: item.name, category: item.category, fridge_id: item.fridge_id, grocery_list_id: pre_created_list.id, creator_id: item.creator_id}
       }.to change { GroceryList.first.items.count }.by(1)
+    end
+
+    it 'should not create an item in a grocery list with invalid params' do
+      sign_in_as(user)
+      expect{
+        post :create_grocery_list_item, fridge_id: fridge.id, grocery_list_id: pre_created_list.id, item: {name: "" }
+      }.not_to change{ GroceryList.first.items.count }
     end
   end
 

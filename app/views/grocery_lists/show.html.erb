@@ -1,3 +1,8 @@
+<div data-role="header" class="toolbar" style="overflow:hidden;">
+  <h2><%= @fridge.name %></h2>
+  <%= link_to 'Back', fridge_path(@fridge), data: {icon: 'gear'}, class: 'ui-btn-left' %>
+</div>
+
 <h1><%= @list.title %></h1>
 <div class='error-message'><%= flash[:add_item_notice] %></div>
 

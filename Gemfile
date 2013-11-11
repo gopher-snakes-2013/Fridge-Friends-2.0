@@ -10,6 +10,8 @@ gem 'clearance'
 gem 'twilio-ruby'
 gem 'figaro'
 gem 'paperclip'
+gem 'rest-client'
+gem 'json'
 
 # Gems used only for assets and not required
 # in production environments by default.

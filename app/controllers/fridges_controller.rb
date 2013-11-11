@@ -26,6 +26,8 @@ class FridgesController < ApplicationController
     # @fridge = Fridge.find(params[:id])
     @item = Item.new
     @items = @fridge.items.all
+
+
     @find_user_email = User.new
     categories = []
     @items.each { |i| categories << i.category }

@@ -45,4 +45,13 @@ class ItemsController < ApplicationController
     item = Item.find(params[:id]).destroy
     redirect_to fridge_path(item.fridge_id)
   end
+
+  def destroy_grocery_list_item
+    item = Item.find(params[:id]).destroy
+    fridge = Fridge.find(params[:fridge_id])
+    list = GroceryList.find(params[:grocery_list_id])
+    redirect_to fridge_grocery_list_path(fridge, list)
+  end
+
+
 end

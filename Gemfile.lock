@@ -191,7 +191,7 @@ DEPENDENCIES
   factory_girl_rails
   figaro
   jquery-rails
-  paperclip (~> 3.0)
+  paperclip
   pg
   quiet_assets
   rails (= 3.2.11)

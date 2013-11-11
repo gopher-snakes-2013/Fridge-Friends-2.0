@@ -31,9 +31,13 @@
           </fieldset>
         <% end %>
         
-        <%= form_for [@fridge, @upc_code], :url => fridge_upc_codes_path(@fridge.id), :html => { :multipart => true } do |f| %>
-          <%= f.file_field :upc_img %>
-          <%= f.submit "Upload UPC Code Image" %>
+
+
+        <%= form_for @upc, :url => fridge_upc_codes_path(@fridge.id), :html => { :multipart => true, "data-ajax" => false } do |f| %>
+          <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
+            <%= f.file_field :upc_img %>
+            <%= f.submit "Upload UPC Code Image" %>
+          </fieldset>
         <% end %>
       </div>
 

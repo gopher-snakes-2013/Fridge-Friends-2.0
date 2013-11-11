@@ -29,10 +29,8 @@ class GroceryListsController < ApplicationController
 
   def destroy
     p params
-    p params[:grocery_list]
-    # @list = GroceryList.find(params[:id])
-    # @list.destroy
-    # redirect_to root_path
-    # redirect_to fridge_path(params[:fridge_id])
+    @list = GroceryList.find(params[:id])
+    @list.destroy
+    redirect_to fridge_path(params[:fridge_id])
   end
 end

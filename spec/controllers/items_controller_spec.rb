@@ -21,12 +21,14 @@ describe ItemsController do
         post :create, fridge_id: item.fridge_id, item: { name: "" }
       }.not_to change{ Item.count }
     end
+  end
 
-
-    it "#destroy" do
+  context '#destroy' do
+    it "deletes an item" do
       expect {
         delete :destroy, fridge_id: pre_created_item.fridge_id, id: pre_created_item.id
       }.to change{ Item.count }.by(-1)
     end
   end
+
 end

@@ -1,0 +1,14 @@
+<div class="recipe_query">
+
+  <%= form_for @recipe_query do |f| %>
+    <%= f.text_field :terms, placeholder: "Search Yummly Recipes" %>
+    <%= f.submit 'Find Recipes' %>
+  <% end %>
+</div>
+
+<div class="recipe_query_reseults">
+  <h3>Results</h3>
+  <% @recipe_array.each do |recipe| %>
+    <%= recipe.name %>
+  <% end %>
+</div>

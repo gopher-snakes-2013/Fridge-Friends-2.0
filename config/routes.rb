@@ -14,5 +14,7 @@ FridgeFriends20::Application.routes.draw do
       end
       resources :items, only: [:index, :create, :show, :destroy]
     end
+    resources :recipes, only: [:index, :create, :show, :destroy]
+    resources :recipe_queries, only: [:index, :create, :show, :destroy]
   end
 end

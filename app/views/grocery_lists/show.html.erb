@@ -2,7 +2,7 @@
 <div class='error-message'><%= flash[:add_item_notice] %></div>
 
 <div id="fridge-contents">
-  <ul data-role="listview" data-filter="true" data-filter-placeholder="Search this fridge..." data-split-icon="delete">
+  <ul data-role="listview" data-filter="true" data-filter-placeholder="Search this grocery list..." data-split-icon="delete">
     <% @items_categories.each do |cat| %>
       <li data-role="list-divider">
         <span class="category"><%= cat %></span>

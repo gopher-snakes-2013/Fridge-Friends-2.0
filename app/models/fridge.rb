@@ -4,7 +4,7 @@ class Fridge < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => [:creator_id]
   has_and_belongs_to_many :users
   has_many :items
-
+  has_many :grocery_lists
   def owner?(user)
     self.users.include? user
   end

@@ -29,12 +29,20 @@ ActiveRecord::Schema.define(:version => 20131111173500) do
 
   add_index "fridges_users", ["user_id", "fridge_id"], :name => "index_fridges_users_on_user_id_and_fridge_id", :unique => true
 
+  create_table "grocery_lists", :force => true do |t|
+    t.integer  "fridge_id"
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "items", :force => true do |t|
     t.string   "name"
     t.string   "category"
     t.integer  "fridge_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "grocery_list_id"
     t.integer  "creator_id"
   end
 

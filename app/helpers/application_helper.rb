@@ -13,6 +13,10 @@ module ApplicationHelper
     Fridge.find(id)
   end
 
+  def find_list(id)
+    GroceryList.find(id)
+  end
+
   def find_only_friends_of_fridge(current_user, current_fridge)
     current_user_array = [current_user]
     current_fridge.users - current_user_array
@@ -50,6 +54,13 @@ module ApplicationHelper
     end
   end
 
+  def item_added_by(user_id)
+    User.find(user_id).name
+  end
+
+  def is_shared?
+    true if Fridge.find(self.id).users.length >= 2
+  end
 end
 
 

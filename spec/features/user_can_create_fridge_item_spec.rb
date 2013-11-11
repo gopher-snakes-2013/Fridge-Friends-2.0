@@ -39,7 +39,7 @@ feature "User can create fridge item" do
     fill_in "item_name", with: "fridge item"
     select('Other', :from => 'item_category')
     click_on 'Add Item to Fridge'
-    expect(page).to have_content "Purchased:"
+    expect(page).to have_content "Purchased By: Carter1"
   end
 
   scenario "with valid item name and category" do

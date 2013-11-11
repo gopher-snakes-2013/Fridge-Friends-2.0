@@ -13,6 +13,10 @@ FridgeFriends20::Application.routes.draw do
         post :add_user
       end
       resources :items, only: [:index, :create, :show, :destroy]
+      resources :grocery_lists, only: [:create, :show, :destroy] do
+        post '/items', to: 'items#create_grocery_list_item'
+        delete '/items/:id', to: 'items#destroy_grocery_list_item', as: 'item'
+      end
     end
     resources :recipe_queries, only: [:index, :create, :show, :destroy] do
       resources :recipes, only: [:index, :create, :show, :destroy]

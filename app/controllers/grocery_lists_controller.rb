@@ -1,4 +1,13 @@
 class GroceryListsController < ApplicationController
+  def index
+    @fridge = find_fridge(params[:fridge_id])
+    @lists = GroceryList.where(fridge_id: params[:fridge_id])
+  end
+
+  def show
+    @params = params
+    # @list = GroceryList.find(fridge_id: params[:fridge_id])
+  end
 
   def create
     @list = GroceryList.new

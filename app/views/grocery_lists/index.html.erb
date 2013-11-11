@@ -1,0 +1,8 @@
+<div class='users-grocery-lists'>
+  <h1> Grocery Lists </h1>
+  <ul>
+    <% @lists.each do |list| %>
+    <li><%= link_to "#{list.title}", fridge_grocery_list_path(@fridge.id, list.id) %></li>
+    <% end %>
+  </ul>
+<div>

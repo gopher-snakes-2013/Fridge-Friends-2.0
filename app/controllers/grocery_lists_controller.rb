@@ -9,6 +9,10 @@ class GroceryListsController < ApplicationController
     @fridge = Fridge.find(params[:fridge_id])
     @list = GroceryList.find(params[:id])
     @item = Item.new
+    @items = @list.items
+    categories = []
+    @items.each { |i| categories << i.category }
+    @items_categories = categories.uniq.sort
   end
 
   def create

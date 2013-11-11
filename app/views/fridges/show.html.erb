@@ -65,7 +65,7 @@
               <span class="purchase-date">Purchased: <%= time_ago_in_words(item.created_at) %> ago</span>
               <%= link_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete', data: { icon: "delete"}) %>
             </li>
-          <% end %>
+            <% end %>
           <% end %>
         </ul>
       </div>

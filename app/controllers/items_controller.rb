@@ -30,7 +30,7 @@ class ItemsController < ApplicationController
     current_fridge = find_fridge(params[:fridge_id])
     current_list = find_list(params[:grocery_list_id])
     if @new_item.save
-      puts "item successfully saved!!" *80
+      flash[:add_item_notice] = 'Item successfully added to Grocery List.'
     else
       flash[:add_item_notice] = @new_item.errors.full_messages.join(", ")
     end

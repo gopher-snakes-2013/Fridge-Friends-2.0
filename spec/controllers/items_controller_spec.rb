@@ -3,7 +3,7 @@ require 'spec_helper'
 describe ItemsController do
   let!(:user) { User.create(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '360-584-4437', customer_id: '123456788') }
   let!(:fridge) { Fridge.create(name: "Food Titanic", creator_id: user.id) }
-  let!(:pre_created_item) { Item.create(name: "Cheese", category: "Dairy", fridge_id: fridge.id, creator_id: 2) }
+  let!(:pre_created_item) { Item.create(name: "Cheese", category: "Dairy", fridge_id: fridge.id, creator_id: 2, grocery_list_id: pre_created_list.id) }
   let!(:item) { Item.new(name: "Milk", category: "Dairy", fridge_id: fridge.id, creator_id: user.id) }
   let! (:pre_created_list) { GroceryList.create(title: 'Grocery List', fridge_id: fridge.id) }
   context "#create" do
@@ -36,15 +36,23 @@ describe ItemsController do
       sign_in_as(user)
       expect{
         post :create_grocery_list_item, fridge_id: fridge.id, grocery_list_id: pre_created_list.id, item: {name: item.name, category: item.category, fridge_id: item.fridge_id, grocery_list_id: pre_created_list.id, creator_id: item.creator_id}
-      }.to change { GroceryList.first.items.count }.by(1)
+      }.to change { pre_created_list.items.count }.by(1)
     end
 
     it 'should not create an item in a grocery list with invalid params' do
       sign_in_as(user)
       expect{
         post :create_grocery_list_item, fridge_id: fridge.id, grocery_list_id: pre_created_list.id, item: {name: "" }
-      }.not_to change{ GroceryList.first.items.count }
+      }.not_to change{ pre_created_list.items.count }
     end
   end
 
+  context '#destroy_grocery_list_item' do
+    it "deletes a grocery list item" do
+      p GroceryList.last
+      expect {
+        delete :destroy_grocery_list_item, fridge_id: pre_created_item.fridge_id, grocery_list_id: pre_created_list.id, id: pre_created_item.id
+      }.to change{ pre_created_list.items.count }.by(-1)
+    end
+  end
 end

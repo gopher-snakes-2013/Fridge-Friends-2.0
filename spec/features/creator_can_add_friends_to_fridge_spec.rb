@@ -17,7 +17,7 @@ feature "Fridge creator can add" do
     click_on "Add Fridge"
     click_link "test fridge"
     fill_in 'user_email', with: user.email
-    click_on 'Sign up'
+    click_on 'Add Fridge Friend'
     expect(page).to have_content "User successfully added as a friend."
   end
 end
@@ -39,10 +39,10 @@ feature "Fridge creator cannot add" do
     click_on "Add Fridge"
     click_link "test fridge"
     fill_in 'user_email', with: user.email
-    click_on 'Sign up'
+    click_on 'Add Fridge Friend'
     expect(page).to have_content "User successfully added as a friend."
     fill_in 'user_email', with: user.email
-    click_on 'Sign up'
+    click_on 'Add Fridge Friend'
     expect(page).to have_content "User is already a friend of this fridge."
   end
 
@@ -54,7 +54,7 @@ feature "Fridge creator cannot add" do
     click_on "Add Fridge"
     click_link "test fridge"
     fill_in 'user_email', with: 'non_existant@example.com'
-    click_on 'Sign up'
+    click_on 'Add Fridge Friend'
     expect(page).to have_content "User not found. Please try again."
   end
 end

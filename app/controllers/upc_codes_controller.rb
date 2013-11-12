@@ -10,8 +10,8 @@ class UpcCodesController < ApplicationController
       else
         @upc.update_attributes(item_name: @upc.upc_text)
       end
-    else
-      
+      @upc.upc_img = nil
+      @upc.save
     end
     redirect_to fridge_upc_code_path(@upc.fridge_id, @upc.id)
   end

@@ -10,7 +10,7 @@ class RecipeQueriesController < ApplicationController
     recipe_query.user_id = current_user.id
     if recipe_query.save
       result = Yummly.search(recipe_query.terms)
-      extract_recipes_from_search(recipe_query, result)
+      extract_recipes_from_search(recipe_query, result, current_user)
       redirect_to recipe_query_path(recipe_query.id)
     else
       flash[:add_recipe_query_notice] = recipe_query.errors.full_messages.join(", ")

@@ -12,16 +12,31 @@ class ItemsController < ApplicationController
   def create
     @new_item = Item.new(params[:item])
     @new_item.fridge_id = params[:fridge_id]
+    @new_item.creator_id = current_user.id
     current_fridge = find_fridge(params[:fridge_id])
     fridge_friends = find_only_friends_of_fridge(current_user, current_fridge)
     if @new_item.save
       text_current_user(twilio_client, current_user, current_fridge, @new_item)
       text_fridge_friends(twilio_client, fridge_friends, current_user, current_fridge, @new_item)
-      redirect_to fridge_path(@new_item.fridge.id)
     else
       flash[:add_item_notice] = @new_item.errors.full_messages.join(", ")
-      redirect_to fridge_path(@new_item.fridge.id)
     end
+    redirect_to fridge_path(@new_item.fridge.id)
+  end
+
+  def create_grocery_list_item
+    @new_item = Item.new(params[:item])
+    @new_item.grocery_list_id = params[:grocery_list_id]
+    @new_item.fridge_id = params[:fridge_id]
+    @new_item.creator_id = current_user.id
+    current_fridge = find_fridge(params[:fridge_id])
+    current_list = find_list(params[:grocery_list_id])
+    if @new_item.save
+      flash[:add_item_notice] = 'Item successfully added to Grocery List.'
+    else
+      flash[:add_item_notice] = @new_item.errors.full_messages.join(", ")
+    end
+    redirect_to fridge_grocery_list_path(current_fridge.id, current_list.id)
   end
 
   def show
@@ -32,4 +47,13 @@ class ItemsController < ApplicationController
     item = Item.find(params[:id]).destroy
     redirect_to fridge_path(item.fridge_id)
   end
+
+  def destroy_grocery_list_item
+    item = Item.find(params[:id]).destroy
+    fridge = Fridge.find(params[:fridge_id])
+    list = GroceryList.find(params[:grocery_list_id])
+    redirect_to fridge_grocery_list_path(fridge, list)
+  end
+
+
 end

@@ -24,6 +24,7 @@
 
       <%= flash[:add_item_notice] %>
       <%= flash[:add_user_notice] %>
+      <%= flash[:add_grocery_list_notice] %>
 
       <div id="ff-form-panel-add-item" class="ff-form-panel">
         <%= form_for [@fridge, @item] do |f| %>
@@ -37,6 +38,7 @@
       </div>
 
       <div id="ff-form-panel-add-friend" class="ff-form-panel">
+
         <%= form_for @find_user_email, url: add_user_fridge_path, method: 'post' do |f| %>
           <fieldset data-theme="a" data-content-theme="d" data-iconpos="right">
             <legend>Add User to <%= @fridge.name %></legend>
@@ -46,36 +48,40 @@
         <% end %>
       </div>
       <div id="ff-form-panel-add-list" class="ff-form-panel">
-        <%= form_for @find_user_email, url: add_user_fridge_path, method: 'post' do |f| %>
-          <fieldset data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="true">
-            <legend>Add User to <%= @fridge.name %></legend>
-            <%= f.text_field :email, placeholder: "Enter Email Address" %>
-            <%= f.submit %>
+        <%= form_for [@fridge, @list] do |f| %>
+          <fieldset data-theme="a" data-content-theme="d" data-iconpos="right">
+            <legend>Add Grocery List for <%= @fridge.name %></legend>
+            <%= f.text_field :title, placeholder: 'Grocery List Title' %>
+            <%= f.submit 'Create Grocery List for Fridge' %>
           </fieldset>
         <% end %>
       </div>
-    </div>
-    <div id="fridge-contents" data-role="content" class="main">
-        <ul data-role="listview" data-filter="true" data-filter-placeholder="Search this fridge..." data-split-icon="delete" data-inset="true">
-          <% @items_categories.each do |cat| %>
-            <li data-role="list-divider">
-              <span class="category"><%= cat %></span>
-            </li>
-            <% @fridge.items.where(category:cat).each do |item| %>
-            <li>
-              <a>
-              <span class="item"><%= item.name %></span>
-              <span class="purchase-date">Purchased: <%= time_ago_in_words(item.created_at) %> ago</span>
-              <%= link_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete', data: { icon: "delete"}) %>
-            </li>
-          <% end %>
-          <% end %>
-        </ul>
+    </div><!-- /content.sidebar -->
 
-  </div><!-- /content -->
+    <div id="fridge-contents" data-role="content" class="main">
+      <ul data-role="listview" data-filter="true" data-filter-placeholder="Search this fridge..." data-split-icon="delete" data-inset="true">
+        <% @items_categories.each do |cat| %>
+          <li data-role="list-divider">
+            <span class="category"><%= cat %></span>
+          </li>
+          <% @fridge.items.where(category:cat).each do |item| %>
+          <li>
+            <a>
+            <span class="item"><%= item.name %></span>
+            <span class="purchase-date">Purchased By: <%= item_added_by(item.creator_id) %> <%= time_ago_in_words(item.created_at) %> ago</span>
+            <%= link_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete', data: { icon: "delete"}) %>
+          </li>
+          <% end %>
+        <% end %>
+      </ul>
+    </div><!-- /content -->
 
   <!-- slider panel -->
     <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
+
+
+      <div><%= link_to "Find Recipes", recipe_queries_path %></div>
+
       <div id='notification_settings'>
         <h3>Notification Settings</h3>
 
@@ -94,6 +100,18 @@
             </select>
       </div>
 
+      <div id='all_grocery_lists'>
+        <h3>Grocery Lists</h3>
+        <ul>
+          <% @lists.each do |list| %>
+          <li>
+            <%= link_to list.title, fridge_grocery_list_path(@fridge.id, list.id) %>
+            <%= link_to "Delete Grocery List", [list.fridge, list], method: :delete %>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+
       <div id='list_fridge_friends'>
         <h3>Friends of this Fridge</h3>
          <ul>
@@ -106,4 +124,3 @@
       </div>
     </div><!-- /slider panel -->
   </div><!-- /page -->
-

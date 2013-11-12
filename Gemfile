@@ -9,6 +9,7 @@ gem 'pg'
 gem 'clearance'
 gem 'twilio-ruby'
 gem 'figaro'
+gem 'yummly'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -44,6 +45,10 @@ group :testing, :development do
   gem 'factory_girl_rails'
   gem 'selenium-webdriver'
 end
+
+gem 'rails_12factor', group: :production
+
+ruby '2.0.0'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

@@ -4,9 +4,9 @@ MVP
 
 - [x] User can remove items from fridge
 - [x] User can see date item was purchased
-- [ ] User can add housemate to a fridge
+- [x] User can add housemate to a fridge
 - [ ] User can join a specific fridge
-- [ ] Multiple users can see same fridge
+- [x] Multiple users can see same fridge
 - [x] User can add item to fridge
 - [x] Guest can signup for an account
 - [x] User can create a new fridge
@@ -15,9 +15,10 @@ MVP
 - [x] after log in/sign-up, should get redirected to see page with list of all fridges
 - [x] when click on fridge, should see all items that belong to the fridge.
 - [x] User can see what's in fridge
-- [ ] guest can get login feedback on errors
-- [ ] guest can get sign-up feedback on errors
+- [x] guest can get login feedback on errors
+- [x] guest can get sign-up feedback on errors
 - [x] make associations work between users and fridge
+
 MESSAGE CLEARANCE SENT AFTER BUNDLING
 Next steps:
 

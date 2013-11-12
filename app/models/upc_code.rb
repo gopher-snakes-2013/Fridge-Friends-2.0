@@ -22,10 +22,8 @@ class UpcCode < ActiveRecord::Base
   def process_image
     image_file = "https://s3-us-west-2.amazonaws.com/fridgefriends/images/upc/#{self._id}/#{self.upc_img_file_name}"
 
-    file_for_ocr = open(image_file)
-
     begin
-      response = RestClient.post("#{BASE_URL}/processImage?profile=barcodeRecognition&exportFormat=xml", :upload => { :file => File.new(file_for_ocr, 'rb') })
+      response = RestClient.get("#{BASE_URL}/processRemoteImage?source=#{image_file}&readBarcodes=true&exportFormat=xml")
     rescue RestClient::ExceptionWithResponse => e
       output_response_error(e.response)
       raise
@@ -33,7 +31,6 @@ class UpcCode < ActiveRecord::Base
       xml_data = REXML::Document.new(response)
       task_id = xml_data.elements["response/task"].attributes["id"]
     end
-
 
     begin
       response = RestClient.get("#{BASE_URL}/getTaskStatus?taskid=#{task_id}")

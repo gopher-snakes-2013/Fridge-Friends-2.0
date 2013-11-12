@@ -4,8 +4,8 @@
   font-weight: 400;
   src: local('Lato Regular'),
     local('Lato-Regular'),
-    url(images/fonts/lato-regular.woff) format('woff'),
-    url(images/fonts/lato-regular.ttf) format('truetype');
+    url(lato-regular.woff) format('woff'),
+    url(lato-regular.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
@@ -13,8 +13,8 @@
   font-weight: 700;
   src: local('Lato Bold'),
     local('Lato-Bold'),
-    url(images/fonts/lato-bold.woff) format('woff'),
-    url(images/fonts/lato-bold.ttf) format('truetype');
+    url(lato-bold.woff) format('woff'),
+    url(lato-bold.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
@@ -22,8 +22,8 @@
   font-weight: 900;
   src: local('Lato Black'),
     local('Lato-Black'),
-    url(images/fonts/lato-black.woff) format('woff'),
-    url(images/fonts/lato-black.ttf) format('truetype');
+    url(lato-black.woff) format('woff'),
+    url(lato-black.ttf) format('truetype');
 }
 @font-face {
   font-family: 'Lato';
@@ -31,15 +31,15 @@
   font-weight: 400;
   src: local('Lato Italic'),
     local('Lato-Italic'),
-    url(images/fonts/lato-italic.woff) format('woff'),
-    url(images/fonts/lato-italic.ttf) format('truetype');
+    url(lato-italic.woff) format('woff'),
+    url(lato-italic.ttf) format('truetype');
 }
 @font-face {
   font-family: "Flat-UI-Icons-24";
   font-weight: normal;
   font-style: normal;
-  src: url("images/fonts/Flat-UI-Icons-24.woff") format("woff"),
-    url(images/fonts/Flat-UI-Icons-24.ttf) format('truetype');
+  src: url("Flat-UI-Icons-24.woff") format("woff"),
+    url(Flat-UI-Icons-24.ttf) format('truetype');
 }
 
 /* Use the following CSS code if you want to have a class per icon */
@@ -420,7 +420,7 @@ input.ui-input-text.ui-slider-input {
 .ui-btn-icon-notext .ui-btn-inner .ui-icon:before { margin-left: 1px;}
 
 .ui-li-link-alt .ui-btn-inner .ui-icon {
-  margin: -10px -10px auto auto !important;
+  /*margin: -10px -10px auto auto !important;*/
 }
 
 /* supporting original icons */
@@ -772,7 +772,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-bar, .ui-body { position: relative; padding: .4em 15px; overflow: hidden; display: block; clear:both; }
 .ui-bar { font-size: 16px; margin: 0; }
 .ui-bar h1, .ui-bar h2, .ui-bar h3, .ui-bar h4, .ui-bar h5, .ui-bar h6 { margin: 0; padding: 0; font-size: 16px; display: inline-block; }
-.ui-header, .ui-footer { position: relative; zoom: 1; }
+.ui-header, .ui-footer { position: relative; zoom: 1; top:50px;}
 .ui-mobile .ui-header, .ui-mobile .ui-footer { border-left-width: 0; border-right-width: 0; }
 .ui-header .ui-btn-left,
 .ui-header .ui-btn-right,
@@ -1616,7 +1616,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
   z-index: 1000;
 }
 .ui-header-fixed {
-  top: -1px;
+  top: 31px;
   padding-top: 1px;
 }
 .ui-header-fixed.ui-fixed-hidden {
@@ -2307,7 +2307,7 @@ ol.ui-listview, ol.ui-listview .ui-li-divider { counter-reset: listnumbering; }
 .ui-listview, .ui-li { list-style: none; padding: 0; }
 .ui-li, .ui-li.ui-field-contain { display: block; margin: 0; position: relative; overflow: visible; text-align: left; border-width: 0; border-top-width: 1px; }
 .ui-li.ui-btn, .ui-li.ui-field-contain, .ui-li-divider, .ui-li-static { margin: 0; }
-.ui-listview-inset .ui-li { border-right-width: 1px; border-left-width: 1px; }
+.ui-listview-inset .ui-li { border-right-width: 1px; border-left-width: 1px; border-bottom: 1px solid #efefef; border-top: 1px solid #F5f5f5;}
 .ui-li.ui-last-child, .ui-li.ui-field-contain.ui-last-child { border-bottom-width: 1px; }
 .ui-collapsible-content > .ui-listview:not(.ui-listview-inset) > .ui-li.ui-first-child { border-top-width: 0; }
 .ui-collapsible-themed-content .ui-listview:not(.ui-listview-inset) > .ui-li.ui-last-child { border-bottom-width: 0; }

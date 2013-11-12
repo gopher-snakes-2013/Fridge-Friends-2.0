@@ -82,20 +82,13 @@
       <h3>Notification Settings</h3>
 
           <%= form_for @user, url: url_for(controller: 'users', action: 'update'), method: 'put'  do |f| %>
-          <fieldset data-role="controlgroup">
-              <%= f.label :opted_in, "Text Alerts" %>
-              <%= f.check_box :opted_in %>
+            <legend>Text Alerts</legend>
+            <%= f.label :opted_in, "Text Alerts" %>
+<%= select_tag(:opted_in, options_for_select([['Off', '0'], ['On', '1']], '0'),id: 'user_opted_in', name: 'user[opted_in]',  data: { role:"slider" }) %>
               <%= f.submit %>
-          </fieldset>
           <% end %>
-
-          <label for="slider2">Flip switch:</label>
-          <select name="slider2" id="slider2" data-role="slider">
-              <option value="off">Off</option>
-              <option value="on">On</option>
-          </select>
     </div>
-
+    <p>&nbsp;</p>
     <div id='all_grocery_lists'>
       <h3>Grocery Lists</h3>
       <ul>

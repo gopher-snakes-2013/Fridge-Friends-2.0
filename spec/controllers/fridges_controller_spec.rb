@@ -44,4 +44,16 @@ describe FridgesController do
       post :add_user, id: fridge.id, user: { email: user.email }
     }.to change { fridge.users.count }.by(1)
   end
+
+  context "#remove_user" do
+
+    it "removes a user from a shared fridge" do
+      sign_in_as(user2)
+      fridge.users << user
+      fridge.users << user2
+      expect{
+        post :remove_user,id: fridge.id
+        }.to change { fridge.users.count }.from(2).to(1)
+    end
+  end
 end

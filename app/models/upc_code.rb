@@ -7,6 +7,7 @@ require 'open-uri'
 class UpcCode < ActiveRecord::Base
   attr_accessible :upc_img, :upc_text, :item_name, :fridge_id
   has_attached_file :upc_img,
+                    :styles => { :original => "30%" },
                     :path => "/images/upc/:id/:basename:extension"
 
   APPLICATION_ID = CGI.escape(ENV["OCR_APPLICATION_ID"])
@@ -69,4 +70,5 @@ class UpcCode < ActiveRecord::Base
       return "Sorry, UPC Not Found"
     end
   end
+
 end

@@ -4,4 +4,5 @@ class RecipeQuery < ActiveRecord::Base
   belongs_to :user
 
   validates :terms, presence: true
+  validates_uniqueness_of :terms, :scope => :user_id
 end

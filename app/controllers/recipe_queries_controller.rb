@@ -13,6 +13,7 @@ class RecipeQueriesController < ApplicationController
       extract_recipes_from_search(recipe_query, result)
       redirect_to recipe_query_path(recipe_query.id)
     else
+      flash[:add_recipe_query_notice] = recipe_query.errors.full_messages.join(", ")
       redirect_to recipe_queries_path
     end
   end

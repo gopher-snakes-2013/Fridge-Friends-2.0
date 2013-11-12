@@ -44,7 +44,7 @@ module ApplicationHelper
   end
 
   def extract_recipes_from_search(recipe_query, result)
-      result.collect.each do |recipe|
+      result.each do |recipe|
         new_recipe = Recipe.new
         new_recipe.name = recipe.name
         new_recipe.img_url = recipe.images.first.small_url

@@ -44,7 +44,7 @@
   <div data-role="content" class="sidebar">
     <h2>Saved Recipes</h2>
     <ul>
-    <% current_user.recipes.each do |recipe|  %>
+    <% current_user.recipes.reverse.each do |recipe|  %>
       <li><%= link_to recipe.name, recipe_query_recipe_path(recipe.recipe_query_id, recipe.id)  %></li>
     <% end %>
   </ul>

@@ -44,8 +44,11 @@
   <div data-role="content" class="sidebar">
     <h2>Saved Recipes</h2>
     <ul>
-    <% current_user.recipes.each do |recipe|  %>
-      <li><%= link_to recipe.name, recipe_query_recipe_path(recipe.recipe_query_id, recipe.id)  %></li>
+    <% current_user.recipes.reverse.each do |recipe|  %>
+      <li>
+        <%= link_to recipe.name, recipe_query_recipe_path(recipe.recipe_query_id, recipe.id)  %>
+        <%= link_to('Delete Recipe', recipe_query_recipe_path(recipe.recipe_query_id, recipe.id), controller: recipe, method: 'delete', data: { icon: "delete"}) %>
+      </li>
     <% end %>
   </ul>
   </div>

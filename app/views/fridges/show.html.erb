@@ -16,6 +16,7 @@
       <a href="#" data-role="button" data-inline="true" data-icon="plus" data-iconpos="left" id="ff-btn-add-item" >Add Item to <%= @fridge.name %></a>
       <a href="#" data-role="button" data-inline="true" data-icon="plus" id="ff-btn-add-friend">Add User to <%= @fridge.name %></a>
       <a href="#" data-role="button" data-inline="true" data-icon="plus" id="ff-btn-add-list">Add Grocery List to <%= @fridge.name %></a>
+      <%= link_to "Find Recipes", recipe_queries_path, { data: { role:"button", inline:"true", icon:"plus" },  id:"ff-btn-find-recipes" } %>
     </div>
   </div><!-- /header -->
 
@@ -77,10 +78,6 @@
 
   <!-- slider panel -->
   <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
-
-
-    <div><%= link_to "Find Recipes", recipe_queries_path %></div>
-
     <div id='notification_settings'>
       <h3>Notification Settings</h3>
 

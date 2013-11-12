@@ -14,7 +14,6 @@ feature "friend of fridge (that is not creator of fridge) can add" do
   scenario "exisiting user as friend to fridge", js: true do
     signup_user(user)
     click_link "logout"
-
     signup_user(user_2)
     fill_in "fridge_name", with: "test fridge"
     click_on "Add Fridge"

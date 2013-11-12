@@ -41,8 +41,8 @@ feature 'Fridge friend may create Grocery List' do
     fill_in 'session_password', with: user.password
     click_on 'Sign in'
     click_on 'test fridge'
-    fill_in "grocery_list_title", with: 'test fridge'
+    fill_in "grocery_list_title", with: 'fancy grocery list'
     click_on 'Create Grocery List for Fridge'
-    expect(page).to have_content 'test fridge successfully created!'
+    expect(page).to have_content 'fancy grocery list successfully created!'
   end
 end

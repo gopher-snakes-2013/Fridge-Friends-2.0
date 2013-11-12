@@ -1,39 +1,43 @@
 <div data-role="page" id="query-index">
-      <div id="username-display">
+    <div id="username-display">
 
-        <% if signed_in? %>
-         <span><%= current_user.email %></span>
-         <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
-        <% else %>
-          <span><%= link_to 'Sign in', sign_in_path %></span>
-        <% end %>
+      <% if signed_in? %>
+       <span><%= current_user.email %></span>
+       <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
+      <% else %>
+        <span><%= link_to 'Sign in', sign_in_path %></span>
+      <% end %>
 
-      </div>
+    </div>
 
-    <div data-role="header" class="toolbar" style="overflow:hidden;">
+    <div data-role="header" class="toolbar" style="overflow:hidden;" data-theme="b">
       <h2>Recipe Search</h2>
       <%= link_to 'Back', fridges_path, data: {icon: 'gear'}, class: 'ui-btn-left' %>
       <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
     </div><!-- /header -->
 
-    <div data-role="content">
+    <div data-role="content" class="main">
 
-<div class="recipe_query">
+      <div class="recipe_query">
 
-  <%= form_for @recipe_query do |f| %>
-    <%= f.text_field :terms, placeholder: "Search Yummly Recipes" %>
-    <%= f.submit 'Find Recipes' %>
-  <% end %>
-</div>
+        <%= form_for @recipe_query do |f| %>
+          <%= f.text_field :terms, placeholder: "Search Yummly Recipes" %>
+          <%= f.submit 'Find Recipes' %>
+        <% end %>
+      </div>
 
-<div class="users_recipe_queries">
-  <h3>Past Queries</h3>
-  <ul>
-    <% @recipe_queries.reverse.each do |query| %>
-      <li><%= link_to query.terms, recipe_query_path(query.id) %> |
-      <%= link_to('Delete Search', recipe_query_path(query.id), method: 'delete', data: { icon: "delete"}) %></li>
-    <% end %>
-  </ul>
-</div>
-</div>
-</div>
+      <div id="users_recipe_queries">
+        <h4>Past Queries</h4>
+        <ul data-role="listview" data-filter="true" data-filter-placeholder="filter past queries. . . " data-split-icon="delete" data-inset="true">
+          <% @recipe_queries.reverse.each do |query| %>
+            <li><%= link_to query.terms, recipe_query_path(query.id) %>
+              <%= link_to('Delete Search', recipe_query_path(query.id), method: 'delete', data: { icon: "delete"}) %></li>
+          <% end %>
+        </ul>
+      </div>
+  </div>
+
+  <!-- slider panel -->
+  <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
+  </div><!-- /slider panel -->
+</div><!-- /page -->

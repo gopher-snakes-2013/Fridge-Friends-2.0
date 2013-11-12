@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '3.2.11'
 
@@ -44,6 +44,7 @@ group :testing, :development do
   gem 'quiet_assets'
   gem 'factory_girl_rails'
   gem 'selenium-webdriver'
+  gem 'sextant'
 end
 
 gem 'rails_12factor', group: :production

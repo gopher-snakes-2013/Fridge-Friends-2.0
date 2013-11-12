@@ -63,7 +63,7 @@ form.login #btn {
   padding: 10px 0px;
 }
 
-#fridge-contents {
+#fridge-contents, #grocery-list-contents {
   margin-top: 16px;
 }
 
@@ -72,15 +72,15 @@ form.login #btn {
 }
 
 #username-display {
-  /*box-shadow: -2px 2px 10px #555;*/
   background-color: #bdc3c7;
   color: white;
   padding: 6px 10px;
   text-align: right;
-  /*position: fixed;*/
-  width: 100%;
   top: 0;
   z-index: 10000;
+  /*box-shadow: -2px 2px 10px #555;*/
+  /*position: fixed;*/
+  /*width: 100%;*/
 }
 #username-display span {
   margin-right: 10px;
@@ -94,15 +94,25 @@ form.login #btn {
   color: #888;
 }
 
-#ff-form-panel-add-item, #ff-form-panel-add-friend, #ff-form-panel-add-list{
+.ff-form-panel legend { margin-bottom: 13px; }
+
+#ff-form-panel-add-item, #ff-form-panel-add-friend, #ff-form-panel-add-list, #ff-form-panel-add-list-item {
   display: none;
 }
 
-#ff-form-panel-add-item {}
-#ff-form-panel-add-friend{}
+#ff-form-panel-add-item { }
+#ff-form-panel-add-friend { }
 
-#ff-form-panel-add-list{}
+#ff-form-panel-add-list { }
 
+.recipe_query_results li { max-height: 60px; }
+.recipe_query_results li a.ui-link-inherit { min-height: 39px !important; text-decoration: none; }
+.recipe_query_results li a.ui-link-inherit span { margin-top: 7px; display: block; }
+
+.ui-listview-inset li:last-child div.ui-li { border-bottom: none; max-height: 60px; }
+
+#users_recipe_queries { margin-top: 40px; }
+#users_recipe_queries li a.ui-link-inherit { text-decoration: none; }
 
 /* Stack the two content containers */
 .main,
@@ -122,7 +132,7 @@ form.login #btn {
     /*box-shadow: -2px 0px 10px #999;*/
     height: 100%;
   }
-  #ff-form-panel-add-item, #ff-form-panel-add-friend, #ff-form-panel-add-list{
+  #ff-form-panel-add-item, #ff-form-panel-add-friend, #ff-form-panel-add-list, #ff-form-panel-add-list-item {
   display: block;
 }
 

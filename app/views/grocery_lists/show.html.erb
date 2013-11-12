@@ -1,35 +1,55 @@
-<div data-role="header" class="toolbar" style="overflow:hidden;">
-  <h2><%= @fridge.name %></h2>
-  <%= link_to 'Back', fridge_path(@fridge), data: {icon: 'gear'}, class: 'ui-btn-left' %>
-</div>
-
-<h1><%= @list.title %></h1>
-<div class='error-message'><%= flash[:add_item_notice] %></div>
-
-<div id="fridge-contents">
-  <ul data-role="listview" data-filter="true" data-filter-placeholder="Search this grocery list..." data-split-icon="delete">
-    <% @items_categories.each do |cat| %>
-      <li data-role="list-divider">
-        <span class="category"><%= cat %></span>
-      </li>
-      <% @list.items.where(category:cat).each do |item| %>
-      <li>
-        <a>
-        <span class="item"><%= item.name %></span>
-        <span class="add-date">Added: <%= time_ago_in_words(item.created_at) %> ago</span>
-        <%= link_to('Delete Item', [@fridge, @list, item], method: 'delete', data: { icon: "delete"}) %>
-      </li>
+<div data-role="page" id="grocery-list-show">
+    <div id="username-display">
+      <% if signed_in? %>
+         <span><%= current_user.email %></span>
+         <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
+      <% else %>
+          <span><%= link_to 'Sign in', sign_in_path %></span>
       <% end %>
-    <% end %>
-  </ul>
-</div>
+    </div>
 
+    <div data-role="header" class="toolbar" style="overflow:hidden;" data-theme="b">
+      <h2><%= @fridge.name %> fridge list: <%= @list.title %></h2>
+        <%= link_to 'Back', fridge_path(@fridge), data: {icon: 'gear'}, class: 'ui-btn-left' %>
+      <div>
+        <a href="#" data-role="button" data-inline="true" data-icon="plus" data-iconpos="left" id="ff-btn-add-list-item" >Add Item to list: <%= @list.title %></a>
+      </div>
+    </div><!-- /header -->
 
-<div>
-  <h3>Add Item to Grocery List</h3>
-  <%= form_for @item, url: fridge_grocery_list_items_path(@fridge, @list), method: :post do |f| %>
-    <%= f.text_field :name, placeholder: 'Item Name' %>
-    <%= f.select :category, ['Beverage', 'Dairy', 'Meat', 'Produce', 'Snack', 'Other'], :prompt => 'Category' %>
-    <%= f.submit 'Add Item to Grocery List' %>
-  <% end %>
-</div>
+    <div data-role="content" class="sidebar">
+      <div class='error-message'><%= flash[:add_item_notice] %></div>
+
+      <div id="ff-form-panel-add-list-item" class="ff-form-panel">
+          <%= form_for @item, url: fridge_grocery_list_items_path(@fridge, @list), method: :post do |f| %>
+          <fieldset  data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="true">
+              <legend>Add Item to Grocery List: <%= @list.title %></legend>
+            <%= f.text_field :name, placeholder: 'Item Name' %>
+            <%= f.select :category, ['Beverage', 'Dairy', 'Meat', 'Produce', 'Snack', 'Other'], :prompt => 'Category' %>
+            <%= f.submit 'Add Item to Grocery List' %>
+          </fieldset>
+          <% end %>
+        </div>
+    </div><!-- /content.sidebar -->
+
+    <div id="grocery-list-contents" data-role="content" class="main">
+      <ul data-role="listview" data-filter="true" data-filter-placeholder="Search this grocery list..." data-split-icon="delete" data-inset="true">
+          <% @items_categories.each do |cat| %>
+            <li data-role="list-divider">
+              <span class="category"><%= cat %></span>
+            </li>
+            <% @list.items.where(category:cat).each do |item| %>
+            <li>
+              <a>
+              <span class="item"><%= item.name %></span>
+              <span class="purchase-date">Added: <%= time_ago_in_words(item.created_at) %> ago</span>
+              <%= link_to('Delete Item', [@fridge, @list, item], method: 'delete', data: { icon: "delete"}) %>
+            </li>
+            <% end %>
+          <% end %>
+        </ul>
+    </div><!-- /content.main -->
+
+    <!-- slider panel -->
+    <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
+    </div><!-- /slider panel -->
+</div><!-- /page -->

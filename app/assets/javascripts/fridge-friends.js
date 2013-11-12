@@ -7,6 +7,9 @@
           console.log('swiped right');
       }
   })
+  $(document).on('pageinit',function(event){
+    console.log('page init');
+  })
 
   $('#ff-btn-add-item').on('click', function(event){
     $('#ff-form-panel-add-friend').fadeOut();
@@ -26,5 +29,15 @@
   $('.ff-form-panel-cancel').on('click', function(event){
     $(this).fadeOut();
   })
+
+  // handlers for grocery lists
+
+  $('#ff-btn-add-list-item').on('click', function(event){
+    $('#ff-form-panel-add-list-item').fadeToggle();
+  })
+
+
+
+  ff-form-panel-add-list-item
 
 })

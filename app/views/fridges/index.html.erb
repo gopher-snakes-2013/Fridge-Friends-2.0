@@ -18,6 +18,7 @@
 
       <%= flash[:delete_fridge_notice] %>
       <%= flash[:add_fridge_notice] %>
+      <%= flash[:remove_user_from_fridge_notice] %>
 
 
       <div>
@@ -36,6 +37,8 @@
             <a href="<%= fridge_url(fridge.id) %>"><%= fridge.name %></a>
             <% if fridge.creator_id == @current_user.id %>
               <%= link_to('Delete Fridge', fridge_path(fridge.id), method: 'delete', data: { icon: "delete"}) %>
+            <% else %>
+                <%= link_to('Remove User from Shared Fridge', remove_user_fridge_path(fridge.id), method: 'post', data: { icon: "delete"}) %>
             <% end %>
           </li>
         <% end %>

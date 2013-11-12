@@ -1,4 +1,4 @@
-<div data-role="page" id="query-show">
+<div data-role="page" id="query-show" data-url="<%= request.path  %>">
   <div id="username-display">
 
     <% if signed_in? %>
@@ -25,6 +25,11 @@
         <li><%= ingredient %></li>
       <% end %>
     </ul>
+    <% unless current_user.recipes.include?(@recipe) %>
+      <%= button_to "Add Recipe", action: "add_recipe_to_user" %>
+    <% else %>
+      <p>Recipe Saved</p>
+    <% end %>
   </div><!-- /content.main -->
 
   <!-- slider panel -->

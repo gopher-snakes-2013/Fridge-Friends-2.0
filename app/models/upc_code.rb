@@ -2,12 +2,12 @@ require 'json'
 require 'rest_client'
 require 'rexml/document'
 require 'base64'
+require 'open-uri'
 
 class UpcCode < ActiveRecord::Base
   attr_accessible :upc_img, :upc_text, :item_name, :fridge_id
   has_attached_file :upc_img,
-                    :path => ":rails_root/public/system/images/upc/:id/:basename:extension",
-                    :url => "/system/images/upc/:id/:basename:extension"
+                    :path => "/images/upc/:id/:basename:extension"
 
   APPLICATION_ID = CGI.escape(ENV["OCR_APPLICATION_ID"])
   PASSWORD = CGI.escape(ENV["OCR_PASSWORD"])
@@ -20,10 +20,12 @@ class UpcCode < ActiveRecord::Base
   end
 
   def process_image
-    image_file = "public/system/images/upc/#{self._id}/#{self.upc_img_file_name}"
+    image_file = "https://s3-us-west-2.amazonaws.com/fridgefriends/images/upc/#{self._id}/#{self.upc_img_file_name}"
+
+    file_for_ocr = open(image_file)
 
     begin
-      response = RestClient.post("#{BASE_URL}/processImage?profile=barcodeRecognition&exportFormat=xml", :upload => { :file => File.new(image_file, 'rb') })  
+      response = RestClient.post("#{BASE_URL}/processImage?profile=barcodeRecognition&exportFormat=xml", :upload => { :file => File.new(file_for_ocr, 'rb') })
     rescue RestClient::ExceptionWithResponse => e
       output_response_error(e.response)
       raise

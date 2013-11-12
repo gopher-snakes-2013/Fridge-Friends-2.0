@@ -23,9 +23,14 @@ class FridgesController < ApplicationController
   end
 
   def show
-    @fridge = Fridge.find(params[:id])
     @item = Item.new
-    @items = @fridge.items.all
+    items_related_to_fridge = @fridge.items.all
+    @items = []
+    items_related_to_fridge.each do |item|
+      unless item.grocery_list_id
+        @items << item
+      end
+    end
     @find_user_email = User.new
     categories = []
     @items.each { |i| categories << i.category }
@@ -33,6 +38,9 @@ class FridgesController < ApplicationController
     @user = current_user
     @friends = find_only_friends_of_fridge(current_user, @fridge)
     @upc = UpcCode.new
+    @list = GroceryList.new
+    @fridge = find_fridge(params[:id])
+    @lists = GroceryList.where(fridge_id: params[:id])
   end
 
   def destroy

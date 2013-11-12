@@ -1,4 +1,4 @@
-source 'https://rubygems.org'
+source 'http://rubygems.org'
 
 gem 'rails', '3.2.11'
 
@@ -12,6 +12,7 @@ gem 'figaro'
 gem 'paperclip'
 gem 'rest-client'
 gem 'json'
+gem 'yummly'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -47,6 +48,10 @@ group :testing, :development do
   gem 'factory_girl_rails'
   gem 'selenium-webdriver'
 end
+
+gem 'rails_12factor', group: :production
+
+ruby '1.9.3'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

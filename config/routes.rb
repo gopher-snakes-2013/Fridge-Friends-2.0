@@ -11,6 +11,7 @@ FridgeFriends20::Application.routes.draw do
     resources :fridges, only: [:index, :create, :show, :destroy] do
       member do
         post :add_user
+        post :remove_user
       end
       resources :items, only: [:index, :create, :show, :destroy]
       resources :grocery_lists, only: [:create, :show, :destroy] do

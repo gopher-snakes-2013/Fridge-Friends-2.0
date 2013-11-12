@@ -68,6 +68,17 @@ class FridgesController < ApplicationController
     redirect_to fridge
   end
 
+  def remove_user
+    fridge = find_fridge(params[:id])
+    if current_user.id != fridge.creator_id
+      flash[:remove_user_from_fridge_notice] = "User successfully removed from #{fridge.name}"
+      fridge.users.delete(current_user)
+    else
+      flash[:remove_user_from_fridge_notice] = "User removal failed"
+    end
+    redirect_to fridges_path
+  end
+
   private
   def authorize_and_load_fridge
     @fridge = Fridge.find(params[:id])

@@ -4,4 +4,5 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   validates :phone_number, format: /\d{3}-\d{3}-\d{4}/
   has_and_belongs_to_many :fridges
+  has_many :recipe_queries
 end

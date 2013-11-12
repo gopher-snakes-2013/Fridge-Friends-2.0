@@ -18,5 +18,8 @@ FridgeFriends20::Application.routes.draw do
         delete '/items/:id', to: 'items#destroy_grocery_list_item', as: 'item'
       end
     end
+    resources :recipe_queries, only: [:index, :create, :show, :destroy] do
+      resources :recipes, only: [:index, :create, :show, :destroy]
+    end
   end
 end

@@ -43,8 +43,7 @@ module ApplicationHelper
     end
   end
 
-  def extract_recipes_from_search(recipe_query, result, current_user)
-
+  def extract_recipes_from_search(recipe_query, result)
     result.each do |recipe|
       new_recipe = Recipe.new
       new_recipe.name = recipe.name

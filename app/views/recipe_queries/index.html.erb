@@ -16,7 +16,11 @@
       <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
     </div><!-- /header -->
 
+
     <div data-role="content" class="main">
+
+  <%= flash[:delete_recipe_query_notice] %>
+  <%= flash[:add_recipe_query_notice] %>
 
       <div class="recipe_query">
 
@@ -41,3 +45,4 @@
   <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
   </div><!-- /slider panel -->
 </div><!-- /page -->
+

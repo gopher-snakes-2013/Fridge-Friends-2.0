@@ -1,5 +1,5 @@
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   specs:
     actionmailer (3.2.11)
       actionpack (= 3.2.11)
@@ -149,6 +149,8 @@ GEM
       multi_json (~> 1.0)
       rubyzip (~> 1.0.0)
       websocket (~> 1.0.4)
+    sextant (0.2.4)
+      rails (>= 3.2)
     shoulda-matchers (2.4.0)
       activesupport (>= 3.0.0)
     simplecov (0.7.1)
@@ -201,6 +203,7 @@ DEPENDENCIES
   rspec-rails
   sass-rails (~> 3.2.3)
   selenium-webdriver
+  sextant
   shoulda-matchers
   simplecov
   twilio-ruby

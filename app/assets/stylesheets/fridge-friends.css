@@ -1,8 +1,13 @@
-.ff-bgd-overlay {
-  font-family: "Helvetica";
-  /*background-image: url('./img/fridge0.jpg');
+
+/* Start with core styles outside of a media query that apply to mobile and up */
+/* Global typography and design elements, stacked containers */
+
+.ff-bgd-overlay, body {
+  /*font-family: "Helvetica";*/
+  /*background-image: url('fridge0.jpg');*/
   background-repeat: no-repeat;
-  background-position: 50% -49px;*/
+  background-position: 50% -49px;
+  /*background-color: #2c3e50;*/
 }
 
 form.login {
@@ -58,14 +63,86 @@ form.login #btn {
   padding: 10px 0px;
 }
 
-#fridge-contents {
+#fridge-contents, #grocery-list-contents {
   margin-top: 16px;
 }
 
 #fridge-show .ui-content {
-  padding-top:0px;
+  /*padding-top:0px;*/
 }
 
+#username-display {
+  background-color: #bdc3c7;
+  color: white;
+  padding: 6px 10px;
+  text-align: right;
+  top: 0;
+  z-index: 10000;
+  /*box-shadow: -2px 2px 10px #555;*/
+  /*position: fixed;*/
+  /*width: 100%;*/
+}
 #username-display span {
+  margin-right: 10px;
+
+}
+
+.ui-btn-inner .purchase-date {
+  font-size: 0.8em;
+  margin-left: 0.6em;
+  font-weight: lighter;
+  color: #888;
+}
+
+.ff-form-panel legend { margin-bottom: 13px; }
+
+#ff-form-panel-add-item, #ff-form-panel-add-friend, #ff-form-panel-add-list, #ff-form-panel-add-list-item {
+  display: none;
+}
+
+#ff-form-panel-add-item { }
+#ff-form-panel-add-friend { }
+
+#ff-form-panel-add-list { }
+
+.recipe_query_results li { max-height: 60px; }
+.recipe_query_results li a.ui-link-inherit { min-height: 39px !important; text-decoration: none; }
+.recipe_query_results li a.ui-link-inherit span { margin-top: 7px; display: block; }
+
+.ui-listview-inset li:last-child div.ui-li { border-bottom: none; max-height: 60px; }
+
+#users_recipe_queries { margin-top: 40px; }
+#users_recipe_queries li a.ui-link-inherit { text-decoration: none; }
+#fridge-contents li img { position: static; margin-left: 15px; margin-top: 9px; float: left; }
+/*#fridge-contents ul li a { padding: .7em 15px; min-height: 0px; }*/
+/* Stack the two content containers */
+.main,
+.sidebar {
+  display:block;
+  /*width:100%;*/
+}
+
+/* First breakpoint at 576px */
+/* Inherits mobile styles, but floats containers to make columns */
+@media all and (min-width: 36em){
+  .main { float: left; width:50%; }
+  .sidebar {
+    float: right;
+    width:40%;
+    /*background-color: #bdc3c7;*/
+    /*box-shadow: -2px 0px 10px #999;*/
+    height: 100%;
+  }
+  #ff-form-panel-add-item, #ff-form-panel-add-friend, #ff-form-panel-add-list, #ff-form-panel-add-list-item {
   display: block;
+}
+
+}
+
+/* Second breakpoint at 800px */
+/* Adjusts column proportions, tweaks base H1 */
+@media all and (min-width: 50em){
+  .main { width:65%; }
+  .sidebar { width:30%; }
+
 }

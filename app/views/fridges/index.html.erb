@@ -38,7 +38,7 @@
             <% if fridge.creator_id == @current_user.id %>
               <%= link_to('Delete Fridge', fridge_path(fridge.id), method: 'delete', data: { icon: "delete"}) %>
             <% else %>
-                <%= link_to('Delete Fridge', remove_user_fridge_path(fridge.id), method: 'post', data: { icon: "delete"}) %>
+                <%= link_to('Remove User from Shared Fridge', remove_user_fridge_path(fridge.id), method: 'post', data: { icon: "delete"}) %>
             <% end %>
           </li>
         <% end %>

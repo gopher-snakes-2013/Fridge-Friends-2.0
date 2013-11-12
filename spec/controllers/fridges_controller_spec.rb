@@ -53,7 +53,16 @@ describe FridgesController do
       fridge.users << user2
       expect{
         post :remove_user,id: fridge.id
-        }.to change { fridge.users.count }.from(2).to(1)
+      }.to change { fridge.users.count }.from(2).to(1)
+    end
+
+    it 'removes a user from a shared fridge without deleting the fridge from the db' do
+      sign_in_as(user2)
+      fridge.users << user
+      fridge.users << user2
+      expect{
+        post :remove_user,id: fridge.id
+      }.to_not change { Fridge.count }
     end
   end
 end

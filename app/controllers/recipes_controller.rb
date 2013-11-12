@@ -9,4 +9,11 @@ class RecipesController < ApplicationController
     @recipe = Recipe.find(params[:id])
     @ingredients = @recipe.ingredients.split(',')
   end
+
+  def add_recipe_to_user
+    @recipe = Recipe.find(params[:id])
+    user = User.find(current_user.id)
+    user.recipes << @recipe
+    redirect_to recipe_query_recipe_path(@recipe.id)
+  end
 end

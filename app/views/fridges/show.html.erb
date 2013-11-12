@@ -16,6 +16,8 @@
       <a href="#" data-role="button" data-inline="true" data-icon="plus" data-iconpos="left" id="ff-btn-add-item" >Add Item to <%= @fridge.name %></a>
       <a href="#" data-role="button" data-inline="true" data-icon="plus" id="ff-btn-add-friend">Add User to <%= @fridge.name %></a>
       <a href="#" data-role="button" data-inline="true" data-icon="plus" id="ff-btn-add-list">Add Grocery List to <%= @fridge.name %></a>
+      <a href="#" data-role="button" data-inline="true" data-icon="plus" id="ff-btn-add-list">Find Recipes</a>
+
     </div>
   </div><!-- /header -->
 
@@ -42,7 +44,7 @@
         <fieldset data-theme="a" data-content-theme="d" data-iconpos="right">
           <legend>Add User to <%= @fridge.name %></legend>
           <%= f.text_field :email, placeholder: "Enter Email Address" %>
-          <%= f.submit %>
+          <%= f.submit "Add Fridge Friend"%>
         </fieldset>
       <% end %>
     </div>

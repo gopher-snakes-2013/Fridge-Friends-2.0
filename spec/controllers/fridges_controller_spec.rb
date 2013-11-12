@@ -6,7 +6,7 @@ describe FridgesController do
   let!(:fridge) { Fridge.create(name: "Home Fridge", creator_id: user.id) }
 
   it "#index" do
-  sign_in_as(user)
+    sign_in_as(user)
     get :index
     response.status.should eq(200)
   end

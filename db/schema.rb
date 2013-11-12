@@ -46,6 +46,22 @@ ActiveRecord::Schema.define(:version => 20131111173500) do
     t.integer  "creator_id"
   end
 
+  create_table "recipe_queries", :force => true do |t|
+    t.string   "terms"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "recipes", :force => true do |t|
+    t.string   "name"
+    t.string   "ingredients"
+    t.integer  "recipe_query_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.string   "img_url"
+  end
+
   create_table "users", :force => true do |t|
     t.datetime "created_at",                        :null => false
     t.datetime "updated_at",                        :null => false

@@ -1,4 +1,4 @@
-<div data-role="page" id="query-show">
+<div data-role="page" id="query-show" data-url="<%= request.path  %>">
   <div id="username-display">
 
     <% if signed_in? %>
@@ -10,20 +10,29 @@
 
   </div>
 
-  <div data-role="header" class="toolbar" style="overflow:hidden;">
+  <div data-role="header" class="toolbar" style="overflow:hidden;" data-theme="b">
     <h2>Recipe</h2>
     <%= link_to 'Back', recipe_query_path(@recipe.recipe_query_id), data: {icon: 'gear'}, class: 'ui-btn-left' %>
     <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
   </div><!-- /header -->
 
-  <div data-role="content">
+  <div data-role="content" class="main">
     <h3><%= @recipe.name %></h3>
     <img src="<%= @recipe.img_url %>" alt="" height="60" width="90">
-    <p>Ingredients List: </p>
+    <h4>Ingredients List: </h4>
     <ul>
       <% @ingredients.each do |ingredient| %>
         <li><%= ingredient %></li>
       <% end %>
     </ul>
-  </div>
-</div>
+    <% unless current_user.recipes.include?(@recipe) %>
+      <%= button_to "Add Recipe", action: "add_recipe_to_user" %>
+    <% else %>
+      <p>Recipe Saved</p>
+    <% end %>
+  </div><!-- /content.main -->
+
+  <!-- slider panel -->
+    <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
+    </div><!-- /slider panel -->
+</div><!-- /page -->

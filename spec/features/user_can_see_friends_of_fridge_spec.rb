@@ -16,7 +16,7 @@ feature 'User can friends of fridge' do
     click_on "Add Fridge"
     click_link "test fridge"
     fill_in 'user_email', with: user.email
-    click_on 'Sign up'
+    click_on 'Add Fridge Friend'
     expect(page).to have_content "User successfully added as a friend."
     click_on 'Options'
     expect(page).to have_content "Carter1"

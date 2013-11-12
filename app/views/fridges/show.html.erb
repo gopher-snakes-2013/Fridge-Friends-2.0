@@ -1,130 +1,133 @@
+<div data-role="page" id="fridge-show">
+  <div id="username-display">
+    <% if signed_in? %>
+       <span><%= current_user.email %></span>
+       <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
+    <% else %>
+        <span><%= link_to 'Sign in', sign_in_path %></span>
+    <% end %>
+  </div>
 
-  <div data-role="page" id="fridge-show">
-    <div id="username-display">
-        <% if signed_in? %>
-         <span><%= current_user.email %></span>
-         <span><%= link_to 'logout', sign_out_path, method: :delete %></span>
-        <% else %>
-          <span><%= link_to 'Sign in', sign_in_path %></span>
-        <% end %>
-
-      </div>
-
-    <div data-role="header" class="toolbar" style="overflow:hidden;">
-      <h2><%= @fridge.name %></h2>
+  <div data-role="header" class="toolbar" style="overflow:hidden;" data-theme="b">
+    <h2><%= @fridge.name %></h2>
       <%= link_to 'Back', fridges_path, data: {icon: 'gear'}, class: 'ui-btn-left' %>
-      <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
-    </div><!-- /header -->
+      <a href="#settings-panel" data-icon="gear" data-theme="b" class="ui-btn-right">Options</a>
+    <div>
+      <a href="#" data-role="button" data-inline="true" data-icon="plus" data-iconpos="left" id="ff-btn-add-item" >Add Item to <%= @fridge.name %></a>
+      <a href="#" data-role="button" data-inline="true" data-icon="plus" id="ff-btn-add-friend">Add User to <%= @fridge.name %></a>
+      <a href="#" data-role="button" data-inline="true" data-icon="plus" id="ff-btn-add-list">Add Grocery List to <%= @fridge.name %></a>
+      <a href="#" data-role="button" data-inline="true" data-icon="plus" id="ff-btn-add-list">Find Recipes</a>
 
-    <div data-role="content">
+    </div>
+  </div><!-- /header -->
 
-      <%= flash[:add_item_notice] %>
-      <%= flash[:add_user_notice] %>
-      <%= flash[:add_grocery_list_notice] %>
+  <div data-role="content" class="sidebar">
 
-      <div>
-        <%= form_for [@fridge, @item] do |f| %>
-          <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
-            <legend>Add Item to <%= @fridge.name %></legend>
-            <%= f.text_field :name, placeholder: 'Item Name' %>
-            <%= f.select :category, ['Beverage', 'Dairy', 'Meat', 'Produce', 'Snack', 'Other'], :prompt => 'Category' %>
-            <%= f.submit 'Add Item to Fridge' %>
-          </fieldset>
+    <%= flash[:add_item_notice] %>
+    <%= flash[:add_user_notice] %>
+    <%= flash[:add_grocery_list_notice] %>
+
+    <div id="ff-form-panel-add-item" class="ff-form-panel">
+      <%= form_for [@fridge, @item] do |f| %>
+        <fieldset  data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="true">
+          <legend>Add Item to <%= @fridge.name %></legend>
+          <%= f.text_field :name, placeholder: 'Item Name' %>
+          <%= f.select :category, ['Beverage', 'Dairy', 'Meat', 'Produce', 'Snack', 'Other'], :prompt => 'Category' %>
+          <%= f.submit 'Add Item to Fridge' %>
+        </fieldset>
+      <% end %>
+      <%= form_for @upc, :url => fridge_upc_codes_path(@fridge.id), :html => { :multipart => true, "data-ajax" => false } do |f| %>
+        <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
+          <%= f.file_field :upc_img %>
+          <%= f.submit "Upload UPC Code Image" %>
+        </fieldset>
+      <% end %>
+    </div>
+
+    <div id="ff-form-panel-add-friend" class="ff-form-panel">
+
+      <%= form_for @find_user_email, url: add_user_fridge_path, method: 'post' do |f| %>
+        <fieldset data-theme="a" data-content-theme="d" data-iconpos="right">
+          <legend>Add User to <%= @fridge.name %></legend>
+          <%= f.text_field :email, placeholder: "Enter Email Address" %>
+          <%= f.submit "Add Fridge Friend"%>
+        </fieldset>
+      <% end %>
+    </div>
+    <div id="ff-form-panel-add-list" class="ff-form-panel">
+      <%= form_for [@fridge, @list] do |f| %>
+        <fieldset data-theme="a" data-content-theme="d" data-iconpos="right">
+          <legend>Add Grocery List for <%= @fridge.name %></legend>
+          <%= f.text_field :title, placeholder: 'Grocery List Title' %>
+          <%= f.submit 'Create Grocery List for Fridge' %>
+        </fieldset>
+      <% end %>
+    </div>
+  </div><!-- /content.sidebar -->
+
+  <div id="fridge-contents" data-role="content" class="main">
+    <ul data-role="listview" data-filter="true" data-filter-placeholder="Search this fridge..." data-split-icon="delete" data-inset="true">
+      <% @items_categories.each do |cat| %>
+        <li data-role="list-divider">
+          <span class="category"><%= cat %></span>
+        </li>
+        <% @fridge.items.where(category:cat).each do |item| %>
+        <li>
+          <a>
+          <span class="item"><%= item.name %></span>
+          <span class="purchase-date">Purchased By: <%= item_added_by(item.creator_id) %> <%= time_ago_in_words(item.created_at) %> ago</span>
+          <%= link_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete', data: { icon: "delete"}) %>
+        </li>
         <% end %>
-        
-
-
-        <%= form_for @upc, :url => fridge_upc_codes_path(@fridge.id), :html => { :multipart => true, "data-ajax" => false } do |f| %>
-          <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
-            <%= f.file_field :upc_img %>
-            <%= f.submit "Upload UPC Code Image" %>
-          </fieldset>
-        <% end %>
-      </div>
-
-
-
-
-      <div>
-        <%= form_for [@fridge, @list] do |f| %>
-          <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
-            <legend>Add Grocery List for <%= @fridge.name %></legend>
-            <%= f.text_field :title, placeholder: 'Grocery List Title' %>
-            <%= f.submit 'Create Grocery List for Fridge' %>
-          </fieldset>
-        <% end %>
-      </div>
-
-      <div>
-        <%= form_for @find_user_email, url: add_user_fridge_path, method: 'post' do |f| %>
-          <fieldset data-role="collapsible" data-collapsed="false" data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="false">
-            <legend>Add User to <%= @fridge.name %></legend>
-            <%= f.text_field :email, placeholder: "Enter Email Address" %>
-            <%= f.submit %>
-          </fieldset>
-        <% end %>
-      </div>
-
-      <div id="fridge-contents">
-        <ul data-role="listview" data-filter="true" data-filter-placeholder="Search this fridge..." data-split-icon="delete">
-          <% @items_categories.each do |cat| %>
-            <li data-role="list-divider">
-              <span class="category"><%= cat %></span>
-            </li>
-            <% @fridge.items.where(category:cat).each do |item| %>
-            <li>
-              <a>
-              <span class="item"><%= item.name %></span>
-              <span class="purchase-date">Purchased By: <%= item_added_by(item.creator_id) %> <%= time_ago_in_words(item.created_at) %> ago</span>
-              <%= link_to('Delete Item', fridge_item_path(item.fridge.id, item.id), controller: item, method: 'delete', data: { icon: "delete"}) %>
-            </li>
-            <% end %>
-          <% end %>
-        </ul>
-      </div>
-
+      <% end %>
+    </ul>
   </div><!-- /content -->
 
-    <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
+  <!-- slider panel -->
+  <div id="settings-panel" class="panel" data-role="panel" data-position="right" data-display="reveal" data-position-fixed="true">
 
-      <div><%= link_to "Find Recipes", recipe_queries_path %></div>
 
-      <div id='notification_settings'>
-        <h3>Notification Settings</h3>
-        <ul>
-          <li>
-            <%= form_for @user, url: url_for(controller: 'users', action: 'update'), method: 'put'  do |f| %>
-              <%= f.label "Text Alerts" %>
+    <div><%= link_to "Find Recipes", recipe_queries_path %></div>
+
+    <div id='notification_settings'>
+      <h3>Notification Settings</h3>
+
+          <%= form_for @user, url: url_for(controller: 'users', action: 'update'), method: 'put'  do |f| %>
+          <fieldset data-role="controlgroup">
+              <%= f.label :opted_in, "Text Alerts" %>
               <%= f.check_box :opted_in %>
               <%= f.submit %>
-            <% end %>
-          </li>
-        </ul>
-      </div>
+          </fieldset>
+          <% end %>
 
-      <div id='all_grocery_lists'>
-        <h3>Grocery Lists</h3>
-        <ul>
-          <% @lists.each do |list| %>
+          <label for="slider2">Flip switch:</label>
+          <select name="slider2" id="slider2" data-role="slider">
+              <option value="off">Off</option>
+              <option value="on">On</option>
+          </select>
+    </div>
+
+    <div id='all_grocery_lists'>
+      <h3>Grocery Lists</h3>
+      <ul>
+        <% @lists.each do |list| %>
+        <li>
+          <%= link_to list.title, fridge_grocery_list_path(@fridge.id, list.id) %>
+          <%= link_to "Delete Grocery List", [list.fridge, list], method: :delete %>
+        </li>
+        <% end %>
+      </ul>
+    </div>
+
+    <div id='list_fridge_friends'>
+      <h3>Friends of this Fridge</h3>
+       <ul>
+        <% @friends.each do |friend| %>
           <li>
-            <%= link_to list.title, fridge_grocery_list_path(@fridge.id, list.id) %>
-            <%= link_to "Delete Grocery List", [list.fridge, list], method: :delete %>
+            <span><%= friend.name %></span>
           </li>
-          <% end %>
-        </ul>
-      </div>
-
-      <div id='list_fridge_friends'>
-        <h3>Friends of this Fridge</h3>
-         <ul>
-          <% @friends.each do |friend| %>
-            <li>
-              <span><%= friend.name %></span>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-
-
-
-  </div><!-- /page -->
+        <% end %>
+      </ul>
+    </div>
+  </div><!-- /slider panel -->
+</div><!-- /page -->

@@ -20,7 +20,7 @@ feature "friend of fridge (that is not creator of fridge) can add" do
     click_on "Add Fridge"
     click_link "test fridge"
     fill_in 'user_email', with: user.email
-    click_on 'Sign up'
+    click_on 'Add Fridge Friend'
     expect(page).to have_content "User successfully added as a friend."
     click_link 'logout'
     signup_user(user_3)
@@ -31,7 +31,7 @@ feature "friend of fridge (that is not creator of fridge) can add" do
     expect(page).to have_content "test fridge"
     click_link "test fridge"
     fill_in 'user_email', with: user_3.email
-    click_on 'Sign up'
+    click_on 'Add Fridge Friend'
     expect(page).to have_content "User successfully added as a friend."
   end
 end

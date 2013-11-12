@@ -48,6 +48,7 @@ group :testing, :development do
   gem 'quiet_assets'
   gem 'factory_girl_rails'
   gem 'selenium-webdriver'
+  gem 'sextant'
 end
 
 gem 'rails_12factor', group: :production

@@ -11,6 +11,7 @@ FridgeFriends20::Application.routes.draw do
     resources :fridges, only: [:index, :create, :show, :destroy] do
       member do
         post :add_user
+        post :remove_user
       end
       resources :items, only: [:index, :create, :show, :destroy]
       resources :upc_codes, only: [:create, :show]
@@ -20,7 +21,11 @@ FridgeFriends20::Application.routes.draw do
       end
     end
     resources :recipe_queries, only: [:index, :create, :show, :destroy] do
-      resources :recipes, only: [:index, :create, :show, :destroy]
+      resources :recipes, only: [:index, :create, :show, :destroy] do
+        member do
+          post :add_recipe_to_user
+        end
+      end
     end
   end
 end

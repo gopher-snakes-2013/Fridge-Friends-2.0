@@ -61,6 +61,10 @@ module ApplicationHelper
   def is_shared?
     true if Fridge.find(self.id).users.length >= 2
   end
+
+  def fridge_item?
+    true if self.grocery_list_id == nil
+  end
 end
 
 

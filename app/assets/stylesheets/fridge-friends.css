@@ -113,7 +113,8 @@ form.login #btn {
 
 #users_recipe_queries { margin-top: 40px; }
 #users_recipe_queries li a.ui-link-inherit { text-decoration: none; }
-
+#fridge-contents li img { position: static; margin-left: 15px; margin-top: 9px; float: left; }
+/*#fridge-contents ul li a { padding: .7em 15px; min-height: 0px; }*/
 /* Stack the two content containers */
 .main,
 .sidebar {

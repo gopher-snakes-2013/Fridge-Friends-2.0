@@ -32,8 +32,8 @@
 
         <% @fridges.each  do |fridge| %>
           <li data-icon="false">
-            <%= link_to fridge.name, fridge_path(fridge.id) %>
-            <%= image_tag("shared.png", alt: "Shared Fridge", id: "shared-icon") if fridge.is_shared? %>
+            <span <%= render( text:'style=visibility:hidden;') if !fridge.is_shared? %>><%= image_tag("shared.png", alt: "Shared Fridge", id: "shared-icon")  %></span>
+            <a href="<%= fridge_url(fridge.id) %>"><%= fridge.name %></a>
             <% if fridge.creator_id == @current_user.id %>
               <%= link_to('Delete Fridge', fridge_path(fridge.id), method: 'delete', data: { icon: "delete"}) %>
             <% end %>

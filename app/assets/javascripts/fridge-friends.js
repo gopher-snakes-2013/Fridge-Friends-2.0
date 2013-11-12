@@ -1,15 +1,4 @@
 ;$(function(){
-  $(".ui-listview-inset .ui-li").on( "swipe", function( e ) {
-      console.log("FTW");
-      if ( e.type === "swipeleft" ) {
-          console.log('swiped left');
-      } else if ( e.type === "swiperight" ) {
-          console.log('swiped right');
-      }
-  })
-  $(document).on('pageinit',function(event){
-    console.log('page init');
-  })
 
   $('#ff-btn-add-item').on('click', function(event){
     $('#ff-form-panel-add-friend').fadeOut();
@@ -36,6 +25,17 @@
     $('#ff-form-panel-add-list-item').fadeToggle();
   })
 
+  $(".ui-listview-inset .ui-li").on( "swipe", function( e ) {
+      console.log("FTW");
+      if ( e.type === "swipeleft" ) {
+          console.log('swiped left');
+      } else if ( e.type === "swiperight" ) {
+          console.log('swiped right');
+      }
+  })
+  $(document).on('pageinit',function(event){
+    console.log('page init');
+  })
 
 
   ff-form-panel-add-list-item

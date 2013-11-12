@@ -28,7 +28,7 @@ feature "User can create fridge item" do
     click_on "Add Fridge"
     click_link "test fridge"
     fill_in 'user_email', with: user.email
-    click_on 'Sign up'
+    click_on 'Add Fridge Friend'
     expect(page).to have_content "User successfully added as a friend."
     click_link 'logout'
     fill_in 'session_email', with: user.email

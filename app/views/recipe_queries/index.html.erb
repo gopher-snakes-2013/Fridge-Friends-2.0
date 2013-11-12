@@ -20,6 +20,9 @@
 
 <div class="recipe_query">
 
+  <%= flash[:delete_recipe_query_notice] %>
+  <%= flash[:add_recipe_query_notice] %>
+
   <%= form_for @recipe_query do |f| %>
     <%= f.text_field :terms, placeholder: "Search Yummly Recipes" %>
     <%= f.submit 'Find Recipes' %>

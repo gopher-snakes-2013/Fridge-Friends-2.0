@@ -5,7 +5,9 @@ require 'base64'
 
 class UpcCode < ActiveRecord::Base
   attr_accessible :upc_img, :upc_text, :item_name, :fridge_id
-  has_attached_file :upc_img, :default_url => "/images/:style/missing.png"
+  has_attached_file :upc_img,
+                    :path => ":rails_root/public/system/images/upc/:id/:basename:extension",
+                    :url => "/system/images/upc/:id/:basename:extension"
 
   APPLICATION_ID = CGI.escape(ENV["OCR_APPLICATION_ID"])
   PASSWORD = CGI.escape(ENV["OCR_PASSWORD"])
@@ -18,13 +20,7 @@ class UpcCode < ActiveRecord::Base
   end
 
   def process_image
-    if self.id <= 99
-      photo_id = "0#{self.id}"
-    else
-      photo_id = self.id
-    end
-
-    image_file = "public/system/upc_codes/upc_imgs/000/000/#{photo_id}/original/#{self.upc_img_file_name}"
+    image_file = "public/system/images/upc/#{self._id}/#{self.upc_img_file_name}"
 
     begin
       response = RestClient.post("#{BASE_URL}/processImage?profile=barcodeRecognition&exportFormat=xml", :upload => { :file => File.new(image_file, 'rb') })  

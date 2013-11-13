@@ -22,6 +22,7 @@ form.login {
   text-align:left;
 }
 
+.password-new#password-create { color:#fff; margin:20px auto; }
 .home, .sign-up, .password-new, .password-reset {
   text-align: center;
   background: #16a085;

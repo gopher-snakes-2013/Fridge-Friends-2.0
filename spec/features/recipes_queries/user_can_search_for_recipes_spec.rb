@@ -15,12 +15,26 @@ feature "User can search for recipes" do
     expect(page).to have_content "Search terms: salmon"
   end
 
-  scenario "with invalid search terms" do
-    signup_user(user)
-    visit recipe_queries_path
-    fill_in "recipe_query_terms", with: ""
-    click_on "Find Recipes"
-    expect(page).not_to have_content "Search terms:"
+  context "with invalid search terms" do
+    scenario "with an empty string" do
+      signup_user(user)
+      visit recipe_queries_path
+      fill_in "recipe_query_terms", with: ""
+      click_on "Find Recipes"
+      expect(page).not_to have_content "Search terms:"
+    end
+
+    scenario "with a search term that the user has already searched" do
+      signup_user(user)
+      visit recipe_queries_path
+      fill_in "recipe_query_terms", with: "butternut"
+      click_on "Find Recipes"
+      expect(page).to have_content "Search terms: butternut"
+      visit recipe_queries_path
+      fill_in "recipe_query_terms", with: "butternut"
+      click_on "Find Recipes"
+      expect(page).to have_content "Terms has already been taken"
+    end
   end
 
 end

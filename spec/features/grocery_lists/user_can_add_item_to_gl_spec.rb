@@ -73,4 +73,29 @@ feature 'Fridge friend' do
     click_on 'Add Item to Grocery List'
     expect(page).to have_content 'Test Cheese'
   end
+
+  scenario 'can add item to grocery list and not see it listed in fridge' do
+    signup_user(user)
+    click_link "logout"
+    signup_user(user_2)
+    fill_in "fridge_name", with: "test fridge"
+    click_on "Add Fridge"
+    click_link "test fridge"
+    fill_in 'user_email', with: user.email
+    click_on 'Add Fridge Friend'
+    fill_in "grocery_list_title", with: 'fancy grocery list'
+    click_on 'Create Grocery List for Fridge'
+    click_link 'logout'
+    fill_in 'session_email', with: user.email
+    fill_in 'session_password', with: user.password
+    click_on 'Sign in'
+    click_on 'test fridge'
+    click_on 'Options'
+    click_on 'fancy grocery list'
+    fill_in 'item_name', with: 'Test Cheese'
+    select('Dairy', from: 'item_category')
+    click_on 'Add Item to Grocery List'
+    click_on 'Back'
+    expect(page).to_not have_content 'Test Cheese'
+  end
 end

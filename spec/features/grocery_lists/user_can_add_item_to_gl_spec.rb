@@ -21,6 +21,24 @@ feature 'Fridge creator' do
     click_on 'Add Item to Grocery List'
     expect(page).to have_content 'Test Cheese'
   end
+
+  scenario 'can add an item to a grocery list and not see it listed in the fridge' do
+    signup_user(user)
+    fill_in "fridge_name", with: "Home Fridge"
+    click_on "Add Fridge"
+    click_on "Home Fridge"
+    fill_in "grocery_list_title", with: 'My Fancy List'
+    click_on 'Create Grocery List for Fridge'
+    click_on 'Options'
+    click_link 'My Fancy List'
+    fill_in 'item_name', with: 'Test Cheese'
+    select('Dairy', from: 'item_category')
+    click_on 'Add Item to Grocery List'
+    expect(page).to have_content 'Test Cheese'
+    click_on 'Back'
+    expect(page).to_not have_content 'Test Cheese'
+  end
+
 end
 
 

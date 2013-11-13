@@ -43,6 +43,11 @@ feature 'Fridge friend' do
     click_on 'Add Fridge Friend'
     fill_in "grocery_list_title", with: 'fancy grocery list'
     click_on 'Create Grocery List for Fridge'
+    click_link 'logout'
+    fill_in 'session_email', with: user.email
+    fill_in 'session_password', with: user.password
+    click_on 'Sign in'
+    click_on 'test fridge'
     click_on 'Options'
     click_on 'fancy grocery list'
     fill_in 'item_name', with: 'Test Cheese'

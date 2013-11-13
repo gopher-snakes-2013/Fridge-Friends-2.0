@@ -62,6 +62,7 @@ class ItemsController < ApplicationController
     item.save
     fridge = Fridge.find(params[:fridge_id])
     list = GroceryList.find(params[:id])
+    flash[:added_to_fridge] = "#{item.name} added to #{fridge.name}!"
     redirect_to fridge_grocery_list_path(fridge)
   end
 

@@ -1,21 +1,23 @@
 ;$(function(){
 
-  $('#ff-btn-add-item').on('click', function(event){
+  $('body').on('click', '#ff-btn-add-item', function(event){
     $('#ff-form-panel-add-friend').fadeOut();
     $('#ff-form-panel-add-list').fadeOut();
     $('#ff-form-panel-add-item').fadeToggle();
   })
-  $('#ff-btn-add-friend').on('click', function(event){
+
+  $('body').on('click', '#ff-btn-add-friend', function(event){
     $('#ff-form-panel-add-item').fadeOut();
     $('#ff-form-panel-add-list').fadeOut();
     $('#ff-form-panel-add-friend').fadeToggle();
   })
-  $('#ff-btn-add-list').on('click', function(event){
+
+  $('body').on('click', '#ff-btn-add-list', function(event){
     $('#ff-form-panel-add-friend').fadeOut();
     $('#ff-form-panel-add-item').fadeOut();
     $('#ff-form-panel-add-list').fadeToggle();
   })
-  $('.ff-form-panel-cancel').on('click', function(event){
+  $('body').on('click','.ff-form-panel-cancel', function(event){
     $(this).fadeOut();
   })
 
@@ -38,13 +40,3 @@
   // ff-form-panel-add-list-item
 
 })
-
-
-$(document).on('pageinit',function(event){
-  console.log('page init');
-})
-
-$(document).bind("mobileinit", function(){
-  //apply overrides here
-  console.log('page init');
-});

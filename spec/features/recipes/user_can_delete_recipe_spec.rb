@@ -13,7 +13,7 @@ feature "User can delete recipe" do
     fill_in "recipe_query_terms", with: "butternut"
     click_on "Find Recipes"
     click_link 'Honey Thyme Roasted Butternut Squash'
-    click_on "Add Recipe"
+    click_on "Save Recipe"
     expect(page).to have_content "Recipe Saved"
     visit recipe_queries_path
     click_on "Delete Recipe"

@@ -13,7 +13,7 @@ feature "User can save recipe" do
     fill_in "recipe_query_terms", with: "butternut"
     click_on "Find Recipes"
     visit recipe_query_recipe_path(1,1)
-    click_on "Add Recipe"
+    click_on "Save Recipe"
     expect(page).to have_content "Recipe Saved"
   end
 end

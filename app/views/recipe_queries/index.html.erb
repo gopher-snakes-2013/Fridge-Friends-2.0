@@ -41,7 +41,7 @@
       </div>
   </div>
 
-  <div data-role="content" class="sidebar">
+  <div data-role="content" class="sidebar" id="user_saved_recipes">
     <h4>Saved Recipes</h4>
     <ul data-role="listview" data-inset="true">
       <% current_user.recipes.reverse.each do |recipe|  %>

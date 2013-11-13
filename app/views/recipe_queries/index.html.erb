@@ -43,14 +43,16 @@
 
   <div data-role="content" class="sidebar">
     <h4>Saved Recipes</h4>
-    <ul data-role="listview" data-split-icon="delete" data-inset="true">
-    <% current_user.recipes.reverse.each do |recipe|  %>
-      <li>
-        <%= link_to recipe.name, recipe_query_recipe_path(recipe.recipe_query_id, recipe.id)  %>
-        <%= link_to('Delete Recipe', recipe_query_recipe_path(recipe.recipe_query_id, recipe.id), controller: recipe, method: 'delete', data: { icon: "delete"}) %>
-      </li>
-    <% end %>
-  </ul>
+    <ul data-role="listview" data-inset="true">
+      <% current_user.recipes.reverse.each do |recipe|  %>
+        <li>
+          <a href="<%=recipe_query_recipe_url(recipe.recipe_query_id, recipe.id)%>">
+          <img src="<%= recipe.img_url %>" alt="" height="60" width="90">
+          <span><%= recipe.name %></span></a>
+          <%= link_to('Delete Recipe', recipe_query_recipe_path(recipe.recipe_query_id, recipe.id), controller: recipe, method: 'delete', data: { icon: "delete"}) %>
+        </li>
+      <% end %>
+    </ul>
   </div>
 
   <!-- slider panel -->

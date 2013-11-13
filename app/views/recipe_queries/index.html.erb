@@ -42,8 +42,8 @@
   </div>
 
   <div data-role="content" class="sidebar">
-    <h2>Saved Recipes</h2>
-    <ul>
+    <h4>Saved Recipes</h4>
+    <ul data-role="listview" data-split-icon="delete" data-inset="true">
     <% current_user.recipes.reverse.each do |recipe|  %>
       <li>
         <%= link_to recipe.name, recipe_query_recipe_path(recipe.recipe_query_id, recipe.id)  %>

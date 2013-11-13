@@ -55,5 +55,15 @@ class ItemsController < ApplicationController
     redirect_to fridge_grocery_list_path(fridge, list)
   end
 
+  def add_to_fridge_from_list
+    item = Item.find(params[:item_id])
+    item.grocery_list_id = nil
+    item.created_at = Time.now
+    item.save
+    fridge = Fridge.find(params[:fridge_id])
+    list = GroceryList.find(params[:id])
+    redirect_to fridge_grocery_list_path(fridge)
+  end
+
 
 end

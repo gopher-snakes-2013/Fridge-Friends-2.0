@@ -2,8 +2,10 @@
 development:
   adapter: postgresql
   database: fridge-friends_development
+  host: localhost
 
 test:
   adapter: postgresql
   database: fridge-friends_test
+  host: localhost
 

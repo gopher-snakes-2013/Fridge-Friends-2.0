@@ -6,14 +6,14 @@ class UsersController < Clearance::UsersController
       sign_in @user
       redirect_back_or url_after_create
     else
-      flash[:notice] = @user.errors.full_messages.join(", ")
-      redirect_to sign_up_path
+      #REVIEW: you shouldn't be redirecting, you should be rendering
+      render :new
     end
   end
-
+  # create a new action and route for opting in
   def update
-    user = current_user
-    user.update_attributes(opted_in: params[:user][:opted_in])
+    # REVIEW: you're handling the happy path only.
+    current_user.update_attributes(opted_in: params[:user][:opted_in])
     redirect_to fridge_path(params[:id])
   end
 end

@@ -1,3 +1,4 @@
+// this would be hard to test. Use objects.
 ;$(function(){
 
   $('body').on('click', '#ff-btn-add-item', function(event){

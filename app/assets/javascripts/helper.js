@@ -1,3 +1,4 @@
+// name it correctly, I would add comments about useage
 ;(function( $, window, document, undefined){
     var setMediaQueries = function(media){
         console.log('QUERY | ' + media);

@@ -16,7 +16,7 @@ class ItemsController < ApplicationController
     current_fridge = find_fridge(params[:fridge_id])
     fridge_friends = find_only_friends_of_fridge(current_user, current_fridge)
     if @new_item.save
-      text_current_user(twilio_client, current_user, current_fridge, @new_item)
+      text_current_user(current_user, current_fridge, @new_item)
       text_fridge_friends(twilio_client, fridge_friends, current_user, current_fridge, @new_item)
     else
       flash[:add_item_notice] = @new_item.errors.full_messages.join(", ")

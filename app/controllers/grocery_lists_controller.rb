@@ -9,6 +9,7 @@ class GroceryListsController < ApplicationController
     @list = GroceryList.find(params[:id])
     @item = Item.new
     @items = @list.items
+    # user map or inject
     categories = []
     @items.each { |i| categories << i.category }
     @items_categories = categories.uniq.sort

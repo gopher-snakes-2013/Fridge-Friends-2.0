@@ -1,5 +1,6 @@
 <div data-role="page" id="grocery-list-show">
     <div id="username-display">
+    <!-- this should move into a partial and rendered in the layout -->
       <% if signed_in? %>
          <span><%= current_user.email %></span>
          <span><%= link_to 'logout', sign_out_path, method: :delete %></span>

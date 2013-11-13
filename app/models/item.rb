@@ -4,4 +4,8 @@ class Item < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => [:grocery_list_id]
   belongs_to :fridge
   belongs_to :grocery_list
+
+  def no_grocery_list?
+    self.grocery_list.blank?
+  end
 end

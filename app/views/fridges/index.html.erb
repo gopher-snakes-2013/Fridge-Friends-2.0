@@ -1,3 +1,4 @@
+  <!-- this file is too big, break it down into partials. -->
   <div data-role="page">
     <div id="username-display">
         <% if signed_in? %>
@@ -20,7 +21,13 @@
       <%= flash[:add_fridge_notice] %>
       <%= flash[:remove_user_from_fridge_notice] %>
 
-
+      <% if @fridge.errors.any? %>
+        <ul>
+          <% @fridge.errors.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      <% end %>
       <div>
         <%= form_for @fridge do |f| %>
           <%= f.text_field :name, placeholder: 'Fridge Name' %>
@@ -33,12 +40,15 @@
 
         <% @fridges.each  do |fridge| %>
           <li data-icon="false">
-            <span <%= render( text:'style=visibility:hidden;') if !fridge.is_shared? %>><%= image_tag("shared.png", alt: "Shared Fridge", id: "shared-icon")  %></span>
+            <% class_name = fridge.is_shared? ? 'active' : 'hidden' %>
+            <span class="<%= class_name %>"%>
+              <%= image_tag("shared.png", alt: "Shared Fridge", id: "shared-icon")  %>
+            </span>
             <a href="<%= fridge_url(fridge.id) %>"><%= fridge.name %></a>
-            <% if fridge.creator_id == @current_user.id %>
-              <%= link_to('Delete Fridge', fridge_path(fridge.id), method: 'delete', data: { icon: "delete"}) %>
+            <% if fridge.creator?(current_user) %>
+              <%= link_to('Delete Fridge', fridge_path(fridge), method: 'delete', data: { icon: "delete"}) %>
             <% else %>
-                <%= link_to('Remove User from Shared Fridge', remove_user_fridge_path(fridge.id), method: 'post', data: { icon: "delete"}) %>
+                <%= link_to('Remove User from Shared Fridge', remove_user_fridge_path(fridge), method: 'post', data: { icon: "delete"}) %>
             <% end %>
           </li>
         <% end %>
@@ -51,6 +61,7 @@
       <div>
         <ul>
           <% @fridges.each  do |fridge| %>
+          <!-- this shouldn't be in the master branch -->
           <li><span>stuff</span></li>
         <% end %>
         </ul>

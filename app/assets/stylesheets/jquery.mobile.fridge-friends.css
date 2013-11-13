@@ -189,8 +189,8 @@
 .ui-bar-c a.ui-link:hover{color:#2489ce}
 .ui-bar-c a.ui-link:active{color:#2489ce}
 .ui-bar-c input,.ui-bar-c select,.ui-bar-c textarea,.ui-bar-c button{font-family:Lato,sans-serif}
-.ui-body-c,.ui-overlay-c{border:2px solid #f2f2f2;color:#34495e;}
-.ui-body-c{font-family:Lato,sans-serif;}
+.ui-body-c,.ui-overlay-c{color:#34495e;}
+.ui-body-c{font-family:Lato,sans-serif;border:2px solid #f2f2f2;}
 .ui-body-c input,.ui-body-c select,.ui-body-c textarea,.ui-body-c button{font-family:Lato,sans-serif}
 .ui-body-c .ui-link-inherit{color:#333}
 .ui-body-c .ui-link{color:#2c3e50;font-weight:bold;}

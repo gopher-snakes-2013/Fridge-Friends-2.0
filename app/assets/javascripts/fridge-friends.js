@@ -33,11 +33,18 @@
           console.log('swiped right');
       }
   })
-  $(document).on('pageinit',function(event){
-    console.log('page init');
-  })
 
 
-  ff-form-panel-add-list-item
+  // ff-form-panel-add-list-item
 
 })
+
+
+$(document).on('pageinit',function(event){
+  console.log('page init');
+})
+
+$(document).bind("mobileinit", function(){
+  //apply overrides here
+  console.log('page init');
+});

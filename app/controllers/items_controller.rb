@@ -61,6 +61,20 @@ class ItemsController < ApplicationController
     item.created_at = Time.now
     item.save
     fridge = Fridge.find(params[:fridge_id])
+    p "*" * 100
+
+    fridge.items.each do |fridge_item|
+      if fridge_item.name == item.name
+        p "in loop"
+        p fridge_item.name
+        p item.name
+        fridge_item.created_at = Time.now
+        fridge_item.save
+        item.destroy
+      end
+
+    end
+
     list = GroceryList.find(params[:id])
     flash[:added_to_fridge] = "#{item.name} added to #{fridge.name}!"
     redirect_to fridge_grocery_list_path(fridge)

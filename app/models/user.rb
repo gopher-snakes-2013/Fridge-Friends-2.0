@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :fridges
   has_many :recipe_queries
   has_and_belongs_to_many :recipes
+  has_many :created_fridges, :foreign_key => :creator_id, :class_name => "Fridge"
 end

@@ -1,24 +1,20 @@
-require 'rubygems'
-require 'twilio-ruby'
-include ApplicationHelper
-
 class FridgesController < ApplicationController
   before_filter :authorize_and_load_fridge, only: [:show]
+
   def index
     @fridge = Fridge.new
     @fridges = current_user.fridges
-    @current_user = current_user
   end
 
   def create
-    fridge = Fridge.new(params[:fridge])
-    fridge.users << current_user
-    fridge.creator_id = current_user.id
-    if fridge.save
-      redirect_to :fridges
+    @fridge = Fridge.new(params[:fridge])
+    @fridge.creator = current_user
+    if @fridge.save
+      @fridge.users << current_user
+      redirect_to fridges_path
     else
-      flash[:add_fridge_notice] = fridge.errors.full_messages.join(", ")
-      redirect_to :fridges
+      @fridges = current_user.fridges
+      render :index
     end
   end
 

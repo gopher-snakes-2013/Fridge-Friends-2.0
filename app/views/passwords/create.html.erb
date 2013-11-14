@@ -1,3 +1,16 @@
-<div id="clearance" class="password-reset">
-  <p><%= t '.description' %></p>
+<div id="password-reset" data-role="page" class="password-reset">
+  <% if flash %>
+  <div id="flash-box">
+    <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+    <% end %>
+  </div>
+  <% end %>
+  <div data-role="content">
+    <h1>Fridge Friend</h1>
+
+    <div id="clearance" class="password-reset">
+      <p><%= t '.description' %></p>
+    </div>
+  </div>
 </div>

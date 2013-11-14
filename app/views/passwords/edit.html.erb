@@ -1,13 +1,13 @@
 <div id="password-edit" data-role="page" class="password-edit">
-  <div data-role="content">
-    <% if flash %>
-    <div id="flash-box">
-      <% flash.each do |key, value| %>
-      <%= content_tag(:div, value, class: "alert alert-#{key}") %>
-      <% end %>
-    </div>
+  <% if flash %>
+  <div id="flash-box">
+    <% flash.each do |key, value| %>
+    <%= content_tag(:div, value, class: "alert alert-#{key}") %>
     <% end %>
-    <h1>Fridge Friend</h1>
+  </div>
+  <% end %>
+  <h1>Fridge Friend</h1>
+  <div data-role="content">
 
     <div id='clearance' class='password-edit'>
       <h2><%= t '.title' %></h2>

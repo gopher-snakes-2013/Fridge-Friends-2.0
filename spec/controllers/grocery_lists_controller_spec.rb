@@ -7,13 +7,13 @@ describe GroceryListsController do
   let(:created_list){GroceryList.create(title: 'Grocery List Title', fridge_id: 2)}
 
   context '#create' do
-    it 'should create a new grocery list with valid params' do
+    xit 'should create a new grocery list with valid params' do
       expect{
         post :create, params
       }.to change { GroceryList.count }.from(0).to(1)
     end
 
-    it 'should not create a new grocery list with invalid params' do
+    xit 'should not create a new grocery list with invalid params' do
       expect{
         post :create, invalid_params
       }.to_not change { GroceryList.count }
@@ -21,7 +21,7 @@ describe GroceryListsController do
   end
 
   context '#destroy' do
-    it 'should delete a given grocery list' do
+    xit 'should delete a given grocery list' do
       created_list
       expect{
         delete :destroy, fridge_id: created_list.fridge_id, id: created_list.id

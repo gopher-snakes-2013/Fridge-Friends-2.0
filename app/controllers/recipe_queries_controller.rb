@@ -2,7 +2,6 @@ class RecipeQueriesController < ApplicationController
   def index
     @recipe_query = RecipeQuery.new
     @recipe_queries = current_user.recipe_queries
-    @current_user = current_user
   end
 
   def create
@@ -10,8 +9,8 @@ class RecipeQueriesController < ApplicationController
     recipe_query.user_id = current_user.id
     if recipe_query.save
       result = Yummly.search(recipe_query.terms)
-      extract_recipes_from_search(recipe_query, result)
-      redirect_to recipe_query_path(recipe_query.id)
+      RecipeQuery.create_recipes_from_search(recipe_query, result)
+      redirect_to recipe_query_path(recipe_query)
     else
       flash[:add_recipe_query_notice] = recipe_query.errors.full_messages.join(", ")
       redirect_to recipe_queries_path

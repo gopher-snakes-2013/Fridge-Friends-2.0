@@ -1,6 +1,5 @@
 require 'rubygems'
-require 'twilio-ruby'
-module Twilio
+module TwilioClient
 
   def convert(phone_number)
     number = "1#{phone_number.gsub(/-/, '')}"

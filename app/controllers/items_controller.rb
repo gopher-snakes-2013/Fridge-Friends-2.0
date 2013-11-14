@@ -3,7 +3,7 @@ include Twilio
 
 class ItemsController < ApplicationController
   before_filter :load_item, only: [:show, :destroy, :destroy_grocery_list_item]
-  before_filter :load_fridge, only: [:index, :create, :create_grocery_list_item, :destroy_grocery_list_item]
+  before_filter :load_fridge, only: [:index, :create, :create_grocery_list_item, :destroy_grocery_list_item, :add_to_fridge_from_list]
   before_filter :load_list, only: [:create_grocery_list_item, :destroy_grocery_list_item]
 
   def index
@@ -52,30 +52,12 @@ class ItemsController < ApplicationController
     redirect_to fridge_grocery_list_path(@fridge, @list)
   end
 
-
   def add_to_fridge_from_list
-    item = Item.find(params[:item_id])
-    item.grocery_list_id = nil
-    item.created_at = Time.now
-    item.save
-    fridge = Fridge.find(params[:fridge_id])
-    p "*" * 100
-
-    fridge.items.each do |fridge_item|
-      if fridge_item.name == item.name
-        p "in loop"
-        p fridge_item.name
-        p item.name
-        fridge_item.created_at = Time.now
-        fridge_item.save
-        item.destroy
-      end
-
-    end
-
-    list = GroceryList.find(params[:id])
-    flash[:added_to_fridge] = "#{item.name} added to #{fridge.name}!"
-    redirect_to fridge_grocery_list_path(fridge)
+    @item = Item.find(params[:item_id])
+    @item.creator_id = current_user.id
+    @item.add_to_fridge
+    flash[:added_to_fridge] = "#{@item.name} added to #{@fridge.name}!"
+    redirect_to fridge_grocery_list_path(@fridge)
   end
 
   private

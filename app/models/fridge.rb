@@ -29,5 +29,4 @@ class Fridge < ActiveRecord::Base
   def add_friend(user)
     self.users << user
   end
-
 end

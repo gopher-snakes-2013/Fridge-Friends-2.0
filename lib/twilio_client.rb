@@ -1,4 +1,3 @@
-require 'rubygems'
 module TwilioClient
 
   def convert(phone_number)

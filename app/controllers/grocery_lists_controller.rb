@@ -40,7 +40,7 @@ class GroceryListsController < ApplicationController
       list.add_ingredients(recipe, current_fridge, current_user)
       redirect_to fridge_grocery_list_path(current_fridge, list)
     else
-      flash[:convert_recipe_notice] = "Something went wrong! Could not conver saved recipe."
+      flash[:convert_recipe_notice] = "Something went wrong! Could not convert saved recipe."
       redirect_to recipe_query_recipe_path(recipe.recipe_query_id, recipe)
     end
   end

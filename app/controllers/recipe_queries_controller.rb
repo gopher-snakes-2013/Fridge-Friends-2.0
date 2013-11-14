@@ -1,4 +1,6 @@
 class RecipeQueriesController < ApplicationController
+  before_filter :load_recipe_query, only: [:show, :destroy]
+
   def index
     @recipe_query = RecipeQuery.new
     @recipe_queries = current_user.recipe_queries
@@ -18,18 +20,21 @@ class RecipeQueriesController < ApplicationController
   end
 
   def show
-    @recipe_query = RecipeQuery.find(params[:id])
+    @recipe_query
     @recipes = @recipe_query.recipes
   end
 
   def destroy
-    recipe_query = RecipeQuery.find(params[:id])
-    if current_user.id == recipe_query.user_id
-      recipe_query.destroy
+    if current_user.id == @recipe_query.user_id
+      @recipe_query.destroy
     else
       flash[:delete_recipe_query_notice] = "You are not authorized to remove this recipe search"
     end
     redirect_to recipe_queries_path
   end
 
+  private
+  def load_recipe_query
+    @recipe_query = RecipeQuery.find(params[:id])
+  end
 end

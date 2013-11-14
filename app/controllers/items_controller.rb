@@ -4,7 +4,8 @@ include Twilio
 
 class ItemsController < ApplicationController
   # before_filter :load_item, only: []
-  before_filter :load_fridge, only: [:index, :create]
+  before_filter :load_fridge, only: [:index, :create, :create_grocery_list_item]
+  before_filter :load_list, only: [:create_grocery_list_item]
 
   def index
     @item = Item.new
@@ -28,16 +29,14 @@ class ItemsController < ApplicationController
   def create_grocery_list_item
     @new_item = Item.new(params[:item])
     @new_item.grocery_list_id = params[:grocery_list_id]
-    @new_item.fridge_id = params[:fridge_id]
-    @new_item.creator_id = current_user.id
-    current_fridge = find_fridge(params[:fridge_id])
-    current_list = find_list(params[:grocery_list_id])
+    @new_item.fridge_id = @fridge.id
+    @new_item.creator = current_user
     if @new_item.save
       flash[:add_item_notice] = 'Item successfully added to Grocery List.'
     else
       flash[:add_item_notice] = @new_item.errors.full_messages.join(", ")
     end
-    redirect_to fridge_grocery_list_path(current_fridge.id, current_list.id)
+    redirect_to fridge_grocery_list_path(@fridge.id, @list.id)
   end
 
   def show
@@ -63,5 +62,9 @@ class ItemsController < ApplicationController
 
   def load_fridge
     @fridge = Fridge.find(params[:fridge_id])
+  end
+
+  def load_list
+    @list = GroceryList.find(params[:grocery_list_id])
   end
 end

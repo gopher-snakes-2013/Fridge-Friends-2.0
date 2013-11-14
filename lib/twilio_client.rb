@@ -1,4 +1,4 @@
-module Twilio
+module TwilioClient
 
   def convert(phone_number)
     number = "1#{phone_number.gsub(/-/, '')}"
@@ -11,7 +11,7 @@ module Twilio
     auth_token = ENV['AUTH_TOKEN']
     @client = Twilio::REST::Client.new account_sid, auth_token
   end
-  
+
   def text_current_user(fridge, item, current_user)
     if current_user.opted_in && current_user.phone_number
       self.client.account.sms.messages.create(body: "you just added #{item.name} to your #{fridge.name} fridge", to: self.convert(current_user.phone_number), from: '14153602257')

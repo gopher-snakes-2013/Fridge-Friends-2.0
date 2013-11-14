@@ -31,6 +31,21 @@ class GroceryListsController < ApplicationController
     redirect_to fridge_path(@fridge.id)
   end
 
+  def convert_recipe_to_list
+    recipe = Recipe.find(params[:recipe_id])
+    list = GroceryList.new
+    list.fridge_id = current_fridge.id
+    list.title = recipe.name
+    if list.save
+      list.add_ingredients(recipe, current_fridge, current_user)
+      redirect_to fridge_grocery_list_path(current_fridge, list)
+    else
+      flash[:convert_recipe_notice] = "Something went wrong! Could not conver saved recipe."
+      redirect_to recipe_query_recipe_path(recipe.recipe_query_id, recipe)
+    end
+  end
+
+
   private
   def load_fridge
     @fridge = Fridge.find(params[:fridge_id])

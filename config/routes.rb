@@ -2,7 +2,7 @@ FridgeFriends20::Application.routes.draw do
 
   match '/users' => 'users#create'
   put '/users/:id/update/texts' => 'users#update_text_alerts'
-  
+
   constraints Clearance::Constraints::SignedOut.new do
     root to: 'clearance/sessions#new'
   end
@@ -13,6 +13,7 @@ FridgeFriends20::Application.routes.draw do
       member do
         post :add_user
         post :remove_user
+        post :convert_recipe_to_list, to: 'grocery_lists#convert_recipe_to_list'
       end
       resources :items, only: [:index, :create, :show, :destroy]
       resources :grocery_lists, only: [:create, :show, :destroy] do

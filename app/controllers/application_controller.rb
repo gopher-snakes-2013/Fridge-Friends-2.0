@@ -7,4 +7,9 @@ class ApplicationController < ActionController::Base
   def current_fridge
     @fridge ||= Fridge.find_by_id(session[:fridge_id])
   end
+
+  private
+  def store_location
+    session[:return_to] = request.env['HTTP_REFERER']
+  end
 end

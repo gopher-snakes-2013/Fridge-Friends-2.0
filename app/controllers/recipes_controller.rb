@@ -1,5 +1,7 @@
 class RecipesController < ApplicationController
   before_filter :load_recipe, only: [:show, :add_recipe_to_user, :destroy]
+  before_filter :store_location, only: [:show]
+
   def index
     @recipe = Recipe.new
     @recipes = Recipe.all

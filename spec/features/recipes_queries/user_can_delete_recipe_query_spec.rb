@@ -9,6 +9,9 @@ feature "User can delete recipe query" do
 
   scenario "there is a query to delete" do
     signup_user(user)
+    fill_in "fridge_name", with: "Bob's Home Fridge"
+    click_on "Add Fridge"
+    click_link "Bob's Home Fridge"
     visit recipe_queries_path
     fill_in "recipe_query_terms", with: "salmon"
     click_on "Find Recipes"

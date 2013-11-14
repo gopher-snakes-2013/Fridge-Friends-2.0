@@ -12,8 +12,7 @@
 
     <div data-role="header" class="toolbar" style="overflow:hidden;" data-theme="b">
       <h2>Recipe Search</h2>
-      <%= link_to 'Back', :back, data: {icon: 'gear'}, class: 'ui-btn-left' %>
-      <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
+      <%= link_to 'Back', { controller: 'fridges', action: 'show', id: current_fridge.id}, data: {icon: 'gear'}, class: 'ui-btn-left' %>
     </div><!-- /header -->
 
 

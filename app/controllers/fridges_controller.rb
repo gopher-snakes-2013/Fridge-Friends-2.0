@@ -1,5 +1,5 @@
 class FridgesController < ApplicationController
-  before_filter :authorize_and_load_fridge, only: [:show, :destroy, :add_user]
+  before_filter :authorize_and_load_fridge, only: [:show, :destroy, :add_user, :remove_user]
 
   def index
     @fridge = Fridge.new
@@ -52,10 +52,9 @@ class FridgesController < ApplicationController
 
 
   def remove_user
-    fridge = find_fridge(params[:id])
-    if current_user.id != fridge.creator_id
-      flash[:remove_user_from_fridge_notice] = "User successfully removed from #{fridge.name}"
-      fridge.users.delete(current_user)
+    if current_user != @fridge.creator
+      flash[:remove_user_from_fridge_notice] = "User successfully removed from #{@fridge.name}"
+      @fridge.users.delete(current_user)
     else
       flash[:remove_user_from_fridge_notice] = "User removal failed"
     end

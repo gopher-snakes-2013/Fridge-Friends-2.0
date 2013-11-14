@@ -42,12 +42,19 @@ form.login {
   text-align: center;
   background: #16a085;
 }
+
+.home h1, .sign-up h1, .password-new h1, .password-reset h1 {
+  font-family: Grand Hotel;
+  font-size: 4.5em;
+}
 .home h1, .sign-up h1, .password-new h1,
-.home h2, .sign-up h2, .password-new h2, .password-new p {
+.home h2, .sign-up h2, .password-new h2,
+.password-reset h1, .password-reset h2,
+.password-new p, .password-reset p {
   margin-top: 2em;
   color: #fff;
 }
-.home h2, .sign-up h2, .password-new h2, .password-new p {
+.home h2, .sign-up h2, .password-new h2, .password-new p, .password-reset p {
   margin-top: 1em;
 }
 

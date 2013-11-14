@@ -39,7 +39,7 @@ describe FridgesController do
     }.to change{ Fridge.count }.by(-1)
   end
 
-  it "#add_user" do
+  xit "#add_user" do
     expect {
       post :add_user, id: fridge.id, user: { email: user.email }
     }.to change { fridge.users.count }.by(1)

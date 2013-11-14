@@ -1,5 +1,5 @@
 class FridgesController < ApplicationController
-  before_filter :authorize_and_load_fridge, only: [:show, :destroy]
+  before_filter :authorize_and_load_fridge, only: [:show, :destroy, :add_user]
 
   def index
     @fridge = Fridge.new
@@ -38,20 +38,18 @@ class FridgesController < ApplicationController
   end
 
   def add_user
-    searched_user = User.find_by_email(params[:user][:email])
-    fridge = Fridge.find(params[:id])
-    if searched_user
-      unless fridge.users.include?(searched_user)
-        fridge.users << searched_user
-        flash[:add_user_notice] = "User successfully added as a friend."
-      else
-        flash[:add_user_notice] = "User is already a friend of this fridge."
-      end
+    new_friend = User.find_by_email(params[:user][:email])
+    if new_friend && !@fridge.users.include?(new_friend)
+      @fridge.add_friend(new_friend)
+      flash[:add_user_notice] = "User successfully added as a friend."
+    elsif new_friend && @fridge.users.include?(new_friend)
+      flash[:add_user_notice] = "User is already a friend of this fridge."
     else
       flash[:add_user_notice] = "User not found. Please try again."
     end
-    redirect_to fridge
+    redirect_to :fridge
   end
+
 
   def remove_user
     fridge = find_fridge(params[:id])

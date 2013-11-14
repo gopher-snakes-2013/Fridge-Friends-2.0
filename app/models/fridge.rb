@@ -5,7 +5,6 @@ class Fridge < ActiveRecord::Base
   belongs_to :creator, :class_name => "User"
   has_and_belongs_to_many :users
   validates :name, presence: true, uniqueness: { :scope => [:creator_id] }
-  # validates_uniqueness_of :name, :scope => [:creator_id]
   
   def owner?(user)
     self.users.include? user

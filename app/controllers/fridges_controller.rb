@@ -1,5 +1,5 @@
 class FridgesController < ApplicationController
-  before_filter :authorize_and_load_fridge, only: [:show]
+  before_filter :authorize_and_load_fridge, only: [:show, :destroy]
 
   def index
     @fridge = Fridge.new
@@ -29,13 +29,12 @@ class FridgesController < ApplicationController
   end
 
   def destroy
-    fridge = Fridge.find(params[:id])
-    if current_user.id == fridge.creator_id
-      fridge.destroy
+    if @fridge.creator?(current_user)
+      @fridge.destroy
+      redirect_to :fridges
     else
-      flash[:delete_fridge_notice] = "You are not authorized to remove this fridge"
+      render :show
     end
-    redirect_to :fridges
   end
 
   def add_user

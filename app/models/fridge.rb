@@ -11,6 +11,10 @@ class Fridge < ActiveRecord::Base
     self.users.include? user
   end
 
+  def creator?(user)
+    self.creator == user
+  end
+
   def is_shared?
     self.users.length >= 2
   end

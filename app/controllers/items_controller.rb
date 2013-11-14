@@ -1,6 +1,3 @@
-require 'Twilio'
-include Twilio
-
 class ItemsController < ApplicationController
   before_filter :load_item, only: [:show, :destroy, :destroy_grocery_list_item]
   before_filter :load_fridge, only: [:index, :create, :create_grocery_list_item, :destroy_grocery_list_item, :add_to_fridge_from_list]
@@ -17,8 +14,8 @@ class ItemsController < ApplicationController
     @new_item.fridge_id = @fridge.id
     fridge_friends = @fridge.find_friends(current_user)
     if @new_item.save
-      Twilio.text_current_user(@fridge, @new_item, current_user)
-      Twilio.text_fridge_friends(fridge_friends, @fridge, @new_item, current_user)
+      TwilioClient.text_current_user(@fridge, @new_item, current_user)
+      TwilioClient.text_fridge_friends(fridge_friends, @fridge, @new_item, current_user)
     else
       flash[:add_item_notice] = @new_item.errors.full_messages.join(", ")
     end

@@ -1,6 +1,6 @@
 class GroceryListsController < ApplicationController
-  before_filter :load_fridge, only: [:index, :show, :create]
-  before_filter :load_list, only: [:show]
+  before_filter :load_fridge, only: [:index, :show, :create, :destroy]
+  before_filter :load_list, only: [:show, :destroy]
 
   def index
     @fridge
@@ -27,9 +27,8 @@ class GroceryListsController < ApplicationController
   end
 
   def destroy
-    @list = GroceryList.find(params[:id])
     @list.destroy
-    redirect_to fridge_path(params[:fridge_id])
+    redirect_to fridge_path(@fridge.id)
   end
 
   private

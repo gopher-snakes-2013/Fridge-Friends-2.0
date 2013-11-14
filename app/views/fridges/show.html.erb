@@ -9,7 +9,7 @@
   </div>
 
   <div data-role="header" class="toolbar" style="overflow:hidden;" data-theme="b">
-    <h2><%= @fridge.name %></h2>
+    <h1><span class="ff-icon-small">Fridge Friend</span></h1>
       <%= link_to 'Back', fridges_path, data: {icon: 'gear'}, class: 'ui-btn-left' %>
       <a href="#settings-panel" data-icon="gear" data-theme="b" class="ui-btn-right">Options</a>
     <div>
@@ -25,7 +25,7 @@
     <%= flash[:add_item_notice] %>
     <%= flash[:add_user_notice] %>
     <%= flash[:add_grocery_list_notice] %>
-
+    <h1 class="ff-fridge-name"><%= @fridge.name %></h1>
     <div id="ff-form-panel-add-item" class="ff-form-panel">
       <%= form_for [@fridge, @item] do |f| %>
         <fieldset  data-theme="a" data-content-theme="d" data-iconpos="right" data-inset="true">

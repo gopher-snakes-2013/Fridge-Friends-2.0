@@ -42,6 +42,13 @@
     url(Flat-UI-Icons-24.ttf) format('truetype');
 }
 
+@font-face {
+  font-family: "Grand Hotel";
+  font-weight: 400;
+  font-style: cursive;
+  src: url(GrandHotel-Regular.ttf) format('truetype');
+}
+
 /* Use the following CSS code if you want to have a class per icon */
 /*Instead of a list of all class selectors,
  *you can use the generic selector below, but it's slower:

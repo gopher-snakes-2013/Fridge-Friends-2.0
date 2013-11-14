@@ -1,4 +1,5 @@
 class RecipesController < ApplicationController
+  before_filter :load_recipe, only: [:show, :add_recipe_to_user, :destroy]
   def index
     @recipe = Recipe.new
     @recipes = Recipe.all
@@ -6,20 +7,22 @@ class RecipesController < ApplicationController
   end
 
   def show
-    @recipe = Recipe.find(params[:id])
+    @recipe
     @ingredients = @recipe.ingredients.split(',')
   end
 
   def add_recipe_to_user
-    @recipe = Recipe.find(params[:id])
-    user = User.find(current_user.id)
-    user.recipes << @recipe
-    redirect_to recipe_query_recipe_path(@recipe.id)
+    current_user.recipes << @recipe
+    redirect_to recipe_query_recipe_path(@recipe)
   end
 
   def destroy
-    @recipe = Recipe.find(params[:id])
     @recipe.destroy
     redirect_to recipe_queries_path
+  end
+
+  private
+  def load_recipe
+    @recipe = Recipe.find(params[:id])
   end
 end

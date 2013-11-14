@@ -26,7 +26,7 @@
       <% end %>
     </ul>
     <% unless current_user.recipes.include?(@recipe) %>
-      <%= button_to "Add Recipe", action: "add_recipe_to_user" %>
+      <%= button_to "Save Recipe", action: "add_recipe_to_user" %>
     <% else %>
       <p>Recipe Saved</p>
     <% end %>

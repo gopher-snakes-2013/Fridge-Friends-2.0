@@ -139,6 +139,7 @@ form.login #btn {
 .recipe_query_results li { max-height: 60px; }
 .recipe_query_results li a.ui-link-inherit { min-height: 39px !important; text-decoration: none; }
 .recipe_query_results li a.ui-link-inherit span { margin-top: 7px; display: block; }
+#user_saved_recipes li a.ui-link-inherit { padding: 20px 53px 0px 100px; min-height: 38px;text-decoration: none; }
 
 .ui-listview-inset li:last-child div.ui-li { border-bottom: none; max-height: 60px; }
 

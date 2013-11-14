@@ -14,12 +14,19 @@
       <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
     </div><!-- /header -->
 
-    <div data-role="content">
+    <div data-role="content" class="main">
 
       <%= flash[:delete_fridge_notice] %>
       <%= flash[:add_fridge_notice] %>
       <%= flash[:remove_user_from_fridge_notice] %>
-
+      
+      <% if @fridge.errors.any? %>
+        <ul>
+          <% @fridge.errors.full_messages.each do |error| %>
+            <li><%= error %></li>
+          <% end %>
+        </ul>
+      <% end %>
 
       <div>
         <%= form_for @fridge do |f| %>
@@ -33,9 +40,9 @@
 
         <% @fridges.each  do |fridge| %>
           <li data-icon="false">
-            <span <%= render( text:'style=visibility:hidden;') if !fridge.is_shared? %>><%= image_tag("shared.png", alt: "Shared Fridge", id: "shared-icon")  %></span>
+            <span <%= render( text:'style=visibility:hidden;') unless fridge.is_shared? %>><%= image_tag("shared.png", alt: "Shared Fridge", id: "shared-icon")  %></span>
             <a href="<%= fridge_url(fridge.id) %>"><%= fridge.name %></a>
-            <% if fridge.creator_id == @current_user.id %>
+            <% if fridge.creator_id == current_user.id %>
               <%= link_to('Delete Fridge', fridge_path(fridge.id), method: 'delete', data: { icon: "delete"}) %>
             <% else %>
                 <%= link_to('Remove User from Shared Fridge', remove_user_fridge_path(fridge.id), method: 'post', data: { icon: "delete"}) %>

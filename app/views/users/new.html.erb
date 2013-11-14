@@ -3,7 +3,7 @@
      <h1>Fridge Friends</h1>
      <div id='clearance' class='sign-up'>
       <h2>Sign up</h2>
-
+      <%= flash[:sign_up_errors] %>
       <%= form_for @user, html: { class: "login", data: { ajax: "false"} } do |form| %>
       <%= render :partial => '/users/form', :object => form %>
 

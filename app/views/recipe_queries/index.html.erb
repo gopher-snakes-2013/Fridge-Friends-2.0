@@ -1,4 +1,4 @@
-<div data-role="page" id="query-index">
+<div data-role="page" id="query-index" data-url="<%= request.path  %>">
     <div id="username-display">
 
       <% if signed_in? %>
@@ -12,7 +12,7 @@
 
     <div data-role="header" class="toolbar" style="overflow:hidden;" data-theme="b">
       <h2>Recipe Search</h2>
-      <%= link_to 'Back', fridges_path, data: {icon: 'gear'}, class: 'ui-btn-left' %>
+      <%= link_to 'Back', :back, data: {icon: 'gear'}, class: 'ui-btn-left' %>
       <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
     </div><!-- /header -->
 
@@ -41,8 +41,8 @@
       </div>
   </div>
 
-  <div data-role="content" class="sidebar">
-    <h2>Saved Recipes</h2>
+  <div data-role="content" class="sidebar" id="user_saved_recipes">
+    <h4>Saved Recipes</h4>
     <ul data-role="listview" data-inset="true">
       <% current_user.recipes.reverse.each do |recipe|  %>
         <li>

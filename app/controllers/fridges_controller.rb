@@ -1,78 +1,59 @@
-require 'rubygems'
-require 'twilio-ruby'
-include ApplicationHelper
-
 class FridgesController < ApplicationController
-  before_filter :authorize_and_load_fridge, only: [:show]
+  before_filter :authorize_and_load_fridge, only: [:show, :destroy, :add_user, :remove_user]
+
   def index
     @fridge = Fridge.new
     @fridges = current_user.fridges
-    @current_user = current_user
   end
 
   def create
-    fridge = Fridge.new(params[:fridge])
-    fridge.users << current_user
-    fridge.creator_id = current_user.id
-    if fridge.save
-      redirect_to :fridges
+    @fridge = Fridge.new(params[:fridge])
+    @fridge.creator = current_user
+    if @fridge.save
+      @fridge.users << current_user
+      redirect_to fridges_path
     else
-      flash[:add_fridge_notice] = fridge.errors.full_messages.join(", ")
-      redirect_to :fridges
+      @fridges = current_user.fridges
+      render :index
     end
   end
 
   def show
     @item = Item.new
-    items_related_to_fridge = @fridge.items.all
-    @items = []
-    items_related_to_fridge.each do |item|
-      unless item.grocery_list_id
-        @items << item
-      end
-    end
     @find_user_email = User.new
-    categories = []
-    @items.each { |i| categories << i.category }
-    @items_categories = categories.uniq.sort
-    @user = current_user
-    @friends = find_only_friends_of_fridge(current_user, @fridge)
     @list = GroceryList.new
-    @fridge = find_fridge(params[:id])
     @lists = GroceryList.where(fridge_id: params[:id])
+    @items = @fridge.fridge_items
+    @items_categories = Item.categories(@items)
+    @friends = @fridge.find_friends(current_user)
   end
 
   def destroy
-    fridge = Fridge.find(params[:id])
-    if current_user.id == fridge.creator_id
-      fridge.destroy
+    if @fridge.creator?(current_user)
+      @fridge.destroy
+      redirect_to :fridges
     else
-      flash[:delete_fridge_notice] = "You are not authorized to remove this fridge"
+      render :show
     end
-    redirect_to :fridges
   end
 
   def add_user
-    searched_user = User.find_by_email(params[:user][:email])
-    fridge = Fridge.find(params[:id])
-    if searched_user
-      unless fridge.users.include?(searched_user)
-        fridge.users << searched_user
-        flash[:add_user_notice] = "User successfully added as a friend."
-      else
-        flash[:add_user_notice] = "User is already a friend of this fridge."
-      end
+    new_friend = User.find_by_email(params[:user][:email])
+    if new_friend && !@fridge.users.include?(new_friend)
+      @fridge.add_friend(new_friend)
+      flash[:add_user_notice] = "User successfully added as a friend."
+    elsif new_friend && @fridge.users.include?(new_friend)
+      flash[:add_user_notice] = "User is already a friend of this fridge."
     else
       flash[:add_user_notice] = "User not found. Please try again."
     end
-    redirect_to fridge
+    redirect_to :fridge
   end
 
   def remove_user
-    fridge = find_fridge(params[:id])
-    if current_user.id != fridge.creator_id
-      flash[:remove_user_from_fridge_notice] = "User successfully removed from #{fridge.name}"
-      fridge.users.delete(current_user)
+    if current_user != @fridge.creator
+      flash[:remove_user_from_fridge_notice] = "User successfully removed from #{@fridge.name}"
+      @fridge.users.delete(current_user)
     else
       flash[:remove_user_from_fridge_notice] = "User removal failed"
     end

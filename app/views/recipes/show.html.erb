@@ -12,9 +12,11 @@
 
   <div data-role="header" class="toolbar" style="overflow:hidden;" data-theme="b">
     <h2>Recipe</h2>
-    <%= link_to 'Back', recipe_query_path(@recipe.recipe_query_id), data: {icon: 'gear'}, class: 'ui-btn-left' %>
+    <%= link_to 'Back', recipe_query_path(@recipe.recipe_query_id, :redirect_to => :back), data: {icon: 'gear'}, class: 'ui-btn-left' %>
     <a href="#settings-panel" data-icon="gear" class="ui-btn-right">Options</a>
   </div><!-- /header -->
+
+  <%= flash[:convert_recipe_notice] %>
 
   <div data-role="content" class="main">
     <h3><%= @recipe.name %></h3>
@@ -29,6 +31,7 @@
       <%= button_to "Save Recipe", action: "add_recipe_to_user" %>
     <% else %>
       <p>Recipe Saved</p>
+      <%= button_to "Convert Recipe to Grocery List", {controller: 'grocery_lists', action: "convert_recipe_to_list", id: current_fridge.id, recipe_id: @recipe.id} %>
     <% end %>
   </div><!-- /content.main -->
 

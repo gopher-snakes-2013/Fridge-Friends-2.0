@@ -19,6 +19,7 @@ class FridgesController < ApplicationController
   end
 
   def show
+    session[:fridge_id] = @fridge.id
     @item = Item.new
     @find_user_email = User.new
     @list = GroceryList.new

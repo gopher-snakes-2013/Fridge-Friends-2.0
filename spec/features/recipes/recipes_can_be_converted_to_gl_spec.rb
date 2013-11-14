@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-feature "User can delete recipe" do
+feature "User can convert saved recipe" do
   before(:each) do
     visit root_path
   end
@@ -8,7 +8,7 @@ feature "User can delete recipe" do
   let!(:user) { User.new(name: 'Carter1', email: 'carter11@example.com', password: 'password', phone_number: '360-584-4437', customer_id: '123456788') }
   let!(:fridge) { Fridge.create(name: "Home Fridge", creator_id: user.id) }
 
-  scenario "when they click on Delete Recipe" do
+  scenario "to a grocery list" do
     signup_user(user)
     fill_in "fridge_name", with: "Bob's Home Fridge"
     click_on "Add Fridge"
@@ -20,8 +20,10 @@ feature "User can delete recipe" do
     click_link 'Honey Thyme Roasted Butternut Squash'
     click_on "Save Recipe"
     expect(page).to have_content "Recipe Saved"
-    visit recipe_queries_path
-    click_on "Delete Recipe"
-    expect(page).to_not have_content "Honey Thyme Roasted Butternut Squash"
+    click_on "Convert Recipe to Grocery List"
+    expect(page).to have_content 'kosher salt'
+    click_on 'Back'
+    click_on 'Options'
+    expect(page).to have_content 'Honey Thyme Roasted Butternut Squash'
   end
 end

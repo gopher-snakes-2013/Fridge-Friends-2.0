@@ -33,6 +33,7 @@
 
     <div id="grocery-list-contents" data-role="content" class="main">
       <ul data-role="listview" data-filter="true" data-filter-placeholder="Search this grocery list..." data-split-icon="delete" data-inset="true">
+          <%= flash[:added_to_fridge] %>
           <% @items_categories.each do |cat| %>
             <li data-role="list-divider">
               <span class="category"><%= cat %></span>
@@ -42,6 +43,9 @@
               <a>
               <span class="item"><%= item.name %></span>
               <span class="purchase-date">Added: <%= time_ago_in_words(item.created_at) %> ago</span>
+
+              <%= link_to("Add to Fridge", add_to_fridge_from_list_fridge_item_path(item.fridge.id, :item_id => item.id), controller: 'item', method: 'post')%>
+
               <%= link_to('Delete Item', [@fridge, @list, item], method: 'delete', data: { icon: "delete"}) %>
             </li>
             <% end %>

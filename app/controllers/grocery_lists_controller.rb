@@ -1,17 +1,18 @@
 class GroceryListsController < ApplicationController
+  before_filter :load_fridge, only: [:index, :show]
+  before_filter :load_list, only: [:show]
+
   def index
-    @fridge = find_fridge(params[:fridge_id])
-    @lists = GroceryList.where(fridge_id: params[:fridge_id])
+    @fridge
+    @lists = GroceryList.where(fridge_id: @fridge.id)
   end
 
   def show
-    @fridge = Fridge.find(params[:fridge_id])
-    @list = GroceryList.find(params[:id])
+    @fridge
+    @list
     @item = Item.new
     @items = @list.items
-    categories = []
-    @items.each { |i| categories << i.category }
-    @items_categories = categories.uniq.sort
+    @items_categories = Item.categories(@items)
   end
 
   def create
@@ -30,5 +31,14 @@ class GroceryListsController < ApplicationController
     @list = GroceryList.find(params[:id])
     @list.destroy
     redirect_to fridge_path(params[:fridge_id])
+  end
+
+  private
+  def load_fridge
+    @fridge = Fridge.find(params[:fridge_id])
+  end
+
+  def load_list
+    @list = GroceryList.find(params[:id])
   end
 end

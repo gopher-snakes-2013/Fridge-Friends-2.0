@@ -4,4 +4,9 @@ class Item < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => [:grocery_list_id]
   belongs_to :fridge
   belongs_to :grocery_list
+
+  def self.categories(items)
+    items.map { |item| item.category } unless items.nil?
+  end
+
 end

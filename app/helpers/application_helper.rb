@@ -17,10 +17,10 @@ module ApplicationHelper
     GroceryList.find(id)
   end
 
-  def find_only_friends_of_fridge(current_user, current_fridge)
-    current_user_array = [current_user]
-    current_fridge.users - current_user_array
-  end
+  # def find_only_friends_of_fridge(current_user, current_fridge)
+  #   current_user_array = [current_user]
+  #   current_fridge.users - current_user_array
+  # end
 
   def text_current_user(twilio_client, current_user, fridge, item)
     if current_user.opted_in && current_user.phone_number

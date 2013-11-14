@@ -14,4 +14,13 @@ class Fridge < ActiveRecord::Base
   def is_shared?
     self.users.length >= 2
   end
+
+  def fridge_items
+    self.items.select { |item| item.grocery_list_id == nil}
+  end
+
+  def find_friends(user)
+    self.users - [user]
+  end
+
 end

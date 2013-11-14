@@ -14,7 +14,7 @@ class ItemsController < ApplicationController
     @new_item.fridge_id = params[:fridge_id]
     @new_item.creator_id = current_user.id
     current_fridge = find_fridge(params[:fridge_id])
-    fridge_friends = find_only_friends_of_fridge(current_user, current_fridge)
+    fridge_friends = current_fridge.find_friends(current_user)
     if @new_item.save
       text_current_user(twilio_client, current_user, current_fridge, @new_item)
       text_fridge_friends(twilio_client, fridge_friends, current_user, current_fridge, @new_item)

@@ -10,6 +10,22 @@
   /*background-color: #2c3e50;*/
 }
 
+.ff-icon-small {
+  font-family: 'Grand Hotel', cursive;
+  display: inline-block;
+  /*background-image: url(refrigerator-icon.png);
+  background-repeat: no-repeat;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;*/
+  word-spacing: 3px;
+  letter-spacing: 0.1em;
+  font-size: 1.7em;
+
+}
+
+.ff-toolbar-header-name { visibility: hidden; }
+.ff-fridge-name { font-size: 1.5em; margin-top: 8px; }
 
 /* Login, Sign-up, and Password Reset forms */
 form.login {
@@ -93,7 +109,7 @@ form.login #btn {
 }
 
 #fridge-contents, #grocery-list-contents {
-  margin-top: 16px;
+  /*margin-top: 16px;*/
 }
 
 #fridge-show .ui-content {

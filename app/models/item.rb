@@ -7,7 +7,7 @@ class Item < ActiveRecord::Base
   validates_uniqueness_of :name, :scope => [:grocery_list_id]
 
   def self.categories(items)
-    items.map { |item| item.category } unless items.nil?
+    items.map { |item| item.category }.uniq unless items.nil?
   end
 
 end

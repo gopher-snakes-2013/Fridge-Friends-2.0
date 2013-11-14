@@ -3,7 +3,7 @@ include Twilio
 
 class ItemsController < ApplicationController
   before_filter :load_item, only: [:show, :destroy, :destroy_grocery_list_item]
-  before_filter :load_fridge, only: [:index, :create, :create_grocery_list_item, :destroy_grocery_list_item]
+  before_filter :load_fridge, only: [:index, :create, :create_grocery_list_item, :destroy_grocery_list_item, :add_to_fridge_from_list]
   before_filter :load_list, only: [:create_grocery_list_item, :destroy_grocery_list_item]
 
   def index
@@ -50,6 +50,14 @@ class ItemsController < ApplicationController
   def destroy_grocery_list_item
     @item.destroy
     redirect_to fridge_grocery_list_path(@fridge, @list)
+  end
+
+  def add_to_fridge_from_list
+    @item = Item.find(params[:item_id])
+    @item.creator_id = current_user.id
+    @item.add_to_fridge
+    flash[:added_to_fridge] = "#{@item.name} added to #{@fridge.name}!"
+    redirect_to fridge_grocery_list_path(@fridge)
   end
 
   private

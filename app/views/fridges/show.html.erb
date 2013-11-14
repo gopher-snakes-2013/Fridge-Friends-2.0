@@ -93,11 +93,11 @@
     <p>&nbsp;</p>
     <div id='all_grocery_lists'>
       <h3>Grocery Lists</h3>
-      <ul>
+        <ul data-role="listview" data-split-icon="delete" data-inset="true">
         <% @lists.each do |list| %>
         <li>
           <%= link_to list.title, fridge_grocery_list_path(@fridge.id, list.id) %>
-          <%= link_to "Delete Grocery List", [list.fridge, list], method: :delete %>
+          <%= link_to "Delete Grocery List", [list.fridge, list], method: :delete, data: { icon: "delete"} %>
         </li>
         <% end %>
       </ul>

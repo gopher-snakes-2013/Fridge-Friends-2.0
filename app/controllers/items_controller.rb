@@ -1,4 +1,3 @@
-include ApplicationHelper
 require 'Twilio'
 include Twilio
 

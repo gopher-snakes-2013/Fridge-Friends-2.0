@@ -50,7 +50,6 @@ class FridgesController < ApplicationController
     redirect_to :fridge
   end
 
-
   def remove_user
     if current_user != @fridge.creator
       flash[:remove_user_from_fridge_notice] = "User successfully removed from #{@fridge.name}"

@@ -1,7 +1,14 @@
 <div id="sign-up" data-role="page" class="sign-up">
   <div data-role="content">
-     <h1>Fridge Friend</h1>
-     <div id='clearance' class='sign-up'>
+     <div id="ff-header-block">
+      <span id="ff-logo-underline"></span>
+      <h1>Fridge Friend</h1>
+      <span id="ff-logo-fridge-med"></span>
+    </div>
+    <div class="ff-tagline-block">Eat.&nbsp;&nbsp;Drink.&nbsp;&nbsp;Be Social.</div>
+
+
+     <div id='clearance'>
       <h2>Sign up</h2>
       <%= flash[:sign_up_errors] %>
       <%= form_for @user, html: { class: "login", data: { ajax: "false"} } do |form| %>

@@ -29,8 +29,8 @@
 }
 #ff-logo-fridge-med {
   background-image: url('ff-logo-fridge-med.png');
-  width: 100px;
-  height: 175px;
+  width: 117px;
+  height: 193px;
   display: inline-block;
   position: relative;
   right: -8em;
@@ -74,6 +74,7 @@ form.login {
   width: 50%;
   line-height: 1.2em;
   position: relative;
+  z-index: 100;
 }
 .home h1, .sign-up h1, .password-new h1,
 .home h2, .sign-up h2, .password-new h2,
@@ -208,6 +209,7 @@ form.login #btn {
   /*width:100%;*/
 }
 
+
 /* First breakpoint at 576px */
 /* Inherits mobile styles, but floats containers to make columns */
 @media all and (min-width: 50em){
@@ -232,6 +234,19 @@ form.login #btn {
     top: 7.8em;
   }
 
+  .home, .sign-up, .password-new, .password-reset { background-size: 100% 100%; min-height: 2080px !important; }
+  #ff-logo-underline { display: none; }
+  #ff-header-block { width: 100%; padding: 0px;}
+  #ff-logo-fridge-med {
+    margin-bottom: 3em;
+    right: 0px;
+    float: none;
+    position: static;
+  }
+  #ff-tagline-block {
+    padding: .5em;
+    font-size: 2.5em;
+  }
 }
 
 /* Second breakpoint at 800px */

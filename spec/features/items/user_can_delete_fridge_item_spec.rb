@@ -23,26 +23,4 @@ feature "User can delete fridge item" do
     expect(page).to_not have_content "fridge item"
   end
 
-  scenario "and when they are not the original fridge creator", js: true do
-    signup_user(user)
-    click_link "logout"
-    signup_user(user_2)
-    fill_in "fridge_name", with: "test fridge"
-    click_on "Add Fridge"
-    click_link "test fridge"
-    fill_in 'item_name', with: 'item'
-    select('Other', :from => 'item_category')
-    click_on 'Add Item to Fridge'
-    fill_in 'user_email', with: user.email
-    click_on 'Add Fridge Friend'
-    expect(page).to have_content "User successfully added as a friend."
-    click_link 'logout'
-    fill_in 'session_email', with: user.email
-    fill_in 'session_password', with: user.password
-    click_on 'Sign in'
-    expect(page).to have_content "test fridge"
-    click_link "test fridge"
-    click_on 'Delete Item'
-    expect(page).to_not have_content "item"
-  end
 end

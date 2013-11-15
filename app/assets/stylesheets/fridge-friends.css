@@ -2,35 +2,57 @@
 /* Start with core styles outside of a media query that apply to mobile and up */
 /* Global typography and design elements, stacked containers */
 
-.ff-bgd-overlay, body {
-  /*font-family: "Helvetica";*/
-  /*background-image: url('fridge0.jpg');*/
-  background-repeat: no-repeat;
-  background-position: 50% -49px;
-  /*background-color: #2c3e50;*/
-}
+.ff-bgd-overlay, body {}
 
 .ff-icon-small {
   font-family: 'Grand Hotel', cursive;
   display: inline-block;
-  /*background-image: url(refrigerator-icon.png);
-  background-repeat: no-repeat;
-  background-color: transparent;
-  width: 20px;
-  height: 20px;*/
   word-spacing: 3px;
   letter-spacing: 0.1em;
   font-size: 1.7em;
-
 }
 
 .ff-toolbar-header-name { visibility: hidden; }
 .ff-fridge-name { font-size: 1.5em; margin-top: 8px; }
 
 /* Login, Sign-up, and Password Reset forms */
+
+#ff-header-block { width: 40%; padding: 0px 3em; }
+#ff-logo-underline {
+  display: block;
+  background-color: #16a085;
+  height: 5px;
+  width: 150%;
+  position: relative;
+  float: right;
+  top: 5em;
+}
+#ff-logo-fridge-med {
+  background-image: url('ff-logo-fridge-med.png');
+  width: 100px;
+  height: 175px;
+  display: inline-block;
+  position: relative;
+  right: -8em;
+  top: -14em;
+  float: right;
+  margin-bottom: -50em;
+}
+.ff-tagline-block {
+  background-color: #16a085;
+  padding: 1em;
+  text-align: center;
+  font-size: 1.8em;
+  color: #fff;
+  letter-spacing: .05em;
+  width: 100%;
+  position: relative;
+  left: -15px;
+}
+
 form.login {
   max-width: 350px;
-  margin: 50px auto;
+  margin: 30px auto;
   padding:20px;
   background-color: #fff;
   border-radius: 7px;
@@ -39,24 +61,31 @@ form.login {
 }
 
 .home, .sign-up, .password-new, .password-reset {
+  background-image: url('ff-blurry-fruit-2.jpg');
+  background-repeat: no-repeat;
+  background-position: 50% -49px;
   text-align: center;
-  background: #16a085;
+  /*background: #16a085;*/
 }
 
 .home h1, .sign-up h1, .password-new h1, .password-reset h1 {
   font-family: Grand Hotel;
   font-size: 4.5em;
+  width: 50%;
+  line-height: 1.2em;
+  position: relative;
 }
 .home h1, .sign-up h1, .password-new h1,
 .home h2, .sign-up h2, .password-new h2,
 .password-reset h1, .password-reset h2,
 .password-new p, .password-reset p {
-  margin-top: 2em;
+  margin-top: .5em;
   color: #fff;
 }
 .home h2, .sign-up h2, .password-new h2, .password-new p, .password-reset p {
   margin-top: 1em;
 }
+#clearance h2 { visibility: hidden; }
 
 .sign-up .other-links .ui-link:visited, .sign-up .other-links .ui-link,
 .sign-up .other-links .ui-link:visited, .sign-up .other-links .ui-link:hover,
@@ -73,7 +102,9 @@ form.login {
 
 .opted_in-field .ui-slider.ui-slider-switch.ui-btn-down-c.ui-btn-corner-all { margin-top: 11px;}
 
-
+#clearance .ui-btn-up-c, #clearance .ui-btn-up-h {
+  background-color: #f1c40f;
+}
 
 form label {
   display: inline-block;
@@ -179,7 +210,7 @@ form.login #btn {
 
 /* First breakpoint at 576px */
 /* Inherits mobile styles, but floats containers to make columns */
-@media all and (min-width: 36em){
+@media all and (min-width: 50em){
   .main { float: left; width:50%; }
   .sidebar {
     float: right;
@@ -189,15 +220,25 @@ form.login #btn {
     height: 100%;
   }
   #ff-form-panel-add-item, #ff-form-panel-add-friend, #ff-form-panel-add-list, #ff-form-panel-add-list-item {
-  display: block;
-}
+    display: block;
+  }
+  .home h1, .sign-up h1, .password-new h1, .password-reset h1 {
+    margin-right: .6em;
+    width: 100%;
+    line-height: 1.5em;
+  }
+  #ff-logo-underline {
+    width: 86%;
+    top: 7.8em;
+  }
 
 }
 
 /* Second breakpoint at 800px */
 /* Adjusts column proportions, tweaks base H1 */
 @media all and (min-width: 50em){
+  /*
   .main { width:65%; }
   .sidebar { width:30%; }
-
+*/
 }

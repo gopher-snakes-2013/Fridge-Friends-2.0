@@ -37,6 +37,4 @@
   })
 
 
-  // ff-form-panel-add-list-item
-
 })

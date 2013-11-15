@@ -23,7 +23,7 @@ feature "User can delete fridge item" do
     expect(page).to_not have_content "fridge item"
   end
 
-  xscenario "and when they are not the original fridge creator", js: true do
+  scenario "and when they are not the original fridge creator", js: true do
     signup_user(user)
     click_link "logout"
     signup_user(user_2)
@@ -34,7 +34,7 @@ feature "User can delete fridge item" do
     select('Other', :from => 'item_category')
     click_on 'Add Item to Fridge'
     fill_in 'user_email', with: user.email
-    click_on 'Sign up'
+    click_on 'Add Fridge Friend'
     expect(page).to have_content "User successfully added as a friend."
     click_link 'logout'
     fill_in 'session_email', with: user.email

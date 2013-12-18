@@ -3,13 +3,10 @@ class GroceryListsController < ApplicationController
   before_filter :load_list, only: [:show, :destroy]
 
   def index
-    @fridge
-    @lists = GroceryList.where(fridge_id: @fridge.id)
+    @lists = GroceryList.where(fridge_id: current_fridge.id)
   end
 
   def show
-    @fridge
-    @list
     @item = Item.new
     @items = @list.items
     @items_categories = Item.categories(@items)
@@ -17,7 +14,7 @@ class GroceryListsController < ApplicationController
 
   def create
     @list = GroceryList.new(params[:grocery_list])
-    @list.fridge_id = params[:fridge_id].to_i
+    @list.fridge_id = current_fridge.id
     if @list.save
       flash[:add_grocery_list_notice] = "#{@list.title} successfully created!"
     else
@@ -28,7 +25,7 @@ class GroceryListsController < ApplicationController
 
   def destroy
     @list.destroy
-    redirect_to fridge_path(@fridge.id)
+    redirect_to fridge_path(@fridge)
   end
 
   def convert_recipe_to_list
@@ -48,7 +45,7 @@ class GroceryListsController < ApplicationController
 
   private
   def load_fridge
-    @fridge = Fridge.find(params[:fridge_id])
+    @fridge = current_fridge
   end
 
   def load_list

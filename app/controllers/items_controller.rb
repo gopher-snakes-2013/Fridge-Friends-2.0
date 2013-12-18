@@ -11,7 +11,7 @@ class ItemsController < ApplicationController
   def create
     @new_item = Item.new(params[:item])
     @new_item.creator = current_user
-    @new_item.fridge_id = @fridge.id
+    @new_item.fridge_id = current_fridge.id
     fridge_friends = @fridge.find_friends(current_user)
     if @new_item.save
       TwilioClient.text_current_user(@fridge, @new_item, current_user)
@@ -33,10 +33,6 @@ class ItemsController < ApplicationController
       flash[:add_item_notice] = @new_item.errors.full_messages.join(", ")
     end
     redirect_to fridge_grocery_list_path(@fridge.id, @list.id)
-  end
-
-  def show
-    @item
   end
 
   def destroy
